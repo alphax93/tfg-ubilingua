@@ -5,11 +5,9 @@
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <h2><%: Title %>.</h2>
 
-    <div class="row">
-        <div class="col-md-8">
+    <asp:Panel runat="server" CssClass="panel col-md-5">
             <section id="loginForm">
                 <div class="form-horizontal">
-                    <h4>Utilice una cuenta local para iniciar sesión.</h4>
                     <hr />
                     <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                         <p class="text-danger">
@@ -32,16 +30,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
+                        
+                        <div class="col-md-offset-3 col-md-9">
                             <div class="checkbox">
-                                <asp:CheckBox runat="server" ID="RememberMe" />
+                                &nbsp&nbsp&nbsp<asp:CheckBox runat="server" ID="RememberMe" />
                                 <asp:Label runat="server" AssociatedControlID="RememberMe">¿Recordar cuenta?</asp:Label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" OnClick="LogIn" Text="Iniciar sesión" CssClass="btn btn-default" />
+                            <asp:Button runat="server" OnClick="LogIn" Text="Iniciar sesión" CssClass="btn panel-button" />
                         </div>
                     </div>
                 </div>
@@ -54,12 +53,5 @@
                     --%>
                 </p>
             </section>
-        </div>
-
-        <div class="col-md-4">
-            <section id="socialLoginForm">
-                <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
-            </section>
-        </div>
-    </div>
+       </asp:Panel>
 </asp:Content>

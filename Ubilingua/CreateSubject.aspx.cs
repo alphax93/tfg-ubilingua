@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Ubilingua.Logic;
+using Microsoft.AspNet.Identity;
 
 namespace Ubilingua
 {
@@ -36,8 +37,8 @@ namespace Ubilingua
                     }
                 }
             }
-            AddSubject subjects = new AddSubject();
-            bool addSuccess = subjects.AddSubjects(SubjectName.Text, image, Password.Text);
+            SubjectCRUD subjects = new SubjectCRUD();
+            bool addSuccess = subjects.AddSubjects(SubjectName.Text, image, Password.Text,User.Identity.GetUserId());
             if (addSuccess)
             {
                 Response.Redirect("~");

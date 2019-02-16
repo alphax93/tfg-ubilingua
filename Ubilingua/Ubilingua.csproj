@@ -401,9 +401,9 @@
     </Compile>
     <Compile Include="Logic\AddJoinSubjectUser.cs" />
     <Compile Include="Logic\AddJoinUserMark.cs" />
-    <Compile Include="Logic\AddResource.cs" />
-    <Compile Include="Logic\AddSubject.cs" />
-    <Compile Include="Logic\AddBlock.cs" />
+    <Compile Include="Logic\ResourceCRUD.cs" />
+    <Compile Include="Logic\SubjectCRUD.cs" />
+    <Compile Include="Logic\BlockCRUD.cs" />
     <Compile Include="Migrations\201811211758056_InitialCreate.cs" />
     <Compile Include="Migrations\201811211758056_InitialCreate.Designer.cs">
       <DependentUpon>201811211758056_InitialCreate.cs</DependentUpon>

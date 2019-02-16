@@ -78,6 +78,7 @@ namespace Ubilingua
                 });
                 Multiview.Views.Add(view);
             }
+            Multiview.ActiveViewIndex = 0;
         }
     }
 }

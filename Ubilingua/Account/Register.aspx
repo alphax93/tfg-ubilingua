@@ -5,7 +5,7 @@
     <p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
-
+    <asp:Panel runat="server" CssClass="panel">
     <div class="form-horizontal">
         <h4>Crear una nueva cuenta</h4>
         <hr />
@@ -32,6 +32,7 @@
                 <asp:TextBox runat="server" ID="Surname2" CssClass="form-control" TextMode="SingleLine" />
             </div>
         </div>
+        <br />
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label">Correo electrónico</asp:Label>
             <div class="col-md-10">
@@ -60,8 +61,9 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Registrarse" CssClass="btn btn-default" />
+                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Registrarse" CssClass="btn panel-button" />
             </div>
         </div>
     </div>
+        </asp:Panel>
 </asp:Content>

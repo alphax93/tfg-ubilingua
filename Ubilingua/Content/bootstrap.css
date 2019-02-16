@@ -3644,12 +3644,19 @@ tbody.collapse.in {
     left: 0;
   }
 }
-.btn-group,
-.btn-group-vertical {
+.btn-group {
   position: relative;
   display: inline-block;
   vertical-align: middle;
 }
+.btn-group-vertical {
+    position: fixed;
+    display: inline-block;
+    vertical-align: middle;
+    right:1%;
+    width:15%
+}
+
 .btn-group > .btn,
 .btn-group-vertical > .btn {
   position: relative;
@@ -6838,4 +6845,30 @@ button.close {
 .notvisible{
     color:lightgrey;
 }
+
+.sidebar-subject {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #eee;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    right:0;
+}
+
+@media screen and (max-width: 1000px) {
+    .btn-group-vertical {
+        width: 91.66666667%;
+        height: auto;
+        position: relative;
+        align-self: center;
+        display: block;
+        margin: 2% auto;
+        text-align: center;
+        
+    }
+}
+
+
 /*# sourceMappingURL=bootstrap.css.map */

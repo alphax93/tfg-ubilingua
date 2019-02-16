@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System;
 namespace Ubilingua.Models
 {
+    [Serializable]
     public class Block
     {
         [ScaffoldColumn(false)]

@@ -1,4 +1,14 @@
-﻿function checkDownload() {
+﻿function checkBlock() {
+    var name = document.getElementById("BlockName").value;
+    if (name === "") {
+        var validator = document.getElementById("BlockValidator");
+        ValidatorEnable(validator);
+        return false;
+    }
+    return true;
+}
+
+function checkDownload() {
 
     var downloadName = document.getElementById("downloadResourceName").value;
     var downloadFile = document.getElementById("downloadResourceFile").value;
@@ -23,6 +33,7 @@ function checkVideo() {
     var videoPath = document.getElementById("videoPath").value;
     var flag = true;
     var validator;
+    
     if (videoName === "") {
         validator = document.getElementById("videoResourceNameValidator");
         ValidatorEnable(validator);
@@ -33,11 +44,12 @@ function checkVideo() {
         ValidatorEnable(validator);
         flag = false;
     } else {
-        var pattern = new RegExp("https:\/\/www\.youtube\.com\/watch\?v=\w*|https:\/\/www\.youtube\.com\/embed\/\w*");
-        if (!pattern.test(videoPath)) {
+        var pattern = new RegExp("(https:\/\/)?www\.youtube\.com\/watch\?v=.*|https:\/\/www\.youtube\.com\/embed\/.*");
+        if (pattern.test(videoPath)) {
             flag = false;
         }
     }
+    
     return flag;
 }
 
@@ -140,14 +152,92 @@ function checkTask() {
 }
 
 function changeVisibility(id) {
+    alert(id);
     $.ajax({
         type: "POST",
         url: "Subject.aspx/ChangeVisibility",
         data: '{id: "' + id + '" }',
         contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        dataType: "json",
+        success: function comeBack() {
+            return false;
+        }
     })
 }
+
+function checkeditDownload() {
+
+    var downloadName = document.getElementById("editDownloadResourceName").value;
+    var downloadFile = document.getElementById("editDownloadResourceFile").value;
+    var flag = true;
+    var validator;
+    if (downloadName === "") {
+        validator = document.getElementById("editDownloadNameValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    if (downloadFile === "") {
+        validator = document.getElementById("editDownloadFileValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    return flag;
+
+}
+
+function checkEditVideo() {
+    var videoName = document.getElementById("EditVideoResourceName").value;
+    var videoPath = document.getElementById("EditVideoPath").value;
+    var flag = true;
+    var validator;
+    
+    if (videoName === "") {
+        validator = document.getElementById("EditVideoResourceNameValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    if (videoPath === "") {
+        validator = document.getElementById("EditVideoResourcePathValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    } else {
+        var pattern = new RegExp("(https:\/\/)?www\.youtube\.com\/watch\?v=.*|https:\/\/www\.youtube\.com\/embed\/.*");
+        if (pattern.test(videoPath)) {
+            flag = false;
+        }
+    }
+    return flag;
+}
+
+function checkEditImage() {
+
+    var imageFile = document.getElementById("EditImageResourceFile").value;
+    var flag = true;
+
+    if (imageFile === "") {
+        var validator = document.getElementById("EditImageValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    } else {
+        var pattern = new RegExp("^.+\.(jpg|JPG|png|PNG|gif|GIF)$");
+        if (!pattern.test(imageFile)) {
+            flag = false;
+        }
+    }
+    return flag;
+}
+
+function checkTextEdit() {
+    var textResource = document.getElementById("editTextResource").value;
+
+    if (textResource === "") {
+        var validator = document.getElementById("editTextValidator");
+        ValidatorEnable(validator);
+        return false;
+    }
+    return true;
+}
+
 
 /*
     if (riddleOGText === "") {
