@@ -13,12 +13,17 @@ namespace Ubilingua.Logic
             var mySubject = new Models.Subject
             {
                 SubjectName = SubjectName,
-                ImagePath = ImagePath
+                ImagePath = ImagePath,
+                IsPrivate = false
             };
-            
+
             using (SubjectContext _db = new SubjectContext())
             {
-                if (!string.IsNullOrEmpty(password)) mySubject.SubjectPassword = password;
+                if (!string.IsNullOrEmpty(password))
+                {
+                    mySubject.SubjectPassword = password;
+                    mySubject.IsPrivate = true;
+                }
                 _db.Subjects.Add(mySubject);
                 _db.SaveChanges();
 
@@ -34,10 +39,67 @@ namespace Ubilingua.Logic
 
         public bool DeleteSubject(int subjectID)
         {
-            using(SubjectContext _db = new SubjectContext())
+            using (SubjectContext _db = new SubjectContext())
             {
                 Models.Subject sub = (from subjects in _db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
                 _db.Subjects.Remove(sub);
+                _db.SaveChanges();
+            }
+            return true;
+        }
+
+        public bool MakePublic(int subjectID)
+        {
+            using (SubjectContext _db = new SubjectContext())
+            {
+                Models.Subject sub = (from subjects in _db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+                sub.IsPrivate = false;
+                sub.SubjectPassword = "";
+                _db.SaveChanges();
+            }
+            return true;
+        }
+
+        public bool MakePrivate(int subjectID, string password, string userID)
+        {
+            using (SubjectContext _db = new SubjectContext())
+            {
+                Models.Subject sub = (from subjects in _db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+                sub.IsPrivate = true;
+                sub.SubjectPassword = password;
+                _db.SaveChanges();
+
+
+                JoinSubjectUser join = (from joins in _db.JoinSubjectUser where joins.SubjectID == subjectID && joins.UserID == userID select joins).FirstOrDefault();
+                if (join == null)
+                {
+                    AddJoinSubjectUser addJoin = new AddJoinSubjectUser();
+                    addJoin.AddJoinSubjectUsers(subjectID, userID);
+
+                }
+
+
+            }
+            return true;
+        }
+
+        public bool UpdatePassword(int subjectID, string password)
+        {
+            using (SubjectContext _db = new SubjectContext())
+            {
+                Models.Subject sub = (from subjects in _db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+                sub.SubjectPassword = password;
+                _db.SaveChanges();
+            }
+            return true;
+        }
+
+        public bool UpdateName(int subjectID, string name)
+        {
+            using (SubjectContext _db = new SubjectContext())
+            {
+                Models.Subject sub = (from subjects in _db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+                sub.SubjectName = name;
                 _db.SaveChanges();
             }
             return true;

@@ -21,19 +21,22 @@ namespace Ubilingua.Models
                 {
                     SubjectID=1,
                     SubjectName="Ingles",
-                    ImagePath="uk.jpg"
+                    ImagePath="uk.jpg",
+                    IsPrivate=false
                 },
                 new Subject
                 {
                     SubjectID=2,
                     SubjectName="Frances",
-                    ImagePath="france.jpg"
+                    ImagePath="france.jpg",
+                    IsPrivate=false
                 },
                 new Subject
                 {
                     SubjectID=3,
                     SubjectName="Aleman",
-                    ImagePath="germany.jpg"
+                    ImagePath="germany.jpg",
+                    IsPrivate=false
                 },
             };
             return subjects;

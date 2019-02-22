@@ -18,7 +18,8 @@ namespace Ubilingua
     {
         List<Block> blocks;
         int index = 0;
-        int? subjectID;
+        public int? subjectID;
+        public Models.Subject subject;
         UpdatePanel updatePanel;
         ListView blockList;
         ListView resourceList;
@@ -31,13 +32,14 @@ namespace Ubilingua
             {
                 var db = new SubjectContext();
                 subjectID = Convert.ToInt32(Request.QueryString["subjectID"]);
-
-                string pass = (string)(from subjects in db.Subjects where subjects.SubjectID == subjectID select subjects.SubjectPassword).Single<string>();
-                if (!String.IsNullOrEmpty(pass))
+                subject = (from subjects in db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+                //string pass = (string)(from subjects in db.Subjects where subjects.SubjectID == subjectID select subjects.SubjectPassword).Single<string>();
+                if (subject.IsPrivate)
                 {
                     string userID = User.Identity.GetUserId();
-                    int count = (from joinSubjectUser in db.JoinSubjectUser where joinSubjectUser.SubjectID == subjectID && joinSubjectUser.UserID == userID select joinSubjectUser.SubjectID).Count();
-                    if (count != 1)
+                    //int count = (from joinSubjectUser in db.JoinSubjectUser where joinSubjectUser.SubjectID == subjectID && joinSubjectUser.UserID == userID select joinSubjectUser.SubjectID).Count();
+                    JoinSubjectUser member = (from joinSubjectUser in db.JoinSubjectUser where joinSubjectUser.SubjectID == subjectID && joinSubjectUser.UserID == userID select joinSubjectUser).SingleOrDefault();
+                    if (member == null)
                     {
                         Response.Redirect("~/SubjectPassword?SubjectID=" + subjectID);
                     }
@@ -47,6 +49,28 @@ namespace Ubilingua
 
                 blockList = (ListView)Page.FindControlRecursive("blockList");
                 resourceList = (ListView)Page.FindControlRecursive("resourceList");
+                if (User.IsInRole("Profesor"))
+                {
+                    if (subject.IsPrivate)
+                    {
+                        Button makePublicButton = (Button)Page.FindControlRecursive("MakePublic");
+                        makePublicButton.Visible = true;
+                        Button changePassword = (Button)Page.FindControlRecursive("ChangePassword");
+                        changePassword.Visible = true;
+                    }
+                    else
+                    {
+                        Button makePrivateButton = (Button)Page.FindControlRecursive("MakePrivate");
+                        makePrivateButton.Visible = true;
+                    }
+                }
+                Label subjectName = (Label)Page.FindControlRecursive("subjectName");
+                subjectName.Text = subject.SubjectName;
+                if (subject.IsPrivate)
+                {
+                    Button leaveButton = (Button)Page.FindControlRecursive("LeaveButton");
+                    leaveButton.Visible = true;
+                }
             }
 
         }
@@ -120,13 +144,14 @@ namespace Ubilingua
 
         protected void CreateBlock_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(Request.QueryString["subjectID"]);
+            //int id = Convert.ToInt32(Request.QueryString["subjectID"]);
             TextBox name = (TextBox)Page.FindControlRecursive("BlockName");
             BlockCRUD blocks = new BlockCRUD();
-            bool addSuccess = blocks.AddBlocks(id, name.Text);
+            bool addSuccess = blocks.AddBlocks((int)subjectID, name.Text);
             if (addSuccess)
             {
-                Refresh();
+                blockList.DataBind();
+                updatePanel.Update();
             }
         }
 
@@ -647,7 +672,7 @@ namespace Ubilingua
         public void DeleteSubject(object sender, EventArgs e)
         {
             SubjectCRUD add = new SubjectCRUD();
-            bool success = add.DeleteSubject(int.Parse(HttpContext.Current.Request.QueryString["subjectID"]));
+            bool success = add.DeleteSubject((int)subjectID);
             if (success)
             {
                 Response.Redirect("~");
@@ -656,7 +681,82 @@ namespace Ubilingua
 
         public void ShowSubjectPanel(object sender, EventArgs e)
         {
+            ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("EditSubjectPopup");
+            modalPopupExtender.Show();
 
+            TextBox name = (TextBox)Page.FindControlRecursive("EditSubjectName");
+            using (SubjectContext _db = new SubjectContext())
+            {
+                Models.Subject sub = (from subjects in _db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+
+                name.Text = sub.SubjectName;
+                updatePanel.Update();
+            }
+
+
+        }
+
+        public void EditSubject_Click(object sender, EventArgs e)
+        {
+            TextBox name = (TextBox)Page.FindControlRecursive("EditSubjectName");
+            SubjectCRUD subjects = new SubjectCRUD();
+            bool success = subjects.UpdateName((int)subjectID, name.Text);
+            if (success)
+            {
+                blockList.DataBind();
+                updatePanel.Update();
+            }
+        }
+
+        public void MakePublicClick(object sender, EventArgs e)
+        {
+            SubjectCRUD subjects = new SubjectCRUD();
+            bool success = subjects.MakePublic((int)subjectID);
+            if (success)
+            {
+                Response.Redirect("~/Subject?subjectID=" + subjectID);
+            }
+        }
+
+        public void ShowMakePrivate(object sender, EventArgs e)
+        {
+            ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("EditSubjectPasswordPopup");
+            modalPopupExtender.Show();
+        }
+
+        public void EditSubjectPassword_Click(object sender, EventArgs e)
+        {
+            TextBox password = (TextBox)Page.FindControlRecursive("EditSubjectPassword");
+            SubjectCRUD subjects = new SubjectCRUD();
+            bool success = subjects.MakePrivate((int)subjectID, password.Text, User.Identity.GetUserId());
+            if (success)
+            {
+                Response.Redirect("~/Subject?subjectID=" + subjectID);
+            }
+        }
+
+        public void ShowChangePassword(object sender, EventArgs e)
+        {
+            ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("ChangeSubjectPasswordPopup");
+            modalPopupExtender.Show();
+        }
+
+        public void ChangeSubjectPassword_Click(object sender, EventArgs e)
+        {
+            TextBox password = (TextBox)Page.FindControlRecursive("ChangeSubjectPassword");
+            SubjectCRUD subjects = new SubjectCRUD();
+            bool success = subjects.UpdatePassword((int)subjectID, password.Text);
+            
+        }
+
+        public void LeaveSubject(object sender, EventArgs e)
+        {
+            AddJoinSubjectUser member = new AddJoinSubjectUser();
+            bool success = member.RemoveJoinSubjectUsers((int)subjectID, User.Identity.GetUserId());
+            if (success)
+            {
+                Response.Redirect("~");
+            }
         }
 
     }

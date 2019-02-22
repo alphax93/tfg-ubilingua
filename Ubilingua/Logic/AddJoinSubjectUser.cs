@@ -20,5 +20,20 @@ namespace Ubilingua.Logic
             }
             return true;
         }
+
+        public bool RemoveJoinSubjectUsers(int subjectID, string userID)
+        {
+            using (SubjectContext _db = new SubjectContext())
+            {
+                var myJoinSubjectUser = (from members in _db.JoinSubjectUser where members.SubjectID == subjectID && members.UserID == userID select members).FirstOrDefault();
+                if (myJoinSubjectUser != null)
+                {
+                    _db.JoinSubjectUser.Remove(myJoinSubjectUser);
+                }
+                _db.SaveChanges();
+            }
+            return true;
+        }
+
     }
 }

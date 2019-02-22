@@ -6,7 +6,9 @@
 
     <section>
         <br />
+
         <div>
+
             <asp:LoginView runat="server">
                 <AnonymousTemplate>
                     <%Response.Redirect("./Account/Login"); %>
@@ -16,121 +18,212 @@
                         <ContentTemplate>
                             <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UpdatePanel" ChildrenAsTriggers="false">
                                 <ContentTemplate>
+                                    <asp:Label runat="server" ID="subjectName" CssClass="h2"><%#: subject.SubjectName %></asp:Label>
+                                    <br />
+                                    <br />
                                     <asp:Panel runat="server" CssClass="btn-group-vertical">
                                         <asp:Button runat="server" Text="Añadir Tema" CssClass="btn" OnClick="ShowBlockPanel" CausesValidation="false" />
-                                        <asp:Button runat="server" Text="Edita Curso" CssClass="btn" OnClick="ShowSubjectPanel" CausesValidation="false" />
+                                        <asp:Button runat="server" Text="Editar Nombre Curso" CssClass="btn" OnClick="ShowSubjectPanel" CausesValidation="false" />
+                                        <asp:Button runat="server" ID="MakePrivate" Text="Hacer Privado" OnClick="ShowMakePrivate" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" />
+                                        <asp:Button runat="server" ID="ChangePassword" Text="Cambiar Contraseña" OnClick="ShowChangePassword" CssClass="btn" CausesValidation="false" ClientIDMode="Static" />
+                                        <asp:Button runat="server" ID="MakePublic" Text="Hacer Público" OnClick="MakePublicClick" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" OnClientClick="if (!confirm('¿Está seguro de que desea gacer público el curso?')) return false;" />
                                         <asp:Button runat="server" Text="Eliminar Curso" CssClass="btn" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;" OnClick="DeleteSubject" />
                                     </asp:Panel>
+
                                     <div class="col-md-11">
-                                    <asp:ListView ID="blockList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Block" SelectMethod="GetBlocks">
-                                        <EmptyDataTemplate>
-                                            <table>
-                                                <tr>
-                                                    <td>No data was returned.</td>
-                                                </tr>
-                                            </table>
-                                        </EmptyDataTemplate>
-                                        <EmptyItemTemplate>
-                                            </td>
-                                        </EmptyItemTemplate>
-                                        <ItemTemplate>
-                                            <td runat="server">
-                                                <asp:Panel CssClass="panel" ID="pnlCategories" runat="server">
 
-                                                    <asp:Panel runat="server" ID="panelExtenderControl">
-                                                        <asp:Image ID="imgCollapsible" CssClass="first" ImageUrl="~/Subjects/Images/uparrow.jpg" runat="server" Width="20px" Height="20px" />
-                                                       </asp:Panel>
-                                                     <span class="panel-title panel-heading" style="display: inline-block"><%#:Item.BlockName %></span>
+
+                                        <asp:ListView ID="blockList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Block" SelectMethod="GetBlocks">
+                                            <EmptyDataTemplate>
+                                                <table>
+                                                    <tr>
+                                                        <td>Curso vacío.</td>
+                                                    </tr>
+                                                </table>
+                                            </EmptyDataTemplate>
+                                            <EmptyItemTemplate>
+                                                </td>
+                                            </EmptyItemTemplate>
+                                            <ItemTemplate>
+
+                                                <td runat="server">
+                                                    <asp:Panel CssClass="panel" ID="pnlCategories" runat="server">
+
+                                                        <asp:Panel runat="server" ID="panelExtenderControl">
+                                                            <asp:Image ID="imgCollapsible" CssClass="first" ImageUrl="~/Subjects/Images/uparrow.jpg" runat="server" Width="20px" Height="20px" />
+                                                        </asp:Panel>
+                                                        <span class="panel-title panel-heading" style="display: inline-block"><%#:Item.BlockName %></span>
                                                         <asp:LinkButton runat="server" OnCommand="DeleteBlock" ID="deleteBlockButton" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
-                                                    <asp:LinkButton runat="server" OnCommand="ShowEditBlock" ID="editBlockButton" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" ><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
-                                                    
-                                                    <asp:Panel ID="pnlProducts" runat="server" CssClass="panel-body">
 
-                                                        <asp:ListView ID="resourceList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Resource" SelectMethod="GetResources" UpdateMethod="GetResources">
-                                                            <EmptyDataTemplate>
+                                                        <asp:LinkButton runat="server" OnCommand="ShowEditBlock" ID="editBlockButton" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
 
-                                                                <p></p>
+                                                        <asp:Panel ID="pnlProducts" runat="server" CssClass="panel-body">
 
-                                                            </EmptyDataTemplate>
-                                                            <EmptyItemTemplate>
-                                                                </td>
-                                                            </EmptyItemTemplate>
+                                                            <asp:ListView ID="resourceList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Resource" SelectMethod="GetResources" UpdateMethod="GetResources">
+                                                                <EmptyDataTemplate>
 
-                                                            <ItemTemplate>
-                                                                <div class="row">
-                                                                    <div class="col-md-1">
-                                                                        <asp:LinkButton runat="server" OnCommand="DeleteResource" ID="deleteButton" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;"><span class="glyphicon glyphicon-remove <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
-                                                                        <asp:LinkButton runat="server" OnCommand="ChangeVisibility" ID="visibleButton" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false"><span class="<%#:(Item.IsVisible == true ? "glyphicon glyphicon-eye-open visible" : "glyphicon glyphicon-eye-close notvisible")%>" id="eye"></span></asp:LinkButton>
+                                                                    <p></p>
 
-                                                                        <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="text"? true : false%>'>
-                                                                            <asp:LinkButton runat="server" OnCommand="ShowEditText" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <p style="white-space: pre" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#: HttpUtility.HtmlEncode(Item.ResourcePath) %></p>
+                                                                </EmptyDataTemplate>
+                                                                <EmptyItemTemplate>
+                                                                    </td>
+                                                                </EmptyItemTemplate>
 
-                                                                        </asp:PlaceHolder>
+                                                                <ItemTemplate>
+                                                                    <div class="row">
+                                                                        <div class="col-md-1">
+                                                                            <asp:LinkButton runat="server" OnCommand="DeleteResource" ID="deleteButton" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;"><span class="glyphicon glyphicon-remove <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
+                                                                            <asp:LinkButton runat="server" OnCommand="ChangeVisibility" ID="visibleButton" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false"><span class="<%#:(Item.IsVisible == true ? "glyphicon glyphicon-eye-open visible" : "glyphicon glyphicon-eye-close notvisible")%>" id="eye"></span></asp:LinkButton>
+
+                                                                            <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="text"? true : false%>'>
+                                                                                <asp:LinkButton runat="server" OnCommand="ShowEditText" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <p style="white-space: pre" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#: HttpUtility.HtmlEncode(Item.ResourcePath) %></p>
+
+                                                                            </asp:PlaceHolder>
 
                                                                         <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="download"? true : false %>'>
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditDownload" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <a href="Resources/<%#Item.ResourcePath %>" download class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a><br />
-                                                                        </asp:PlaceHolder>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <a href="Resources/<%#Item.ResourcePath %>" download class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a><br />
+                                                                            </asp:PlaceHolder>
 
                                                                         <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="img"? true : false %>'>
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditImage" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <img src="Resources/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></img><br />
-                                                                        </asp:PlaceHolder>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <img src="Resources/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></img><br />
+                                                                            </asp:PlaceHolder>
 
                                                                         <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="video"? true : false %>'>
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditVideo" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <iframe src="<%#Item.ResourcePath %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></iframe>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <iframe src="<%#Item.ResourcePath %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></iframe>
 
-                                                                        </asp:PlaceHolder>
+                                                                            </asp:PlaceHolder>
                                                                         <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="riddle"? true : false %>'>
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditRiddle" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <a href="Riddle.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <a href="Riddle.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
 
-                                                                        </asp:PlaceHolder>
+                                                                            </asp:PlaceHolder>
                                                                         <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="task"? true : false %>'>
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditTask" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
-                                                                    </div>
-                                                                    <div class="col-md-4">
-                                                                        <a href="ViewTask.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <a href="ViewTask.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
 
-                                                                        </asp:PlaceHolder>
-                                                                    </div>
+                                                                            </asp:PlaceHolder>
+                                                                        </div>
 
-                                                                </div>
-                                                                <br />
-                                                            </ItemTemplate>
-                                                        </asp:ListView>
-                                                        <br />
-                                                        
+                                                                    </div>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:ListView>
+                                                            <br />
+                                                            <div class="btn-group">
+                                                                <asp:Button ID="AddDownload" runat="server" Text="Añadir Recurso Descargable" OnCommand="ShowDownloadPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
+                                                                <asp:Button ID="AddVideo" runat="server" Text="Añadir Video" OnCommand="ShowVideoPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
+                                                                <asp:Button ID="AddImage" runat="server" Text="Añadir Imagen" OnCommand="ShowImagePopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
+                                                                <asp:Button ID="AddText" runat="server" Text="Añadir Texto" OnCommand="ShowTextPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
+                                                                <asp:Button ID="AddRiddle" runat="server" Text="Añadir Adivinanza" OnCommand="ShowRiddlePopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
+                                                                <asp:Button ID="AddTask" runat="server" Text="Añadir Tarea" OnCommand="ShowTaskPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
+                                                            </div>
+                                                        </asp:Panel>
+
                                                     </asp:Panel>
-                                                    <div class="btn-group">
-                                                    <asp:Button ID="AddDownload" runat="server" Text="Añadir Recurso Descargable" OnCommand="ShowDownloadPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
-                                                        <asp:Button ID="AddVideo" runat="server" Text="Añadir Video" OnCommand="ShowVideoPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
-                                                        <asp:Button ID="AddImage" runat="server" Text="Añadir Imagen" OnCommand="ShowImagePopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
-                                                        <asp:Button ID="AddText" runat="server" Text="Añadir Texto" OnCommand="ShowTextPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
-                                                        <asp:Button ID="AddRiddle" runat="server" Text="Añadir Adivinanza" OnCommand="ShowRiddlePopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
-                                                        <asp:Button ID="AddTask" runat="server" Text="Añadir Tarea" OnCommand="ShowTaskPopup" CssClass="btn" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" />
-                                                    </div>
-                                                </asp:Panel>
-                                                <asp:CollapsiblePanelExtender ID="cpe" runat="server" TargetControlID="pnlProducts" CollapsedSize="0" Collapsed="False" ExpandControlID="panelExtenderControl" CollapseControlID="panelExtenderControl"
-                                                    AutoCollapse="False" AutoExpand="False" ScrollContents="false" ImageControlID="imgCollapsible" ExpandDirection="Vertical" ExpandedImage="~/Subjects/Images/downarrow.png" CollapsedImage="~/Subjects/Images/uparrow.png"></asp:CollapsiblePanelExtender>
-                                            </td>
-                                        </ItemTemplate>
+                                                    <asp:CollapsiblePanelExtender ID="cpe" runat="server" TargetControlID="pnlProducts" CollapsedSize="0" Collapsed="False" ExpandControlID="panelExtenderControl" CollapseControlID="panelExtenderControl"
+                                                        AutoCollapse="False" AutoExpand="False" ScrollContents="false" ImageControlID="imgCollapsible" ExpandDirection="Vertical" ExpandedImage="~/Subjects/Images/downarrow.png" CollapsedImage="~/Subjects/Images/uparrow.png"></asp:CollapsiblePanelExtender>
+                                                </td>
+                                            </ItemTemplate>
 
-                                    </asp:ListView>
+                                        </asp:ListView>
+                                    </div>
+                                    <asp:HiddenField ID="EditSubjectDummy" runat="server" />
+                                    <asp:ModalPopupExtender ID="EditSubjectPopup" runat="server"
+                                        CancelControlID="EditSubjectBtnCancel"
+                                        TargetControlID="EditSubjectDummy" PopupControlID="EditSubjectPanel"
+                                        PopupDragHandleControlID="EditSubjectPopupHeader" Drag="true">
+                                    </asp:ModalPopupExtender>
+                                    <asp:Panel ID="EditSubjectPanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                        <div>
+                                            <div id="EditSubjectPopupHeader" class="modal-header">
+                                                <h4>Editar Curso</h4>
+                                            </div>
+                                            <br />
+                                            <div class="form-group">
+                                                <asp:Label runat="server">Nombre</asp:Label>
+                                                <asp:TextBox runat="server" ID="EditSubjectName" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="EditSubjectName" ID="EditSubjectValidator" ClientIDMode="Static"
+                                                    CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <asp:Button Text="Aceptar" OnClick="EditSubject_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditSubject()" ID="EditSubjectButton" />
+
+                                                <input id="EditSubjectBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                            </div>
                                         </div>
-                                    
+                                    </asp:Panel>
+
+                                    <asp:HiddenField ID="EditSubjectPasswordDummy" runat="server" />
+                                    <asp:ModalPopupExtender ID="EditSubjectPasswordPopup" runat="server"
+                                        CancelControlID="EditSubjectPasswordBtnCancel"
+                                        TargetControlID="EditSubjectPasswordDummy" PopupControlID="EditSubjectPasswordPanel"
+                                        PopupDragHandleControlID="EditSubjectPasswordPopupHeader" Drag="true">
+                                    </asp:ModalPopupExtender>
+                                    <asp:Panel ID="EditSubjectPasswordPanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                        <div>
+                                            <div id="EditSubjectPasswordPopupHeader" class="modal-header">
+                                                <h4>Hacer Curso Privado</h4>
+                                            </div>
+                                            <br />
+                                            <div class="form-group">
+                                                <asp:Label runat="server">Contraseña</asp:Label>
+                                                <asp:TextBox runat="server" ID="EditSubjectPassword" TextMode="Password" ClientIDMode="Static"></asp:TextBox>
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="EditSubjectPassword" ID="EditSubjectPasswordValidator" ClientIDMode="Static"
+                                                    CssClass="text-danger" ErrorMessage="El campo de contraseña es obligatorio." />
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <asp:Button Text="Aceptar" OnClick="EditSubjectPassword_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditSubjectPassword()" ID="EditSubjectPasswordButton" />
+
+                                                <input id="EditSubjectPasswordBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+
+                                    <asp:HiddenField ID="ChangeSubjectPasswordDummy" runat="server" />
+                                    <asp:ModalPopupExtender ID="ChangeSubjectPasswordPopup" runat="server"
+                                        CancelControlID="ChangeSubjectPasswordBtnCancel"
+                                        TargetControlID="ChangeSubjectPasswordDummy" PopupControlID="ChangeSubjectPasswordPanel"
+                                        PopupDragHandleControlID="ChangeSubjectPasswordPopupHeader" Drag="true">
+                                    </asp:ModalPopupExtender>
+                                    <asp:Panel ID="ChangeSubjectPasswordPanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                        <div>
+                                            <div id="ChangeSubjectPasswordPopupHeader" class="modal-header">
+                                                <h4>Cambiar Contraseña</h4>
+                                            </div>
+                                            <br />
+                                            <div class="form-group">
+                                                <asp:Label runat="server">Nueva contraseña</asp:Label>
+                                                <asp:TextBox runat="server" ID="ChangeSubjectPassword" TextMode="Password" ClientIDMode="Static"></asp:TextBox>
+                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="ChangeSubjectPassword" ID="ChangeSubjectPasswordValidator" ClientIDMode="Static"
+                                                    CssClass="text-danger" ErrorMessage="El campo de contraseña es obligatorio." />
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <asp:Button Text="Aceptar" OnClick="ChangeSubjectPassword_Click" CssClass="panel-button" runat="server" OnClientClick="return checkChangeSubjectPassword()" ID="ChangeSubjectPasswordButton" />
+
+                                                <input id="ChangeSubjectPasswordBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                            </div>
+                                        </div>
+                                    </asp:Panel>
+
                                     <asp:HiddenField ID="BlockDummy" runat="server" />
                                     <asp:ModalPopupExtender ID="BlockPopup" runat="server"
                                         CancelControlID="BlockBtnCancel"
@@ -636,83 +729,106 @@
                                 <Triggers>
                                 </Triggers>
                             </asp:UpdatePanel>
-
-
-
-
-
-
-
-
-
-
                         </ContentTemplate>
                     </asp:RoleGroup>
                     <asp:RoleGroup Roles="Alumno">
                         <ContentTemplate>
-                            <asp:ListView ID="blockList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Block" SelectMethod="GetBlocks">
-                                <EmptyDataTemplate>
-                                    <table>
-                                        <tr>
-                                            <td>No data was returned.</td>
-                                        </tr>
-                                    </table>
-                                </EmptyDataTemplate>
-                                <EmptyItemTemplate>
-                                    </td>
-                                </EmptyItemTemplate>
-                                <ItemTemplate>
-                                    <td runat="server">
-                                        <asp:Panel CssClass="panel" ID="pnlCategories" runat="server">
-                                            <asp:Image ID="imgCollapsible" CssClass="first" ImageUrl="~/Subjects/Images/uparrow.jpg" runat="server" Width="20px" Height="20px" />
-                                            <span class="panel-title panel-heading" style="display: inline-block"><%#:Item.BlockName %></span>
+                            <asp:Label runat="server" ID="subjectName" CssClass="h2"><%#: subject.SubjectName %></asp:Label>
+                            <br />
+                            <br />
+                            <asp:Panel runat="server" CssClass="btn-group-vertical">
+                                <asp:Button runat="server" Text="Ver Calificaciones" CssClass="btn" CausesValidation="false" />
+                                <asp:Button runat="server" Text="Abandonar Curso" CssClass="btn" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea abandonar el curso?')) return false;" OnClick="LeaveSubject" ID="LeaveButton" Visible="false" />
+                            </asp:Panel>
+                            <div class="col-md-11">
+                                <asp:ListView ID="blockList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Block" SelectMethod="GetBlocks">
+                                    <EmptyDataTemplate>
+                                        <table>
+                                            <tr>
+                                                <td>Curso vacío.</td>
+                                            </tr>
+                                        </table>
+                                    </EmptyDataTemplate>
+                                    <EmptyItemTemplate>
+                                        </td>
+                                    </EmptyItemTemplate>
+                                    <ItemTemplate>
+                                        <td runat="server">
+                                            <asp:Panel CssClass="panel" ID="pnlCategories" runat="server">
+                                                <asp:Panel runat="server" ID="panelExtenderControl">
+                                                    <asp:Image ID="imgCollapsible" CssClass="first" ImageUrl="~/Subjects/Images/uparrow.jpg" runat="server" Width="20px" Height="20px" />
+                                                </asp:Panel>
+                                                <span class="panel-title panel-heading" style="display: inline-block"><%#:Item.BlockName %></span>
 
-                                            <asp:Panel ID="pnlProducts" runat="server">
-                                                <asp:ListView ID="resourceList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Resource" SelectMethod="GetVisibleResources">
-                                                    <EmptyDataTemplate>
 
-                                                        <p></p>
 
-                                                    </EmptyDataTemplate>
-                                                    <EmptyItemTemplate>
-                                                        </td>
-                                                    </EmptyItemTemplate>
-                                                    <ItemTemplate>
-                                                        <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="text"? true : false%>'>
-                                                            <pre><%#: HttpUtility.HtmlEncode(Item.ResourcePath) %></pre>
-                                                            <br />
-                                                        </asp:PlaceHolder>
+                                                <asp:Panel ID="pnlProducts" runat="server" CssClass="panel-body">
 
-                                                        <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="download"? true : false %>'>
-                                                            <a href="Resources/<%#Item.ResourcePath %>" download><%#Item.ResourceName %></a><br />
-                                                        </asp:PlaceHolder>
+                                                    <asp:ListView ID="resourceList" runat="server" DataKeyNames="BlockID" GroupItemCount="1" ItemType="Ubilingua.Models.Resource" SelectMethod="GetVisibleResources" UpdateMethod="GetVisibleResources">
+                                                        <EmptyDataTemplate>
 
-                                                        <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="img"? true : false %>'>
-                                                            <img src="Resources/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>"></img><br />
-                                                        </asp:PlaceHolder>
+                                                            <p></p>
 
-                                                        <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="video"? true : false %>'>
-                                                            <iframe src="<%#Item.ResourcePath %>"><%#Item.ResourceName %></iframe>
-                                                            <br />
-                                                        </asp:PlaceHolder>
-                                                        <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="riddle"? true : false %>'>
-                                                            <a href="Riddle.aspx?ResourceID=<%#Item.ResourceID %>"><%#Item.ResourceName %></a>
-                                                            <br />
-                                                        </asp:PlaceHolder>
-                                                        <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="task"? true : false %>'>
-                                                            <a href="ViewTask.aspx?ResourceID=<%#Item.ResourceID %>"><%#Item.ResourceName %></a>
-                                                            <br />
-                                                        </asp:PlaceHolder>
-                                                    </ItemTemplate>
-                                                </asp:ListView>
+                                                        </EmptyDataTemplate>
+                                                        <EmptyItemTemplate>
+                                                            </td>
+                                                        </EmptyItemTemplate>
+
+                                                        <ItemTemplate>
+                                                            <div class="row">
+
+
+                                                                <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="text"? true : false%>'>
+
+                                                                    <div class="col-md-4">
+                                                                        <p style="white-space: pre" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#: HttpUtility.HtmlEncode(Item.ResourcePath) %></p>
+                                                                </asp:PlaceHolder>
+
+                                                                <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="download"? true : false %>'>
+
+                                                                    <div class="col-md-4">
+                                                                        <a href="Resources/<%#Item.ResourcePath %>" download class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a><br />
+                                                                </asp:PlaceHolder>
+
+                                                                <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="img"? true : false %>'>
+
+                                                                    <div class="col-md-4">
+                                                                        <img src="Resources/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></img><br />
+                                                                </asp:PlaceHolder>
+
+                                                                <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="video"? true : false %>'>
+
+                                                                    <div class="col-md-4">
+                                                                        <iframe src="<%#Item.ResourcePath %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></iframe>
+                                                                </asp:PlaceHolder>
+                                                                <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="riddle"? true : false %>'>
+
+                                                                    <div class="col-md-4">
+                                                                        <a href="Riddle.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
+                                                                </asp:PlaceHolder>
+                                                                <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="task"? true : false %>'>
+
+                                                                    <div class="col-md-4">
+                                                                        <a href="ViewTask.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
+                                                                </asp:PlaceHolder>
+                                                            </div>
+
+                                                            </div>
+                                                                <br />
+                                                        </ItemTemplate>
+                                                    </asp:ListView>
+                                                    <br />
+
+                                                </asp:Panel>
+
                                             </asp:Panel>
-                                        </asp:Panel>
-                                        <asp:CollapsiblePanelExtender ID="cpe" runat="server" TargetControlID="pnlProducts" CollapsedSize="0" Collapsed="False" ExpandControlID="pnlCategories" CollapseControlID="pnlCategories"
-                                            AutoCollapse="False" AutoExpand="False" ScrollContents="false" ImageControlID="imgCollapsible" ExpandDirection="Vertical" ExpandedImage="~/Subjects/Images/downarrow.png" CollapsedImage="~/Subjects/Images/uparrow.png"></asp:CollapsiblePanelExtender>
-                                    </td>
-                                </ItemTemplate>
+                                            <asp:CollapsiblePanelExtender ID="cpe" runat="server" TargetControlID="pnlProducts" CollapsedSize="0" Collapsed="False" ExpandControlID="panelExtenderControl" CollapseControlID="panelExtenderControl"
+                                                AutoCollapse="False" AutoExpand="False" ScrollContents="false" ImageControlID="imgCollapsible" ExpandDirection="Vertical" ExpandedImage="~/Subjects/Images/downarrow.png" CollapsedImage="~/Subjects/Images/uparrow.png"></asp:CollapsiblePanelExtender>
+                                        </td>
+                                    </ItemTemplate>
 
-                            </asp:ListView>
+                                </asp:ListView>
+                            </div>
                         </ContentTemplate>
                     </asp:RoleGroup>
                 </RoleGroups>

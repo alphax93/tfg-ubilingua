@@ -10,6 +10,9 @@ namespace Ubilingua.Models
         [Required, StringLength(20), Display(Name ="Name")]
         public string SubjectName { get; set; }
 
+        [Required]
+        public bool IsPrivate { get; set; }
+
         public string SubjectPassword { get; set; }
 
         public string ImagePath { get; set; }
