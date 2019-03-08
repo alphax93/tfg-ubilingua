@@ -113,7 +113,7 @@ namespace Ubilingua
             {
 
                 string fileName = Path.GetFileName(fileUpload.FileName);
-                fileUpload.SaveAs(Server.MapPath("Resources/UserTasks") + fileName);
+                fileUpload.SaveAs(Server.MapPath("Resources/UserTasks/") + fileName);
                 AddJoinUserMark join = new AddJoinUserMark();
                 if (alredySent)
                 {
@@ -126,9 +126,12 @@ namespace Ubilingua
                 else
                 {
 
+                    SubjectContext _db = new SubjectContext();
+                        int blockID = (from resources in _db.Resources where resources.ResourceID == id select resources.BlockId).FirstOrDefault();
+                        int subjectID = (from blocks in _db.Blocks where blocks.BlockID == blockID select blocks.SubjectID).FirstOrDefault();
                     
                     bool addSuccess = join.AddJoinUserMarks(id, User.Identity.GetUserId(), fileName, 
-                        User.Identity.GetName() + " " + User.Identity.GetSurname1() + " " + User.Identity.GetSurname2());
+                        User.Identity.GetName() + " " + User.Identity.GetSurname1() + " " + User.Identity.GetSurname2(), subjectID);
                     if (addSuccess)
                     {
                         Response.Redirect(Request.RawUrl);

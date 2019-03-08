@@ -11,6 +11,7 @@ using Ubilingua.Logic;
 using AjaxControlToolkit;
 using System.IO;
 using Ubilingua.NewExtensions;
+using System.Data.Entity.Validation;
 
 namespace Ubilingua
 {
@@ -27,6 +28,7 @@ namespace Ubilingua
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.MaintainScrollPositionOnPostBack = true;
+            Page.Form.Attributes.Add("enctype", "multipart/form-data");
 
             if (User.Identity.IsAuthenticated)
             {
@@ -483,7 +485,6 @@ namespace Ubilingua
             TextBox ogText = (TextBox)Page.FindControlRecursive("OGText");
             TextBox transText = (TextBox)Page.FindControlRecursive("TransText");
             TextBox answer = (TextBox)Page.FindControlRecursive("riddleAnswer");
-
             if (audioFile.HasFile)
             {
                 try
@@ -497,6 +498,7 @@ namespace Ubilingua
                     {
                         imageFile.SaveAs(Server.MapPath("Resources/") + imageFilename);
                     }
+
                     ResourceCRUD resources = new ResourceCRUD();
                     bool addSuccess = resources.AddRiddleResource(int.Parse(ViewState["blockID"].ToString()), riddleName.Text,
                         audioFilename, imageFilename, ogText.Text, transText.Text, answer.Text);
@@ -509,7 +511,7 @@ namespace Ubilingua
                 }
                 catch (Exception ex)
                 {
-
+                    
                 }
             }
         }
@@ -757,6 +759,11 @@ namespace Ubilingua
             {
                 Response.Redirect("~");
             }
+        }
+
+        public void ViewMarks(object sender, EventArgs e)
+        {
+            Response.Redirect("~/SubjectMarks?subjectID="+subjectID);
         }
 
     }

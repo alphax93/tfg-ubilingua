@@ -1,8 +1,3 @@
-C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.InitialCreate.resources
-C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.CreateSurname1Column.resources
-C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.CreateSurname2Column.resources
-C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csproj.GenerateResource.cache
-C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csproj.CoreCompileInputs.cache
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Ubilingua.dll.config
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Ubilingua.dll
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Ubilingua.pdb
@@ -108,8 +103,13 @@ C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\es\EntityFramework.SqlServer
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.InitialCreate.resources
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.CreateSurname1Column.resources
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.CreateSurname2Column.resources
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.CreateNameColumn.resources
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csproj.GenerateResource.cache
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csproj.CoreCompileInputs.cache
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csproj.CopyComplete
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.dll
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.pdb
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csprojAssemblyReference.cache
-C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.Migrations.CreateNameColumn.resources

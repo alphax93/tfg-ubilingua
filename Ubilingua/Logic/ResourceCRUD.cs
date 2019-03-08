@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using Ubilingua.Models;
@@ -35,9 +36,10 @@ namespace Ubilingua.Logic
             myResource.ResourceType = "riddle";
             myResource.IsVisible = false;
 
-            using(SubjectContext _db = new SubjectContext())
+            using (SubjectContext _db = new SubjectContext())
             {
                 _db.Resources.Add(myResource);
+
                 _db.SaveChanges();
 
                 var myRiddle = new RiddleResource();
@@ -50,14 +52,15 @@ namespace Ubilingua.Logic
                 myRiddle.Answer = answer;
 
                 _db.RiddleResources.Add(myRiddle);
+
                 _db.SaveChanges();
 
-            }
 
+            }
             return true;
         }
 
-        public bool AddTaskResource(int blockID,string taskName, string taskText, DateTime deadline)
+        public bool AddTaskResource(int blockID, string taskName, string taskText, DateTime deadline)
         {
             var myResource = new Resource();
             myResource.BlockId = blockID;
@@ -66,7 +69,7 @@ namespace Ubilingua.Logic
             myResource.ResourceType = "task";
             myResource.IsVisible = false;
 
-            using(SubjectContext _db = new SubjectContext())
+            using (SubjectContext _db = new SubjectContext())
             {
                 _db.Resources.Add(myResource);
                 _db.SaveChanges();

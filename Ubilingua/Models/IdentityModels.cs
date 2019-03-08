@@ -19,7 +19,7 @@ namespace Ubilingua.Models
             var userIdentity = manager.CreateIdentity(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Agregar reclamaciones de usuario personalizadas aquí
             userIdentity.AddClaim(new Claim("Surname1", this.Surname1));
-            userIdentity.AddClaim(new Claim("Surname1", this.Surname2));
+            userIdentity.AddClaim(new Claim("Surname2", this.Surname2));
             userIdentity.AddClaim(new Claim("Name", this.Name));
             return userIdentity;
         }

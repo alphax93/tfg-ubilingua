@@ -12,6 +12,7 @@
                 <audio controls>
                     <source id="audioSource" runat="server" />
                 </audio>
+                <a id="audioLink" runat="server" download>Descargar audio</a>
                 <asp:Panel runat="server" ID="imagePanelContainer" CssClass="panel">
                     <asp:Panel runat="server" ID="imagePanelExtender">
                         <asp:Image ID="imagePanelImage" runat="server" CssClass="first" ImageUrl="Subjects/Images/uparrow.png" Width="20px" Height="20px" />

@@ -8,7 +8,7 @@ namespace Ubilingua.Logic
 {
     public class AddJoinUserMark
     {
-        public bool AddJoinUserMarks(int ResourceID, string UserID, string filepath, string user)
+        public bool AddJoinUserMarks(int ResourceID, string UserID, string filepath, string user, int subjectID)
         {
             var myJoinUserMarks = new JoinUserMark();
             myJoinUserMarks.ResourceID = ResourceID;
@@ -16,8 +16,11 @@ namespace Ubilingua.Logic
             myJoinUserMarks.FilePath = filepath;
             myJoinUserMarks.Delivered = DateTime.Now;
             myJoinUserMarks.User = user;
+            myJoinUserMarks.SubjectID = subjectID;
             using (SubjectContext _db = new SubjectContext())
             {
+                TaskResource task = (from tasks in _db.TaskResources where tasks.ResourceID == ResourceID select tasks).FirstOrDefault();
+                myJoinUserMarks.TaskName = task.TaskName;
                 _db.JoinUserMark.Add(myJoinUserMarks);
                 _db.SaveChanges();
             }

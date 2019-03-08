@@ -15,6 +15,10 @@ namespace Ubilingua.Models
 
         public string User { get; set; }
 
+        public int SubjectID { get; set; }
+
+        public string TaskName { get; set; }
+
         public float Mark { get; set; }
 
         public string FilePath { get; set; }

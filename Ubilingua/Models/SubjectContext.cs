@@ -20,5 +20,7 @@ namespace Ubilingua.Models
         public DbSet<TaskResource> TaskResources { get; set; }
 
         public DbSet<JoinUserMark> JoinUserMark { get; set; }
+
+        public DbSet<TeacherPassword> TeacherPasswords { get; set; }
     }
 }

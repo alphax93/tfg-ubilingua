@@ -9,7 +9,7 @@
     <div class="form-horizontal">
         <h4>Crear una nueva cuenta</h4>
         <hr />
-        <asp:ValidationSummary runat="server" CssClass="text-danger" />
+        
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="Username" CssClass="col-md-2 control-label">Nombre</asp:Label>
             <div class="col-md-10">
@@ -57,6 +57,13 @@
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="El campo de confirmación de contraseña es obligatorio." />
                 <asp:CompareValidator runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="La contraseña y la contraseña de confirmación no coinciden." />
+            </div>
+        </div>
+        <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="TeacherPassword" CssClass="col-md-2 control-label">Contraseña de profesor</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="TeacherPassword" TextMode="Password" CssClass="form-control" />
+                <asp:Literal runat="server" ID="TeacherPasswordWarning" Visible="false" Text="La contraseña de profesor no es correcta"></asp:Literal>
             </div>
         </div>
         <div class="form-group">

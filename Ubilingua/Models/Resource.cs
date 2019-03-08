@@ -7,7 +7,7 @@ namespace Ubilingua.Models
         [ScaffoldColumn(false)]
         public int ResourceID { get; set; }
 
-        [Required, StringLength(20), Display(Name = "Name")]
+        [Required, Display(Name = "Name")]
         public string ResourceName { get; set; }
 
         [Required]

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Ubilingua.Models
 {
     [Serializable]
@@ -8,7 +9,7 @@ namespace Ubilingua.Models
         [ScaffoldColumn(false)]
         public int BlockID { get; set; }
 
-        [Required, StringLength(30), Display(Name = "Name")]
+        [Required, Display(Name = "Name")]
         public string BlockName { get; set; }
 
         [ScaffoldColumn(false)]

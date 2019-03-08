@@ -19,7 +19,7 @@ namespace Ubilingua.Account
             //var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
             //if (!String.IsNullOrEmpty(returnUrl))
             //{
-              //  RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+            //  RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
             //}
         }
 
@@ -33,28 +33,35 @@ namespace Ubilingua.Account
 
                 // Esto no cuenta los errores de inicio de sesión hacia el bloqueo de cuenta
                 // Para habilitar los errores de contraseña para desencadenar el bloqueo, cambie a shouldLockout: true
-                string user = manager.FindByEmail(Email.Text).UserName;
-                var result = signinManager.PasswordSignIn(user, Password.Text, RememberMe.Checked, shouldLockout: false);
-
-                switch (result)
+                try
                 {
-                    case SignInStatus.Success:
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-                        break;
-                    case SignInStatus.LockedOut:
-                        Response.Redirect("/Account/Lockout");
-                        break;
-                    case SignInStatus.RequiresVerification:
-                        Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
-                                                        Request.QueryString["ReturnUrl"],
-                                                        RememberMe.Checked),
-                                          true);
-                        break;
-                    case SignInStatus.Failure:
-                    default:
-                        FailureText.Text = "Intento de inicio de sesión no válido";
-                        ErrorMessage.Visible = true;
-                        break;
+                    string user = manager.FindByEmail(Email.Text).UserName;
+                    var result = signinManager.PasswordSignIn(user, Password.Text, RememberMe.Checked, shouldLockout: false);
+
+                    switch (result)
+                    {
+                        case SignInStatus.Success:
+                            IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                            break;
+                        case SignInStatus.LockedOut:
+                            Response.Redirect("/Account/Lockout");
+                            break;
+                        case SignInStatus.RequiresVerification:
+                            Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}",
+                                                            Request.QueryString["ReturnUrl"],
+                                                            RememberMe.Checked),
+                                              true);
+                            break;
+                        case SignInStatus.Failure:
+                        default:
+                            FailureText.Text = "Intento de inicio de sesión no válido";
+                            ErrorMessage.Visible = true;
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
         }

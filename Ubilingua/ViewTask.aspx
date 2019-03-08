@@ -39,12 +39,12 @@
                                         <%#:Item.Delivered %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Nombre">
+                                <asp:TemplateField HeaderText="Archivo">
                                     <ItemTemplate>
                                         <a href="Resources/UserTasks/<%#:Item.FilePath %>" download><%#:Item.FilePath %></a>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Fecha de entrega">
+                                <asp:TemplateField HeaderText="Calificación">
                                     <ItemTemplate>
                                         <asp:TextBox runat="server" id="mark" Text="<%#:Item.Mark %>" ></asp:TextBox>
                                         <asp:RangeValidator runat="server" ControlToValidate="mark" MinimumValue="0" MaximumValue="10" Type="Double" Text="Debe introducir un número entre 0 y 10"></asp:RangeValidator>

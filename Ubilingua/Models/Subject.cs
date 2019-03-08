@@ -7,7 +7,7 @@ namespace Ubilingua.Models
         [Required, Key]
         public int SubjectID { get; set; }
 
-        [Required, StringLength(20), Display(Name ="Name")]
+        [Required, Display(Name ="Name")]
         public string SubjectName { get; set; }
 
         [Required]

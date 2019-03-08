@@ -11,6 +11,7 @@ namespace Ubilingua.Models
             GetBlocks().ForEach(b => context.Blocks.Add(b));
             GetResources().ForEach(r => context.Resources.Add(r));
             GetTeachers().ForEach(t => context.Teachers.Add(t));
+            context.TeacherPasswords.Add(new TeacherPassword { Password = "profesor"});
         }
 
         private static List<Subject> GetSubjects()

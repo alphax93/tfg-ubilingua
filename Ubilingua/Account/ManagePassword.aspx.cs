@@ -28,16 +28,7 @@ namespace Ubilingua.Account
 
             if (!IsPostBack)
             {
-                // Determinar las secciones que se va a representar
-                if (HasPassword(manager))
-                {
-                    changePasswordHolder.Visible = true;
-                }
-                else
-                {
-                    setPassword.Visible = true;
-                    changePasswordHolder.Visible = false;
-                }
+               
 
                 // Presentar mensaje de operación correcta
                 var message = Request.QueryString["m"];
@@ -69,23 +60,6 @@ namespace Ubilingua.Account
             }
         }
 
-        protected void SetPassword_Click(object sender, EventArgs e)
-        {
-            if (IsValid)
-            {
-                // Crear la información de inicio de sesión local y vincular la cuenta local al usuario
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                IdentityResult result = manager.AddPassword(User.Identity.GetUserId(), password.Text);
-                if (result.Succeeded)
-                {
-                    Response.Redirect("~/Account/Manage?m=SetPwdSuccess");
-                }
-                else
-                {
-                    AddErrors(result);
-                }
-            }
-        }
 
         private void AddErrors(IdentityResult result)
         {

@@ -26,7 +26,8 @@
                                         <asp:Button runat="server" Text="Editar Nombre Curso" CssClass="btn" OnClick="ShowSubjectPanel" CausesValidation="false" />
                                         <asp:Button runat="server" ID="MakePrivate" Text="Hacer Privado" OnClick="ShowMakePrivate" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" />
                                         <asp:Button runat="server" ID="ChangePassword" Text="Cambiar Contraseña" OnClick="ShowChangePassword" CssClass="btn" CausesValidation="false" ClientIDMode="Static" />
-                                        <asp:Button runat="server" ID="MakePublic" Text="Hacer Público" OnClick="MakePublicClick" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" OnClientClick="if (!confirm('¿Está seguro de que desea gacer público el curso?')) return false;" />
+                                        <asp:Button runat="server" ID="MakePublic" Text="Hacer Público" OnClick="MakePublicClick" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" OnClientClick="if (!confirm('¿Está seguro de que desea hacer público el curso?')) return false;" />
+                                        <asp:Button runat="server" Text="Abandonar Curso" CssClass="btn" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea abandonar el curso?')) return false;" OnClick="LeaveSubject" ID="LeaveButton" Visible="false" />
                                         <asp:Button runat="server" Text="Eliminar Curso" CssClass="btn" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;" OnClick="DeleteSubject" />
                                     </asp:Panel>
 
@@ -329,71 +330,6 @@
                                             </div>
                                         </div>
                                     </asp:Panel>
-                                    <asp:HiddenField ID="downloadDummy" runat="server" />
-                                    <asp:ModalPopupExtender ID="AddDownloadPopup" runat="server"
-                                        CancelControlID="downloadBtnCancel"
-                                        TargetControlID="downloadDummy" PopupControlID="downloadPanel"
-                                        PopupDragHandleControlID="downloadPopupHeader" Drag="true">
-                                    </asp:ModalPopupExtender>
-
-                                    <asp:Panel ID="downloadPanel" Style="display: none" runat="server" CssClass="panel-popup">
-                                        <div>
-                                            <div id="downloadPopupHeader" class="modal-header">
-                                                <h4>Nuevo Recurso Descargable (PDF, Word, PowerPoint...)</h4>
-                                            </div>
-                                            <br />
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="downloadResourceName">Nombre del Recurso</asp:Label>
-                                                <asp:TextBox runat="server" ID="downloadResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="downloadResourceName" ClientIDMode="Static" ID="downloadNameValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="downloadResourceFile">Archivo</asp:Label>
-                                                <asp:FileUpload ID="downloadResourceFile" runat="server" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="downloadResourceFile" ClientIDMode="Static" ID="downloadFileValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio"></asp:RequiredFieldValidator>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="NewDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkDownload()" />
-                                                <input id="downloadBtnCancel" type="button" value="Cancelar" class="panel-button" />
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
-
-                                    <asp:HiddenField ID="editDownloadDummy" runat="server" />
-                                    <asp:ModalPopupExtender ID="editDownloadPopup" runat="server"
-                                        CancelControlID="editDownloadBtnCancel"
-                                        TargetControlID="editDownloadDummy" PopupControlID="editDownloadPanel"
-                                        PopupDragHandleControlID="editDownloadPopupHeader" Drag="true">
-                                    </asp:ModalPopupExtender>
-
-                                    <asp:Panel ID="editDownloadPanel" Style="display: none" runat="server" CssClass="panel-popup">
-                                        <div>
-                                            <div id="editDownloadPopupHeader" class="modal-header">
-                                                <h4>Nuevo Recurso Descargable (PDF, Word, PowerPoint...)</h4>
-                                            </div>
-                                            <br />
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="editDownloadResourceName">Nombre del Recurso</asp:Label>
-                                                <asp:TextBox runat="server" ID="editDownloadResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="editDownloadResourceName" ClientIDMode="Static" ID="editDownloadNameValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server">Archivo en el servidor: </asp:Label>
-                                                <asp:Label runat="server" ID="oldFileName" ClientIDMode="Static"></asp:Label><br />
-                                                <asp:Label runat="server" AssociatedControlID="editDownloadResourceFile">Nuevo archivo</asp:Label>
-                                                <asp:FileUpload ID="editDownloadResourceFile" runat="server" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="editDownloadResourceFile" ClientIDMode="Static" ID="editDownloadFileValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio"></asp:RequiredFieldValidator>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="editDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkeditDownload()" />
-                                                <input id="editDownloadBtnCancel" type="button" value="Cancelar" class="panel-button" />
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
 
                                     <asp:HiddenField ID="videoDummy" runat="server" />
                                     <asp:ModalPopupExtender ID="addVideoPopup" runat="server"
@@ -464,191 +400,9 @@
                                     </asp:Panel>
 
 
-                                    <asp:HiddenField ID="imageDummy" runat="server" />
-                                    <asp:ModalPopupExtender ID="addImagePopup" runat="server"
-                                        CancelControlID="imageBtnCancel"
-                                        TargetControlID="imageDummy" PopupControlID="imagePanel"
-                                        PopupDragHandleControlID="imagePopupHeader" Drag="true">
-                                    </asp:ModalPopupExtender>
-                                    <asp:Panel ID="imagePanel" Style="display: none" runat="server" CssClass="panel-popup">
-                                        <div>
-                                            <div id="imagePopupHeader" class="modal-header">
-                                                <h4>Nueva Imagen (jpg, png o gif)</h4>
-                                            </div>
-                                            <br />
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="imageResourceFile">Archivo</asp:Label>
-                                                <asp:FileUpload ID="imageResourceFile" runat="server" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="imageResourceFile" ClientIDMode="Static" ID="imageValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio." />
-                                                <asp:RegularExpressionValidator runat="server" ControlToValidate="imageResourceFile" ClientIDMode="Static" ID="imageExtensionValidator"
-                                                    CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="NewImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkImage()" />
-
-                                                <input id="imageBtnCancel" type="button" value="Cancelar" class="panel-button" />
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
-
-                                    <asp:HiddenField ID="EditImageDummy" runat="server" />
-                                    <asp:ModalPopupExtender ID="EditImagePopup" runat="server"
-                                        CancelControlID="EditImageBtnCancel"
-                                        TargetControlID="EditImageDummy" PopupControlID="EditImagePanel"
-                                        PopupDragHandleControlID="EditImagePopupHeader" Drag="true">
-                                    </asp:ModalPopupExtender>
-                                    <asp:Panel ID="EditImagePanel" Style="display: none" runat="server" CssClass="panel-popup">
-                                        <div>
-                                            <div id="EditImagePopupHeader" class="modal-header">
-                                                <h4>Cambiar Imagen (jpg, png o gif)</h4>
-                                            </div>
-                                            <br />
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditImageResourceFile">Archivo</asp:Label>
-                                                <asp:FileUpload ID="EditImageResourceFile" runat="server" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="EditImageResourceFile" ClientIDMode="Static" ID="EditImageValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio." />
-                                                <asp:RegularExpressionValidator runat="server" ControlToValidate="EditImageResourceFile" ClientIDMode="Static" ID="EditImageExtensionValidator"
-                                                    CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditImage()" />
-
-                                                <input id="EditImageBtnCancel" type="button" value="Cancelar" class="panel-button" />
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
 
 
 
-                                    <asp:HiddenField ID="riddleDummy" runat="server" />
-                                    <asp:ModalPopupExtender ID="AddRiddlePopup" runat="server"
-                                        CancelControlID="riddleBtnCancel"
-                                        TargetControlID="riddleDummy" PopupControlID="riddlePanel"
-                                        PopupDragHandleControlID="riddlePopupHeader" Drag="true">
-                                    </asp:ModalPopupExtender>
-                                    <asp:Panel ID="riddlePanel" Style="display: none" runat="server" CssClass="panel-popup">
-                                        <div>
-                                            <div id="riddlePopupHeader" class="modal-header">
-                                                <h4>Nueva adivinanza</h4>
-                                            </div>
-                                            <br />
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="riddleName">Nombre</asp:Label>
-                                                <asp:TextBox runat="server" ID="riddleName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleName" ClientIDMode="Static" ID="riddleNameValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="riddleAudioFile">Audio</asp:Label>
-                                                <asp:FileUpload ID="riddleAudioFile" runat="server" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleAudioFile" ClientIDMode="Static" ID="AudioFileValidator"
-                                                    CssClass="text-danger" ErrorMessage="El archivo de audio es obligatorio." />
-                                                <asp:RegularExpressionValidator runat="server" ControlToValidate="riddleAudioFile" ClientIDMode="Static" ID="riddleAudioFileExtValidator"
-                                                    CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(mp3|MP3)$" />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="riddleImageFile">Imagen</asp:Label>
-                                                <asp:FileUpload ID="riddleImageFile" runat="server" ClientIDMode="Static" />
-
-                                                <asp:RegularExpressionValidator runat="server" ControlToValidate="riddleImageFile" ClientIDMode="Static" ID="riddleImageFileExtValidator"
-                                                    CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="OGText">Texto sin traducir</asp:Label>
-                                                <br />
-                                                <asp:TextBox runat="server" ID="OGTExt" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="TransText">Traducción</asp:Label>
-                                                <br />
-                                                <asp:TextBox runat="server" ID="TransText" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="riddleAnswer">Solución</asp:Label>
-                                                <br />
-                                                <asp:TextBox runat="server" ID="riddleAnswer" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleAnswer" ClientIDMode="Static" ID="riddleAnswerValidator"
-                                                    CssClass="text-danger" ErrorMessage="La solución es obligatoria." />
-                                            </div>
-                                            <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="NewRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkRiddle()" />
-
-                                                <input id="riddleBtnCancel" type="button" value="Cancelar" class="panel-button" />
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
-
-                                    <asp:HiddenField ID="EditRiddleDummy" runat="server" />
-                                    <asp:ModalPopupExtender ID="EditRiddlePopup" runat="server"
-                                        CancelControlID="EditRiddleBtnCancel"
-                                        TargetControlID="EditRiddleDummy" PopupControlID="EditRiddlePanel"
-                                        PopupDragHandleControlID="EditRiddlePopupHeader" Drag="true">
-                                    </asp:ModalPopupExtender>
-                                    <asp:Panel ID="EditRiddlePanel" Style="display: none" runat="server" CssClass="panel-popup">
-                                        <div>
-                                            <div id="EditRiddlePopupHeader" class="modal-header">
-                                                <h4>Nueva adivinanza</h4>
-                                            </div>
-                                            <br />
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditRiddleName">Nombre</asp:Label>
-                                                <asp:TextBox runat="server" ID="EditRiddleName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleName" ClientIDMode="Static" ID="EditRiddleNameValidator"
-                                                    CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server">Audio en el servidor: </asp:Label>
-                                                <asp:Label ID="oldRiddleAudio" runat="server"></asp:Label><br />
-                                                <asp:Label runat="server" AssociatedControlID="EditRiddleAudioFile">Audio</asp:Label>
-                                                <asp:FileUpload ID="EditRiddleAudioFile" runat="server" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="RequiredFieldValidator1"
-                                                    CssClass="text-danger" ErrorMessage="El archivo de audio es obligatorio." />
-                                                <asp:RegularExpressionValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="EditRiddleAudioFileExtValidator"
-                                                    CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(mp3|MP3)$" />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server">Imagen en el servidor: </asp:Label>
-                                                <asp:Label ID="oldRiddleImage" runat="server"></asp:Label><br />
-                                                <asp:Label runat="server" AssociatedControlID="EditRiddleImageFile">Imagen</asp:Label>
-                                                <asp:FileUpload ID="EditRiddleImageFile" runat="server" ClientIDMode="Static" />
-
-                                                <asp:RegularExpressionValidator runat="server" ControlToValidate="EditRiddleImageFile" ClientIDMode="Static" ID="EditRiddleImageFileExtValidator"
-                                                    CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditOGText">Texto sin traducir</asp:Label>
-                                                <br />
-                                                <asp:TextBox runat="server" ID="EditOGTExt" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditTransText">Traducción</asp:Label>
-                                                <br />
-                                                <asp:TextBox runat="server" ID="EditTransText" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditRiddleAnswer">Solución</asp:Label>
-                                                <br />
-                                                <asp:TextBox runat="server" ID="EditRiddleAnswer" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAnswer" ClientIDMode="Static" ID="EditRiddleAnswerValidator"
-                                                    CssClass="text-danger" ErrorMessage="La solución es obligatoria." />
-                                            </div>
-                                            <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditRiddle()" />
-
-                                                <input id="EditRiddleBtnCancel" type="button" value="Cancelar" class="panel-button" />
-                                            </div>
-                                        </div>
-                                    </asp:Panel>
 
                                     <asp:HiddenField ID="taskDummy" runat="server" />
                                     <asp:ModalPopupExtender ID="AddTaskPopup" runat="server"
@@ -725,10 +479,259 @@
                                     </asp:Panel>
 
 
+
                                 </ContentTemplate>
                                 <Triggers>
                                 </Triggers>
                             </asp:UpdatePanel>
+                            <asp:HiddenField ID="downloadDummy" runat="server" />
+                            <asp:ModalPopupExtender ID="AddDownloadPopup" runat="server"
+                                CancelControlID="downloadBtnCancel"
+                                TargetControlID="downloadDummy" PopupControlID="downloadPanel"
+                                PopupDragHandleControlID="downloadPopupHeader" Drag="true">
+                            </asp:ModalPopupExtender>
+
+                            <asp:Panel ID="downloadPanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                <div>
+                                    <div id="downloadPopupHeader" class="modal-header">
+                                        <h4>Nuevo Recurso Descargable (PDF, Word, PowerPoint...)</h4>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="downloadResourceName">Nombre del Recurso</asp:Label>
+                                        <asp:TextBox runat="server" ID="downloadResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="downloadResourceName" ClientIDMode="Static" ID="downloadNameValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="downloadResourceFile">Archivo</asp:Label>
+                                        <asp:FileUpload ID="downloadResourceFile" runat="server" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="downloadResourceFile" ClientIDMode="Static" ID="downloadFileValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio"></asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button Text="Aceptar" OnClick="NewDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkDownload()" />
+                                        <input id="downloadBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                    </div>
+                                </div>
+                            </asp:Panel>
+
+                            <asp:HiddenField ID="editDownloadDummy" runat="server" />
+                            <asp:ModalPopupExtender ID="editDownloadPopup" runat="server"
+                                CancelControlID="editDownloadBtnCancel"
+                                TargetControlID="editDownloadDummy" PopupControlID="editDownloadPanel"
+                                PopupDragHandleControlID="editDownloadPopupHeader" Drag="true">
+                            </asp:ModalPopupExtender>
+
+                            <asp:Panel ID="editDownloadPanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                <div>
+                                    <div id="editDownloadPopupHeader" class="modal-header">
+                                        <h4>Nuevo Recurso Descargable (PDF, Word, PowerPoint...)</h4>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="editDownloadResourceName">Nombre del Recurso</asp:Label>
+                                        <asp:TextBox runat="server" ID="editDownloadResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="editDownloadResourceName" ClientIDMode="Static" ID="editDownloadNameValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server">Archivo en el servidor: </asp:Label>
+                                        <asp:Label runat="server" ID="oldFileName" ClientIDMode="Static"></asp:Label><br />
+                                        <asp:Label runat="server" AssociatedControlID="editDownloadResourceFile">Nuevo archivo</asp:Label>
+                                        <asp:FileUpload ID="editDownloadResourceFile" runat="server" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="editDownloadResourceFile" ClientIDMode="Static" ID="editDownloadFileValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio"></asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button Text="Aceptar" OnClick="editDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkeditDownload()" />
+                                        <input id="editDownloadBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                            <asp:HiddenField ID="imageDummy" runat="server" />
+                            <asp:ModalPopupExtender ID="addImagePopup" runat="server"
+                                CancelControlID="imageBtnCancel"
+                                TargetControlID="imageDummy" PopupControlID="imagePanel"
+                                PopupDragHandleControlID="imagePopupHeader" Drag="true">
+                            </asp:ModalPopupExtender>
+                            <asp:Panel ID="imagePanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                <div>
+                                    <div id="imagePopupHeader" class="modal-header">
+                                        <h4>Nueva Imagen (jpg, png o gif)</h4>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="imageResourceFile">Archivo</asp:Label>
+                                        <asp:FileUpload ID="imageResourceFile" runat="server" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="imageResourceFile" ClientIDMode="Static" ID="imageValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio." />
+                                        <asp:RegularExpressionValidator runat="server" ControlToValidate="imageResourceFile" ClientIDMode="Static" ID="imageExtensionValidator"
+                                            CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <asp:Button Text="Aceptar" OnClick="NewImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkImage()" />
+
+                                        <input id="imageBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                    </div>
+                                </div>
+                            </asp:Panel>
+
+                            <asp:HiddenField ID="EditImageDummy" runat="server" />
+                            <asp:ModalPopupExtender ID="EditImagePopup" runat="server"
+                                CancelControlID="EditImageBtnCancel"
+                                TargetControlID="EditImageDummy" PopupControlID="EditImagePanel"
+                                PopupDragHandleControlID="EditImagePopupHeader" Drag="true">
+                            </asp:ModalPopupExtender>
+                            <asp:Panel ID="EditImagePanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                <div>
+                                    <div id="EditImagePopupHeader" class="modal-header">
+                                        <h4>Cambiar Imagen (jpg, png o gif)</h4>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="EditImageResourceFile">Archivo</asp:Label>
+                                        <asp:FileUpload ID="EditImageResourceFile" runat="server" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditImageResourceFile" ClientIDMode="Static" ID="EditImageValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio." />
+                                        <asp:RegularExpressionValidator runat="server" ControlToValidate="EditImageResourceFile" ClientIDMode="Static" ID="EditImageExtensionValidator"
+                                            CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <asp:Button Text="Aceptar" OnClick="EditImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditImage()" />
+
+                                        <input id="EditImageBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                    </div>
+                                </div>
+                            </asp:Panel>
+                            <asp:HiddenField ID="riddleDummy" runat="server" />
+                            <asp:ModalPopupExtender ID="AddRiddlePopup" runat="server"
+                                CancelControlID="riddleBtnCancel"
+                                TargetControlID="riddleDummy" PopupControlID="riddlePanel"
+                                PopupDragHandleControlID="riddlePopupHeader" Drag="true">
+                            </asp:ModalPopupExtender>
+                            <asp:Panel ID="riddlePanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                <div>
+                                    <div id="riddlePopupHeader" class="modal-header">
+                                        <h4>Nueva adivinanza</h4>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="riddleName">Nombre</asp:Label>
+                                        <asp:TextBox runat="server" ID="riddleName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleName" ClientIDMode="Static" ID="riddleNameValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="riddleAudioFile">Audio</asp:Label>
+                                        <asp:FileUpload ID="riddleAudioFile" runat="server" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleAudioFile" ClientIDMode="Static" ID="AudioFileValidator"
+                                            CssClass="text-danger" ErrorMessage="El archivo de audio es obligatorio." />
+                                        <asp:RegularExpressionValidator runat="server" ControlToValidate="riddleAudioFile" ClientIDMode="Static" ID="riddleAudioFileExtValidator"
+                                            CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(mp3|MP3)$" />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="riddleImageFile">Imagen</asp:Label>
+                                        <asp:FileUpload ID="riddleImageFile" runat="server" ClientIDMode="Static" />
+
+                                        <asp:RegularExpressionValidator runat="server" ControlToValidate="riddleImageFile" ClientIDMode="Static" ID="riddleImageFileExtValidator"
+                                            CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="OGText">Texto sin traducir</asp:Label>
+                                        <br />
+                                        <asp:TextBox runat="server" ID="OGTExt" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="TransText">Traducción</asp:Label>
+                                        <br />
+                                        <asp:TextBox runat="server" ID="TransText" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="riddleAnswer">Solución</asp:Label>
+                                        <br />
+                                        <asp:TextBox runat="server" ID="riddleAnswer" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleAnswer" ClientIDMode="Static" ID="riddleAnswerValidator"
+                                            CssClass="text-danger" ErrorMessage="La solución es obligatoria." />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button Text="Aceptar" OnClick="NewRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkRiddle()"  />
+
+                                        <input id="riddleBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                    </div>
+                                </div>
+                            </asp:Panel>
+
+                            <asp:HiddenField ID="EditRiddleDummy" runat="server" />
+                            <asp:ModalPopupExtender ID="EditRiddlePopup" runat="server"
+                                CancelControlID="EditRiddleBtnCancel"
+                                TargetControlID="EditRiddleDummy" PopupControlID="EditRiddlePanel"
+                                PopupDragHandleControlID="EditRiddlePopupHeader" Drag="true">
+                            </asp:ModalPopupExtender>
+                            <asp:Panel ID="EditRiddlePanel" Style="display: none" runat="server" CssClass="panel-popup">
+                                <div>
+                                    <div id="EditRiddlePopupHeader" class="modal-header">
+                                        <h4>Nueva adivinanza</h4>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleName">Nombre</asp:Label>
+                                        <asp:TextBox runat="server" ID="EditRiddleName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleName" ClientIDMode="Static" ID="EditRiddleNameValidator"
+                                            CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server">Audio en el servidor: </asp:Label>
+                                        <asp:Label ID="oldRiddleAudio" runat="server"></asp:Label><br />
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleAudioFile">Audio</asp:Label>
+                                        <asp:FileUpload ID="EditRiddleAudioFile" runat="server" ClientIDMode="Static" />
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="RequiredFieldValidator1"
+                                            CssClass="text-danger" ErrorMessage="El archivo de audio es obligatorio." />
+                                        <asp:RegularExpressionValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="EditRiddleAudioFileExtValidator"
+                                            CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(mp3|MP3)$" />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server">Imagen en el servidor: </asp:Label>
+                                        <asp:Label ID="oldRiddleImage" runat="server"></asp:Label><br />
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleImageFile">Imagen</asp:Label>
+                                        <asp:FileUpload ID="EditRiddleImageFile" runat="server" ClientIDMode="Static" />
+
+                                        <asp:RegularExpressionValidator runat="server" ControlToValidate="EditRiddleImageFile" ClientIDMode="Static" ID="EditRiddleImageFileExtValidator"
+                                            CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="EditOGText">Texto sin traducir</asp:Label>
+                                        <br />
+                                        <asp:TextBox runat="server" ID="EditOGTExt" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="EditTransText">Traducción</asp:Label>
+                                        <br />
+                                        <asp:TextBox runat="server" ID="EditTransText" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleAnswer">Solución</asp:Label>
+                                        <br />
+                                        <asp:TextBox runat="server" ID="EditRiddleAnswer" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAnswer" ClientIDMode="Static" ID="EditRiddleAnswerValidator"
+                                            CssClass="text-danger" ErrorMessage="La solución es obligatoria." />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button Text="Aceptar" OnClick="EditRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditRiddle()" />
+
+                                        <input id="EditRiddleBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                    </div>
+                                </div>
+                            </asp:Panel>
+
                         </ContentTemplate>
                     </asp:RoleGroup>
                     <asp:RoleGroup Roles="Alumno">
@@ -737,7 +740,7 @@
                             <br />
                             <br />
                             <asp:Panel runat="server" CssClass="btn-group-vertical">
-                                <asp:Button runat="server" Text="Ver Calificaciones" CssClass="btn" CausesValidation="false" />
+                                <asp:Button runat="server" Text="Ver Calificaciones" CssClass="btn" CausesValidation="false" OnClick="ViewMarks" />
                                 <asp:Button runat="server" Text="Abandonar Curso" CssClass="btn" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea abandonar el curso?')) return false;" OnClick="LeaveSubject" ID="LeaveButton" Visible="false" />
                             </asp:Panel>
                             <div class="col-md-11">

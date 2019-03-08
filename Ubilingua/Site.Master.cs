@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
@@ -7,6 +8,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using Ubilingua.Models;
 
 namespace Ubilingua
 {
@@ -69,13 +71,25 @@ namespace Ubilingua
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var html = "";
+            var _db = new SubjectContext();
+            List<Models.Subject> query =_db.Subjects.ToList();
+            foreach(Models.Subject subject in query)
+            {
+                html += "<li><a href='../Subject.aspx?subjectID=" + subject.SubjectID + "'>" + subject.SubjectName + "</a></li>";
+            }
+            subjectMenu.InnerHtml = html;
+            //< li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Cursos<span class="caret"></span></a>
+                 //           <div id = "myDropdownMenu" runat="server" class="dropdown-menu" aria-labelledby="navbarDropdown"></div>
+                      //  </li>
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        
     }
 
 }

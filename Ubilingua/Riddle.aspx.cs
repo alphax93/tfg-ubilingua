@@ -25,6 +25,8 @@ namespace Ubilingua
 
             HtmlSource audioSource = (HtmlSource)Page.FindControlRecursive("audioSource");
             audioSource.Src = "Resources/" + riddleRes.AudioPath;
+            HtmlAnchor audioLink = (HtmlAnchor)Page.FindControlRecursive("audioLink");
+            audioLink.HRef = "Resources/" + riddleRes.AudioPath;
 
             if (riddleRes.ImagePath == "")
             {

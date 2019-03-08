@@ -26,5 +26,6 @@ namespace Ubilingua.NewExtensions
             var claim = ((ClaimsIdentity)identity).FindFirst("Name");
             return (claim != null) ? claim.Value : string.Empty;
         }
+        
     }
 }
