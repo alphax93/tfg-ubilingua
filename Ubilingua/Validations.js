@@ -1,7 +1,47 @@
-﻿function checkBlock() {
+﻿function checkEditSubject() {
+    var name = document.getElementById("EditSubjectName").value;
+    if (name === "") {
+        var validator = document.getElementById("EditSubjectValidator");
+        ValidatorEnable(validator);
+        return false;
+    }
+    return true;
+}
+
+function checkEditSubjectPassword() {
+    var name = document.getElementById("EditSubjectPassword").value;
+    if (name === "") {
+        var validator = document.getElementById("EditSubjectPasswordValidator");
+        ValidatorEnable(validator);
+        return false;
+    }
+    return true;
+}
+
+function checkChangeSubjectPassword() {
+    var name = document.getElementById("ChangeSubjectPassword").value;
+    if (name === "") {
+        var validator = document.getElementById("ChangeSubjectPasswordValidator");
+        ValidatorEnable(validator);
+        return false;
+    }
+    return true;
+}
+
+function checkBlock() {
     var name = document.getElementById("BlockName").value;
     if (name === "") {
         var validator = document.getElementById("BlockValidator");
+        ValidatorEnable(validator);
+        return false;
+    }
+    return true;
+}
+
+function checkeditBlock() {
+    var name = document.getElementById("EditBlockName").value;
+    if (name === "") {
+        var validator = document.getElementById("EditBlockValidator");
         ValidatorEnable(validator);
         return false;
     }
@@ -21,6 +61,25 @@ function checkDownload() {
     }
     if (downloadFile === "") {
         validator = document.getElementById("downloadFileValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    return flag;
+}
+
+function checkeditDownload() {
+
+    var downloadName = document.getElementById("editDownloadResourceName").value;
+    var downloadFile = document.getElementById("editDownloadResourceFile").value;
+    var flag = true;
+    var validator;
+    if (downloadName === "") {
+        validator = document.getElementById("editDownloadNameValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    if (downloadFile === "") {
+        validator = document.getElementById("editDownloadFileValidator");
         ValidatorEnable(validator);
         flag = false;
     }
@@ -53,6 +112,32 @@ function checkVideo() {
     return flag;
 }
 
+function checkEditVideo() {
+
+    var videoName = document.getElementById("EditVideoResourceName").value;
+    var videoPath = document.getElementById("EditVideoPath").value;
+    var flag = true;
+    var validator;
+
+    if (videoName === "") {
+        validator = document.getElementById("EditVideoResourceNameValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    if (videoPath === "") {
+        validator = document.getElementById("EditVideoResourcePathValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    } else {
+        var pattern = new RegExp("(https:\/\/)?www\.youtube\.com\/watch\?v=.*|https:\/\/www\.youtube\.com\/embed\/.*");
+        if (pattern.test(videoPath)) {
+            flag = false;
+        }
+    }
+
+    return flag;
+}
+
 function checkImage() {
 
     var imageFile = document.getElementById("imageResourceFile").value;
@@ -71,11 +156,40 @@ function checkImage() {
     return flag;
 }
 
+function checkEditImage() {
+
+    var imageFile = document.getElementById("EditImageResourceFile").value;
+    var flag = true;
+
+    if (imageFile === "") {
+        var validator = document.getElementById("EditImageValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    } else {
+        var pattern = new RegExp("^.+\.(jpg|JPG|png|PNG|gif|GIF)$");
+        if (!pattern.test(imageFile)) {
+            flag = false;
+        }
+    }
+    return flag;
+}
+
 function checkText() {
     var textResource = document.getElementById("textResource").value;
     
     if (textResource === "") {
         var validator = document.getElementById("textValidator");
+        ValidatorEnable(validator);
+        return false;
+    }
+    return true;
+}
+
+function checkTextEdit() {
+    var textResource = document.getElementById("editTextResource").value;
+
+    if (textResource === "") {
+        var validator = document.getElementById("editTextValidator");
         ValidatorEnable(validator);
         return false;
     }
@@ -126,6 +240,50 @@ function checkRiddle() {
     return flag;
 }
 
+function checkEditRiddle() {
+
+    var riddleName = document.getElementById("EditRiddleName").value;
+    var riddleAudioFile = document.getElementById("EditRiddleAudioFile").value;
+    var riddleImageFile = document.getElementById("EditRiddleImageFile").value;
+    var riddleAnswer = document.getElementById("EditRiddleAnswer").value;
+    flag = true;
+    var validator;
+    if (riddleName === "") {
+
+        validator = document.getElementById("EditRiddleNameValidator");
+
+        ValidatorEnable(validator);
+        flag = false;
+
+    }
+
+    if (riddleAudioFile === "") {
+        validator = document.getElementById("EditRiddleAudioValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    } else {
+        var pattern = new RegExp("^.+\.(mp3|MP3)$");
+        if (!pattern.test(riddleAudioFile)) {
+            flag = false;
+        }
+    }
+
+    if (riddleImageFile !== "") {
+        var pattern = new RegExp("^.+\.(jpg|JPG|png|PNG|gif|GIF)$");
+        if (!pattern.test(riddleImageFile)) {
+            flag = false;
+        }
+
+    }
+    if (riddleAnswer === "") {
+
+        validator = document.getElementById("EditRiddleAnswerValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    return flag;
+}
+
 function checkTask() {
     
     var taskName = document.getElementById("taskName").value;
@@ -151,6 +309,31 @@ function checkTask() {
     return flag;
 }
 
+function checkEditTask() {
+
+    var taskName = document.getElementById("EditTaskName").value;
+    var taskText = document.getElementById("EditTaskText").value;
+    var taskDate = document.getElementById("taskDate").value;
+    var flag = true;
+    var validator;
+    if (taskName === "") {
+        validator = document.getElementById("EditTaskNameValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    if (taskText === "") {
+        validator = document.getElementById("EditTaskTextValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    if (taskDate === "") {
+        validator = document.getElementById("EditTaskDateValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    return flag;
+}
+
 function changeVisibility(id) {
     alert(id);
     $.ajax({
@@ -165,78 +348,6 @@ function changeVisibility(id) {
     })
 }
 
-function checkeditDownload() {
-
-    var downloadName = document.getElementById("editDownloadResourceName").value;
-    var downloadFile = document.getElementById("editDownloadResourceFile").value;
-    var flag = true;
-    var validator;
-    if (downloadName === "") {
-        validator = document.getElementById("editDownloadNameValidator");
-        ValidatorEnable(validator);
-        flag = false;
-    }
-    if (downloadFile === "") {
-        validator = document.getElementById("editDownloadFileValidator");
-        ValidatorEnable(validator);
-        flag = false;
-    }
-    return flag;
-
-}
-
-function checkEditVideo() {
-    var videoName = document.getElementById("EditVideoResourceName").value;
-    var videoPath = document.getElementById("EditVideoPath").value;
-    var flag = true;
-    var validator;
-    
-    if (videoName === "") {
-        validator = document.getElementById("EditVideoResourceNameValidator");
-        ValidatorEnable(validator);
-        flag = false;
-    }
-    if (videoPath === "") {
-        validator = document.getElementById("EditVideoResourcePathValidator");
-        ValidatorEnable(validator);
-        flag = false;
-    } else {
-        var pattern = new RegExp("(https:\/\/)?www\.youtube\.com\/watch\?v=.*|https:\/\/www\.youtube\.com\/embed\/.*");
-        if (pattern.test(videoPath)) {
-            flag = false;
-        }
-    }
-    return flag;
-}
-
-function checkEditImage() {
-
-    var imageFile = document.getElementById("EditImageResourceFile").value;
-    var flag = true;
-
-    if (imageFile === "") {
-        var validator = document.getElementById("EditImageValidator");
-        ValidatorEnable(validator);
-        flag = false;
-    } else {
-        var pattern = new RegExp("^.+\.(jpg|JPG|png|PNG|gif|GIF)$");
-        if (!pattern.test(imageFile)) {
-            flag = false;
-        }
-    }
-    return flag;
-}
-
-function checkTextEdit() {
-    var textResource = document.getElementById("editTextResource").value;
-
-    if (textResource === "") {
-        var validator = document.getElementById("editTextValidator");
-        ValidatorEnable(validator);
-        return false;
-    }
-    return true;
-}
 
 
 /*

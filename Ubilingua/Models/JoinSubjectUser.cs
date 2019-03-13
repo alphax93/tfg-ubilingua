@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Ubilingua.Models
 {
@@ -11,5 +11,6 @@ namespace Ubilingua.Models
         [Key]
         [System.ComponentModel.DataAnnotations.Schema.Column(Order =1)]
         public string UserID { get; set; }
+
     }
 }

@@ -6,21 +6,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Ubilingua.Models;
 
 namespace Ubilingua.Account
 {
-    public partial class ManagePassword : System.Web.UI.Page
+    public partial class ManageTeacherPassword : System.Web.UI.Page
     {
-        protected string SuccessMessage
-        {
-            get;
-            private set;
-        }
-
-        private bool HasPassword(ApplicationUserManager manager)
-        {
-            return manager.HasPassword(User.Identity.GetUserId());
-        }
+ 
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,29 +36,19 @@ namespace Ubilingua.Account
         {
             if (IsValid)
             {
-                var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-                IdentityResult result = manager.ChangePassword(User.Identity.GetUserId(), CurrentPassword.Text, NewPassword.Text);
-                if (result.Succeeded)
+                using(SubjectContext _db = new SubjectContext())
                 {
-                    var user = manager.FindById(User.Identity.GetUserId());
-                    signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
-                    Response.Redirect("~/Account/Manage?m=ChangePwdSuccess");
-                }
-                else
-                {
-                    AddErrors(result);
+                    TeacherPassword pass = _db.TeacherPasswords.FirstOrDefault();
+                    if(pass.Password == CurrentPassword.Text)
+                    {
+                        pass.Password = NewPassword.Text;
+                        _db.SaveChanges();
+                        Response.Redirect("~/Account/Manage?m=ChangeTeachPwdSuccess");
+                    }
                 }
             }
         }
 
 
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
-            }
-        }
     }
 }

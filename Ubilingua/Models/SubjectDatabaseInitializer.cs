@@ -84,7 +84,7 @@ namespace Ubilingua.Models
                     ResourceID=1,
                     ResourceName="Recurso1",
                     ResourcePath="~",
-                    BlockId=2,
+                    BlockID=2,
                     IsVisible=true,
                     ResourceType="text"
                 },
@@ -93,7 +93,7 @@ namespace Ubilingua.Models
                     ResourceID=2,
                     ResourceName="Recurso2",
                     ResourcePath="~",
-                    BlockId=1,
+                    BlockID=1,
                     IsVisible=true,
                     ResourceType="text"
                 },
@@ -102,7 +102,7 @@ namespace Ubilingua.Models
                     ResourceID=3,
                     ResourceName="Recurso3",
                     ResourcePath="~",
-                    BlockId=1,
+                    BlockID=1,
                     IsVisible=true,
                     ResourceType="text"
                 },

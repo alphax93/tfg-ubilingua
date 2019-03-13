@@ -20,31 +20,36 @@ namespace Ubilingua
         protected void Page_Init(object sender, EventArgs e)
         {
 
-            PopulateMultiview();    
+            //PopulateMultiview();    
             
         }
 
         protected void Menu_Click(Object sender, MenuEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("CLICK: "+ Multiview.Views.Count);
-            Multiview.ActiveViewIndex = Int32.Parse(e.Item.Value);
+            // Multiview.ActiveViewIndex = Int32.Parse(e.Item.Value);
+            PopulateMultiview(Int32.Parse(e.Item.Value));
         }
 
         private void PopulateMenu()
         {
             var _db = new SubjectContext();
             List<Teacher> teachers = _db.Teachers.ToList();
+            bool first = true;
             foreach(Teacher teacher in teachers)
             {
                 MenuItem menuItem = new MenuItem
                 {
-                    Value = (teacher.TeacherID-1).ToString(),
+                    Value = (teacher.TeacherID).ToString(),
                     Text = teacher.TeacherName,
 
 
                 };
-                if (menuItem.Value == "0") menuItem.Selected = true;
-                
+                if (first)
+                {
+                    menuItem.Selected = true;
+                    first = false;
+                    PopulateMultiview(Int32.Parse(menuItem.Value));
+                }
                 Menu1.Items.Add(menuItem);
 
                 
@@ -56,29 +61,30 @@ namespace Ubilingua
             //System.Diagnostics.Debug.WriteLine(Multiview.Views.Count);
         }
 
-        private void PopulateMultiview()
+        private void PopulateMultiview(int id)
         {
             var _db = new SubjectContext();
-            List<Teacher> teachers = _db.Teachers.ToList();
-            foreach (Teacher teacher in teachers)
-            {
-                View view = new View { ID = "Tab" + (teacher.TeacherID - 1).ToString(), };
-                
-               
-                
-                view.Controls.Add(new Literal { Text = 
+            //List<Teacher> teachers = _db.Teachers.ToList();
+            //foreach (Teacher teacher in teachers)
+            //{
+            //    View view = new View { ID = "Tab" + (teacher.TeacherID - 1).ToString(), };
+
+            Teacher teacher = (from Teachers in _db.Teachers where Teachers.TeacherID == id select Teachers).FirstOrDefault();
+            
+            content.Text = 
                     "<h2>" + teacher.Position + "</h2>" +
-                    "<br><div style='float: left;'><img src='Subjects/Images/teacher0.jpg' style=' margin-right: 10px'><img></div>" +
+                    "<br><div style='float: left;'><img src='Subjects/Images/"+  teacher.Image + "' style=' margin-right: 10px'><img></div>" +
                     "<div><h3>Función en el grupo</h3>" +
-                    "<br><p style='text-align:justify'>" + teacher.SpanishRole + "</p>" +
-                    "<p style='text-align:justify'><i>" + teacher.OtherRole + "</i></p></div>" +
+                    "<br><p style='text-align:justify; white - space: pre'>" + teacher.SpanishRole + "</p>" +
+                    "<p style='text-align:justify; white - space: pre'><i>" + teacher.OtherRole + "</i></p></div>" +
                     "<div><h3>CV</h3>" +
-                    "<br><p style='text-align:justify'>" + teacher.SpanishCV + "</p>" +
-                    "<p style='text-align:justify'><i>" + teacher.OtherCV + "</i></p></div>"
-                });
-                Multiview.Views.Add(view);
-            }
-            Multiview.ActiveViewIndex = 0;
+                    "<br><p style='text-align:justify; white - space: pre'>" + teacher.SpanishCV + "</p>" +
+                    "<p style='text-align:justify; white - space: pre'><i>" + teacher.OtherCV + "</i></p></div>" +
+                    "<div><h3>Contacto</h3>"+
+                    "<br><p style='text-align:justify; white - space: pre'>" + teacher.Contact + "</p></div>";
+                //Multiview.Views.Add(view);
+            //}
+            //Multiview.ActiveViewIndex = 0;
         }
     }
 }

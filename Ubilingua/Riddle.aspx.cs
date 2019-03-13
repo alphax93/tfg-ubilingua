@@ -19,14 +19,15 @@ namespace Ubilingua
             var _db = new SubjectContext();
             id = Convert.ToInt32(Request.QueryString["ResourceID"]);
             riddleRes = (from riddles in _db.RiddleResources where riddles.ResourceID == id select riddles).FirstOrDefault();
-
+            int blockID = (from resources in _db.Resources where resources.ResourceID == id select resources.BlockID).First();
+            int subjectID = (from blocks in _db.Blocks where blocks.BlockID == blockID select blocks.SubjectID).First();
             Label label = (Label)Page.FindControlRecursive("name");
             label.Text = riddleRes.RiddleName;
 
             HtmlSource audioSource = (HtmlSource)Page.FindControlRecursive("audioSource");
-            audioSource.Src = "Resources/" + riddleRes.AudioPath;
+            audioSource.Src = "Subjects/"+ subjectID+ "/Audios/" + riddleRes.AudioPath;
             HtmlAnchor audioLink = (HtmlAnchor)Page.FindControlRecursive("audioLink");
-            audioLink.HRef = "Resources/" + riddleRes.AudioPath;
+            audioLink.HRef = "Subjects/" + subjectID + "/Audios/" + riddleRes.AudioPath;
 
             if (riddleRes.ImagePath == "")
             {
@@ -35,7 +36,7 @@ namespace Ubilingua
             } else
             {
                 Image img = (Image)Page.FindControlRecursive("imageImage");
-                img.ImageUrl = "Resources/" + riddleRes.ImagePath;
+                img.ImageUrl = "Subjects/" + subjectID + "/Images/" + riddleRes.ImagePath;
             }
 
             if(riddleRes.Text == "")

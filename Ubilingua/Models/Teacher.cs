@@ -7,11 +7,14 @@ namespace Ubilingua.Models
         [Required, Key]
         public int TeacherID { get; set; }
 
-        [Required]
-        public string TeacherName { get; set; }
+        public string UserID { get; set; }
 
         [Required]
+        public string TeacherName { get; set; }
+        
         public string Position { get; set; }
+
+        public string Contact { get; set; }
 
         public string SpanishRole { get; set; }
         public string OtherRole { get; set; }

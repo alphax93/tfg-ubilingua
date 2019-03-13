@@ -22,12 +22,12 @@ namespace Ubilingua {
         protected global::System.Web.UI.WebControls.Menu Menu1;
         
         /// <summary>
-        /// Control Multiview.
+        /// Control content.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView Multiview;
+        protected global::System.Web.UI.WebControls.Literal content;
     }
 }

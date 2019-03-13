@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using Ubilingua.Models;
@@ -32,6 +33,13 @@ namespace Ubilingua.Logic
                     AddJoinSubjectUser join = new AddJoinSubjectUser();
                     join.AddJoinSubjectUsers(mySubject.SubjectID, userID);
                 }
+                
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Subjects/" + mySubject.SubjectID));
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Subjects/" + mySubject.SubjectID)+"/Images");
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Subjects/" + mySubject.SubjectID)+"/Tasks");
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Subjects/" + mySubject.SubjectID)+"/Downloadables");
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Subjects/" + mySubject.SubjectID) + "/Audios");
+
 
             }
             return true;

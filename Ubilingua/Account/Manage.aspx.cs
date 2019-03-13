@@ -66,13 +66,13 @@ namespace Ubilingua.Account
                     Form.Action = ResolveUrl("~/Account/Manage");
 
                     SuccessMessage =
-                        message == "ChangePwdSuccess" ? "Se cambió la contraseña."
-                        : message == "SetPwdSuccess" ? "Se estableció la contraseña."
-                        : message == "RemoveLoginSuccess" ? "La cuenta se quitó."
-                        : message == "AddPhoneNumberSuccess" ? "Se ha agregado el número de teléfono"
-                        : message == "RemovePhoneNumberSuccess" ? "Se ha quitado el número de teléfono"
+                        message == "ChangePwdSuccess" ? "Se cambió la contraseña de acceso correctamente."
+                        : message == "ChangeTeachPwdSuccess" ? "Se cambió la contraseña de profesor correctamente."
+                        : message == "ChangeUserSuccess" ? "Se modificaron los datos con éxito. Se aplicarán los cambios la próxima vez que inicie sesión."
+                        : message == "TeacherProfSuccess" ? "Se modificó el perfil de profesor."
                         : String.Empty;
-                    //successMessage.Visible = !String.IsNullOrEmpty(SuccessMessage);
+                    success.Visible = !String.IsNullOrEmpty(SuccessMessage);
+                    success.Text = SuccessMessage;
                 }
             }
         }
@@ -134,6 +134,11 @@ namespace Ubilingua.Account
             Response.Redirect("/Account/ManageTeacherPassword");
         }
 
+        public void GoToTeacherProfile(object sender, EventArgs e)
+        {
+            Response.Redirect("/Account/ManageTeacherProfile");
+        }
+
         public void ShowProfilePopu(object sender, EventArgs e)
         {
             ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("EditUserPopup");
@@ -154,7 +159,7 @@ namespace Ubilingua.Account
             user.Surname2 = EditSurname2.Text;
             manager.Update(user);
 
-            Response.Redirect(Request.RawUrl);
+            Response.Redirect("~/Account/Manage?m=ChangeUserSuccess");
 
         }
 

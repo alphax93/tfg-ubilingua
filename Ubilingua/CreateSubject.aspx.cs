@@ -29,7 +29,7 @@ namespace Ubilingua
                         string filename = Path.GetFileName(FileUpload.FileName);
                         FileUpload.SaveAs(Server.MapPath("~/Subjects/Images/") + filename);
                         image = filename;
-
+                        
                     }
                     catch (Exception ex)
                     {
@@ -41,6 +41,7 @@ namespace Ubilingua
             bool addSuccess = subjects.AddSubjects(SubjectName.Text, image, Password.Text,User.Identity.GetUserId());
             if (addSuccess)
             {
+
                 Response.Redirect("~");
             }
         }

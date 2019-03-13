@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
+
 namespace Ubilingua.Models
 {
     [Serializable]
@@ -14,5 +16,8 @@ namespace Ubilingua.Models
 
         [ScaffoldColumn(false)]
         public int SubjectID { get; set; }
+
+        [ForeignKey("BlockID")]
+        public ICollection<Resource> Resources { get; set; }
     }
 }

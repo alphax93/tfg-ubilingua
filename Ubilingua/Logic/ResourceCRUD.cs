@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Web;
 using Ubilingua.Models;
@@ -13,7 +14,7 @@ namespace Ubilingua.Logic
         {
             var myResource = new Resource();
 
-            myResource.BlockId = blockId;
+            myResource.BlockID = blockId;
             myResource.ResourceName = resourceName;
             myResource.ResourcePath = resourcePath;
             myResource.IsVisible = false;
@@ -30,7 +31,7 @@ namespace Ubilingua.Logic
         {
             var myResource = new Resource();
 
-            myResource.BlockId = blockId;
+            myResource.BlockID = blockId;
             myResource.ResourceName = name;
             myResource.ResourcePath = audioName;
             myResource.ResourceType = "riddle";
@@ -63,7 +64,7 @@ namespace Ubilingua.Logic
         public bool AddTaskResource(int blockID, string taskName, string taskText, DateTime deadline)
         {
             var myResource = new Resource();
-            myResource.BlockId = blockID;
+            myResource.BlockID = blockID;
             myResource.ResourceName = taskName;
             myResource.ResourcePath = taskName;
             myResource.ResourceType = "task";
@@ -82,6 +83,8 @@ namespace Ubilingua.Logic
 
                 _db.TaskResources.Add(myTask);
                 _db.SaveChanges();
+                int subjectID = (from blocks in _db.Blocks where blocks.BlockID == blockID select blocks.SubjectID).First();
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath("~/Subjects/" + subjectID) + "/Tasks/"+myResource.ResourceID);
 
             }
 

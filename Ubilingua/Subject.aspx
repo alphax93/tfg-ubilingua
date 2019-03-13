@@ -88,14 +88,15 @@
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditDownload" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
                                                                         </div>
                                                                         <div class="col-md-4">
-                                                                            <a href="Resources/<%#Item.ResourcePath %>" download class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a><br />
+                                                                            <span class="glyphicon glyphicon-save"></span>
+                                                                            <a href="Subjects/<%#: subjectID%>/Downloadables/<%#Item.ResourcePath %>" download class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a><br />
                                                                             </asp:PlaceHolder>
 
                                                                         <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="img"? true : false %>'>
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditImage" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
                                                                         </div>
                                                                         <div class="col-md-4">
-                                                                            <img src="Resources/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></img><br />
+                                                                            <img src="Subjects/<%#: subjectID%>/Images/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></img><br />
                                                                             </asp:PlaceHolder>
 
                                                                         <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="video"? true : false %>'>
@@ -109,6 +110,7 @@
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditRiddle" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
                                                                         </div>
                                                                         <div class="col-md-4">
+                                                                            <span class="glyphicon glyphicon-headphones"></span>
                                                                             <a href="Riddle.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
 
                                                                             </asp:PlaceHolder>
@@ -116,6 +118,7 @@
                                                                             <asp:LinkButton runat="server" OnCommand="ShowEditTask" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
                                                                         </div>
                                                                         <div class="col-md-4">
+                                                                            <span class="glyphicon glyphicon-open"></span>
                                                                             <a href="ViewTask.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
 
                                                                             </asp:PlaceHolder>
@@ -471,6 +474,7 @@
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditTaskDate" ClientIDMode="Static" ID="EditTaskDateValidator"
                                                     CssClass="text-danger" ErrorMessage="El campo de fecha es obligatorio." />
                                             </div>
+                                            <asp:HiddenField runat="server" ID="deadlineHidden" ClientIDMode="Static"/>
                                             <div class="modal-footer">
                                                 <asp:Button Text="Aceptar" OnClick="EditTaskResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditTask()" />
                                                 <input id="EditTaskBtnCancel" type="button" value="Cancelar" class="panel-button" />
@@ -690,7 +694,7 @@
                                         <asp:Label ID="oldRiddleAudio" runat="server"></asp:Label><br />
                                         <asp:Label runat="server" AssociatedControlID="EditRiddleAudioFile">Audio</asp:Label>
                                         <asp:FileUpload ID="EditRiddleAudioFile" runat="server" ClientIDMode="Static" />
-                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="RequiredFieldValidator1"
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="EditRiddleAudioValidator"
                                             CssClass="text-danger" ErrorMessage="El archivo de audio es obligatorio." />
                                         <asp:RegularExpressionValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="EditRiddleAudioFileExtValidator"
                                             CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(mp3|MP3)$" />
@@ -790,13 +794,14 @@
                                                                 <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="download"? true : false %>'>
 
                                                                     <div class="col-md-4">
-                                                                        <a href="Resources/<%#Item.ResourcePath %>" download class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a><br />
+                                                                        <span class="glyphicon glyphicon-save"></span>
+                                                                        <a href="Subjects/<%#: subjectID%>/Downloadables/<%#Item.ResourcePath %>" download class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a><br />
                                                                 </asp:PlaceHolder>
 
                                                                 <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="img"? true : false %>'>
 
                                                                     <div class="col-md-4">
-                                                                        <img src="Resources/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></img><br />
+                                                                        <img src="Subjects/<%#: subjectID%>/Images/<%#Item.ResourcePath %>" alt="<%#: Item.ResourceName %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></img><br />
                                                                 </asp:PlaceHolder>
 
                                                                 <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="video"? true : false %>'>
@@ -807,11 +812,13 @@
                                                                 <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="riddle"? true : false %>'>
 
                                                                     <div class="col-md-4">
+                                                                        <span class="glyphicon glyphicon-headphones"></span>
                                                                         <a href="Riddle.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
                                                                 </asp:PlaceHolder>
                                                                 <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="task"? true : false %>'>
 
                                                                     <div class="col-md-4">
+                                                                        <span class="glyphicon glyphicon-open"></span>
                                                                         <a href="ViewTask.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
                                                                 </asp:PlaceHolder>
                                                             </div>

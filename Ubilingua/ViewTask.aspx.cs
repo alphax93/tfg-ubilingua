@@ -16,12 +16,15 @@ namespace Ubilingua
 {
     public partial class ViewTask : System.Web.UI.Page
     {
-        int id;
+        public int id;
         bool alredySent;
+        public int subjectID;
         protected void Page_Load(object sender, EventArgs e)
         {
             var _db = new SubjectContext();
             id = Convert.ToInt32(Request.QueryString["ResourceID"]);
+            int blockID = (from resources in _db.Resources where resources.ResourceID == id select resources.BlockID).First();
+            subjectID = (from blocks in _db.Blocks where blocks.BlockID == blockID select blocks.SubjectID).First();
             TaskResource task = (from tasks in _db.TaskResources where tasks.ResourceID == id select tasks).FirstOrDefault();
 
             Label name = (Label)Page.FindControlRecursive("name");
@@ -111,13 +114,13 @@ namespace Ubilingua
             FileUpload fileUpload = (FileUpload)Page.FindControlRecursive("fileUpload");
             if (fileUpload.HasFile)
             {
-
                 string fileName = Path.GetFileName(fileUpload.FileName);
-                fileUpload.SaveAs(Server.MapPath("Resources/UserTasks/") + fileName);
+                string path = "Subjects/" + subjectID + "/Tasks/" + id + "/";
+                fileUpload.SaveAs(Server.MapPath(path) + User.Identity.GetUserId() + fileName);
                 AddJoinUserMark join = new AddJoinUserMark();
                 if (alredySent)
                 {
-                    bool updateSuccess = join.UpdateJoinUserMarks(id, User.Identity.GetUserId(), fileName);
+                    bool updateSuccess = join.UpdateJoinUserMarks(id, User.Identity.GetUserId(), User.Identity.GetUserId() + fileName);
                     if (updateSuccess)
                     {
                         Response.Redirect(Request.RawUrl);
@@ -126,11 +129,8 @@ namespace Ubilingua
                 else
                 {
 
-                    SubjectContext _db = new SubjectContext();
-                        int blockID = (from resources in _db.Resources where resources.ResourceID == id select resources.BlockId).FirstOrDefault();
-                        int subjectID = (from blocks in _db.Blocks where blocks.BlockID == blockID select blocks.SubjectID).FirstOrDefault();
                     
-                    bool addSuccess = join.AddJoinUserMarks(id, User.Identity.GetUserId(), fileName, 
+                    bool addSuccess = join.AddJoinUserMarks(id, User.Identity.GetUserId(),User.Identity.GetUserId()+ fileName, 
                         User.Identity.GetName() + " " + User.Identity.GetSurname1() + " " + User.Identity.GetSurname2(), subjectID);
                     if (addSuccess)
                     {

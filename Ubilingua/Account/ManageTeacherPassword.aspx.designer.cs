@@ -10,7 +10,7 @@
 namespace Ubilingua.Account {
     
     
-    public partial class ManagePassword {
+    public partial class ManageTeacherPassword {
         
         /// <summary>
         /// Control CurrentPasswordLabel.

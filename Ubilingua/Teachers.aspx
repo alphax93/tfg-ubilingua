@@ -8,9 +8,8 @@
         <StaticSelectedStyle BackColor="#cccccc" BorderStyle="inset" />
         <StaticHoverStyle BackColor="#bbbbbb" />
     </asp:Menu>
-    <asp:Panel runat="server" CssClass="tab-content">
-        <asp:MultiView ID="Multiview" runat="server" >
-        </asp:MultiView>
+    <asp:Panel runat="server" CssClass="tab-content" >
+        <asp:Literal runat="server" ID="content"></asp:Literal>
     </asp:Panel>
             </ContentTemplate>
         <Triggers></Triggers>

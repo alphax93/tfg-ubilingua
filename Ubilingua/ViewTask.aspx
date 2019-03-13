@@ -41,7 +41,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Archivo">
                                     <ItemTemplate>
-                                        <a href="Resources/UserTasks/<%#:Item.FilePath %>" download><%#:Item.FilePath %></a>
+                                        <a href="Subject/<%#:subjectID %>/Tasks/<%#:id %>/<%#:Item.FilePath %>" download><%#:Item.FilePath %></a>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Calificación">

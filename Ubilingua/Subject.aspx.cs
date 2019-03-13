@@ -112,7 +112,7 @@ namespace Ubilingua
 
                 if (blockID.HasValue && blockID > 0)
                 {
-                    query = query.Where(r => r.BlockId == blockID);
+                    query = query.Where(r => r.BlockID == blockID);
                 }
             }
             index++;
@@ -128,7 +128,7 @@ namespace Ubilingua
 
             if (blockID.HasValue && blockID > 0)
             {
-                query = query.Where(r => r.BlockId == blockID && r.IsVisible);
+                query = query.Where(r => r.BlockID == blockID && r.IsVisible);
             }
             index++;
             return query;
@@ -219,7 +219,8 @@ namespace Ubilingua
                 {
 
                     string fileName = Path.GetFileName(fileUpload.FileName);
-                    fileUpload.SaveAs(Server.MapPath("Resources/") + fileName);
+                    string path = "~/Subjects/" + subjectID + "/Downloadables/";
+                    fileUpload.SaveAs(Server.MapPath(path) + fileName);
                     ResourceCRUD resources = new ResourceCRUD();
 
                     bool addSuccess = resources.AddResources(resourceName.Text, fileName, int.Parse(ViewState["blockID"].ToString()), "download");
@@ -267,7 +268,8 @@ namespace Ubilingua
             if (file.HasFile)
             {
                 string fileName = Path.GetFileName(file.FileName);
-                file.SaveAs(Server.MapPath("Resources/") + fileName);
+                string path = "~/Subjects/" + subjectID + "/Downloadables/";
+                file.SaveAs(Server.MapPath(path) + fileName);
 
                 res.ResourceName = text.Text;
                 res.ResourcePath = fileName;
@@ -368,7 +370,8 @@ namespace Ubilingua
                 {
 
                     string fileName = Path.GetFileName(fileUpload.FileName);
-                    fileUpload.SaveAs(Server.MapPath("Resources/") + fileName);
+                    string path = "~/Subjects/" + subjectID + "/Images/";
+                    fileUpload.SaveAs(Server.MapPath(path) + fileName);
                     ResourceCRUD resources = new ResourceCRUD();
 
                     bool addSuccess = resources.AddResources("img", fileName, int.Parse(ViewState["blockID"].ToString()), "img");
@@ -400,7 +403,8 @@ namespace Ubilingua
             if (fileUpload.HasFile)
             {
                 string fileName = Path.GetFileName(fileUpload.FileName);
-                fileUpload.SaveAs(Server.MapPath("Resources/") + fileName);
+                string path = "~/Subjects/" + subjectID + "/Images/";
+                fileUpload.SaveAs(Server.MapPath(path) + fileName);
 
                 SubjectContext _db = new SubjectContext();
                 int id = int.Parse(ViewState["ResID"].ToString());
@@ -491,12 +495,14 @@ namespace Ubilingua
                 {
 
                     string audioFilename = Path.GetFileName(audioFile.FileName);
-                    audioFile.SaveAs(Server.MapPath("Resources/") + audioFilename);
+                    string path = "~/Subjects/" + subjectID + "/Audios/";
+                    audioFile.SaveAs(Server.MapPath(path) + audioFilename);
 
                     string imageFilename = Path.GetFileName(imageFile.FileName);
                     if (imageFilename != "")
                     {
-                        imageFile.SaveAs(Server.MapPath("Resources/") + imageFilename);
+                        string path2 = "~/Subjects/" + subjectID + "/Images/";
+                        imageFile.SaveAs(Server.MapPath(path2) + imageFilename);
                     }
 
                     ResourceCRUD resources = new ResourceCRUD();
@@ -558,14 +564,16 @@ namespace Ubilingua
             if (audio.HasFile)
             {
                 string audioFilename = Path.GetFileName(audio.FileName);
-                audio.SaveAs(Server.MapPath("Resources/") + audioFilename);
+                string path = "~/Subjects/" + subjectID + "/Audios/";
+                audio.SaveAs(Server.MapPath(path) + audioFilename);
                 riddle.AudioPath = audioFilename;
 
             }
             if (image.HasFile)
             {
                 string imageFilename = Path.GetFileName(image.FileName);
-                image.SaveAs(Server.MapPath("Resources/") + imageFilename);
+                string path2 = "~/Subjects/" + subjectID + "/Images/";
+                image.SaveAs(Server.MapPath(path2) + imageFilename);
                 riddle.ImagePath = imageFilename;
             }
             riddle.RiddleName = name.Text;
@@ -615,11 +623,14 @@ namespace Ubilingua
             TextBox taskName = (TextBox)Page.FindControlRecursive("EditTaskName");
             TextBox taskText = (TextBox)Page.FindControlRecursive("EditTaskText");
             TextBox taskDate = (TextBox)Page.FindControlRecursive("EditTaskDate");
+            HiddenField hidden = (HiddenField)Page.FindControlRecursive("deadlineHidden");
 
             taskName.Text = res.TaskName;
             taskText.Text = res.Text;
             taskDate.TextMode = TextBoxMode.DateTimeLocal;
             taskDate.Text = res.Deadline.ToString();
+            hidden.Value = res.Deadline.ToString();
+            
         }
 
         public void EditTaskResource(object sender, EventArgs e)
@@ -631,10 +642,18 @@ namespace Ubilingua
             TextBox taskName = (TextBox)Page.FindControlRecursive("EditTaskName");
             TextBox taskText = (TextBox)Page.FindControlRecursive("EditTaskText");
             TextBox taskDate = (TextBox)Page.FindControlRecursive("EditTaskDate");
+            HiddenField hidden = (HiddenField)Page.FindControlRecursive("deadlineHidden");
 
             res.TaskName = taskName.Text;
             res.Text = taskText.Text;
-            res.Deadline = DateTime.Parse(taskDate.Text);
+            if(!string.IsNullOrEmpty(taskDate.Text))
+            {
+                res.Deadline = DateTime.Parse(taskDate.Text);
+            } else
+            {
+                res.Deadline = DateTime.Parse(hidden.Value);
+            }
+            
             _db.SaveChanges();
             Refresh();
 
@@ -677,6 +696,8 @@ namespace Ubilingua
             bool success = add.DeleteSubject((int)subjectID);
             if (success)
             {
+                string path = "Subjects/" + subjectID + "/";
+                Directory.Delete(Server.MapPath(path), true);
                 Response.Redirect("~");
             }
         }

@@ -5,7 +5,9 @@ namespace Ubilingua.Models
 {
     public class TeacherPassword
     {
-        [Required, ScaffoldColumn(false), Key]
+        [Key]
+        public int Id { get; set; }
+        [Required, ScaffoldColumn(false)]
         public string Password { get; set; }
     }
 }

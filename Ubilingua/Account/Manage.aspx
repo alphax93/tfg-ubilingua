@@ -34,12 +34,15 @@
                             <asp:RoleGroup Roles="Profesor">
                                 <ContentTemplate>
                                     <asp:Button Text="Cambiar Contraseña Profesor" runat="server" CssClass="btn" OnClick="GoToChangeTeacherPassword" OnClientClick="return true" CausesValidation="false" />
+                                    <asp:Button Text="Datos de Profesor" runat="server" CssClass="btn" OnClick="GoToTeacherProfile" OnClientClick="return true" CausesValidation="false" />
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>
                     </asp:LoginView>
                     <asp:Button Text="Eliminar Cuenta" runat="server" CssClass="btn" OnClick="DeleteAccount" OnClientClick="if (!confirm('¿Está seguro de que desea eliminar su cuenta?')) return false;" CausesValidation="false" />
                 </div>
+                <br />
+                <asp:Label runat="server" Visible="false" CssClass="text-danger" ID="success"></asp:Label>
             </asp:Panel>
 
             <asp:HiddenField ID="EditUserDummy" runat="server" />
