@@ -83,26 +83,8 @@ namespace Ubilingua.Models
                 {
                     ResourceID=1,
                     ResourceName="Recurso1",
-                    ResourcePath="~",
+                    ResourcePath="Recurso de texto",
                     BlockID=2,
-                    IsVisible=true,
-                    ResourceType="text"
-                },
-                new Resource
-                {
-                    ResourceID=2,
-                    ResourceName="Recurso2",
-                    ResourcePath="~",
-                    BlockID=1,
-                    IsVisible=true,
-                    ResourceType="text"
-                },
-                new Resource
-                {
-                    ResourceID=3,
-                    ResourceName="Recurso3",
-                    ResourcePath="~",
-                    BlockID=1,
                     IsVisible=true,
                     ResourceType="text"
                 },

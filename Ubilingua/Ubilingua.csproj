@@ -528,6 +528,18 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\UserTasks\" />
+    <Folder Include="Subjects\1\Audios\" />
+    <Folder Include="Subjects\1\Downloadables\" />
+    <Folder Include="Subjects\1\Images\" />
+    <Folder Include="Subjects\1\Tasks\" />
+    <Folder Include="Subjects\2\Audios\" />
+    <Folder Include="Subjects\2\Downloadables\" />
+    <Folder Include="Subjects\2\Images\" />
+    <Folder Include="Subjects\2\Tasks\" />
+    <Folder Include="Subjects\3\Audios\" />
+    <Folder Include="Subjects\3\Downloadables\" />
+    <Folder Include="Subjects\3\Images\" />
+    <Folder Include="Subjects\3\Tasks\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
