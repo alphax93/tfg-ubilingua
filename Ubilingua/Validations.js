@@ -334,6 +334,40 @@ function checkEditTask() {
     return flag;
 }
 
+function checkProfileImage() {
+
+    var imageFile = document.getElementById("Image").value;
+    var flag = true;
+
+    if (imageFile !== "") {
+        
+        var pattern = new RegExp("^.+\.(jpg|JPG|png|PNG|gif|GIF)$");
+        if (!pattern.test(imageFile)) {
+            flag = false;
+        }
+    }
+    return flag;
+}
+
+function checkEditUser() {
+
+    var taskName = document.getElementById("EditUserName").value;
+    var taskText = document.getElementById("EditSurname1").value;
+    var flag = true;
+    var validator;
+    if (taskName === "") {
+        validator = document.getElementById("EditUserValidator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    if (taskText === "") {
+        validator = document.getElementById("EditSurname1Validator");
+        ValidatorEnable(validator);
+        flag = false;
+    }
+    return flag;
+}
+
 function changeVisibility(id) {
     alert(id);
     $.ajax({

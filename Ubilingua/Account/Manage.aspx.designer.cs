@@ -103,13 +103,13 @@ namespace Ubilingua.Account {
         protected global::System.Web.UI.WebControls.TextBox EditSurname1;
         
         /// <summary>
-        /// Control RequiredFieldValidator1.
+        /// Control EditSurname1Validator.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EditSurname1Validator;
         
         /// <summary>
         /// Control EditSurname2.
@@ -128,15 +128,6 @@ namespace Ubilingua.Account {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EditEmail;
-        
-        /// <summary>
-        /// Control RequiredFieldValidator2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// Control createEditUserButton.

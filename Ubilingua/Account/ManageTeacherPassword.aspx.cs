@@ -44,9 +44,19 @@ namespace Ubilingua.Account
                         pass.Password = NewPassword.Text;
                         _db.SaveChanges();
                         Response.Redirect("~/Account/Manage?m=ChangeTeachPwdSuccess");
+                    } else
+                    {
+                        AddErrors("Contraseña actual incorrecta.");
                     }
                 }
             }
+        }
+
+        private void AddErrors(string error)
+        {
+            
+                ModelState.AddModelError("", error);
+            
         }
 
 

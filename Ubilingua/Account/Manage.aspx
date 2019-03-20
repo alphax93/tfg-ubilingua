@@ -59,25 +59,23 @@
                     <br />
                     <div class="form-group">
                         <asp:Label runat="server">Nombre</asp:Label>
-                        <asp:TextBox runat="server" ID="EditUserName" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="EditUserName" TextMode="SingleLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditUserName" ID="EditUserValidator" ClientIDMode="Static"
                             CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server">Primer Apellido</asp:Label>
-                        <asp:TextBox runat="server" ID="EditSurname1" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
-                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditSurname1" ID="RequiredFieldValidator1" ClientIDMode="Static"
+                        <asp:TextBox runat="server" ID="EditSurname1" TextMode="SingleLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
+                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditSurname1" ID="EditSurname1Validator" ClientIDMode="Static"
                             CssClass="text-danger" ErrorMessage="El primer apellido es obligatorio." />
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server">Segundo Apellido</asp:Label>
-                        <asp:TextBox runat="server" ID="EditSurname2" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="EditSurname2" TextMode="SingleLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="form-group">
                         <asp:Label runat="server">Correo Electrónico</asp:Label>
-                        <asp:TextBox runat="server" ID="EditEmail" TextMode="Email" ClientIDMode="Static"></asp:TextBox>
-                        <asp:RequiredFieldValidator runat="server" ControlToValidate="EditUserName" ID="RequiredFieldValidator2" ClientIDMode="Static"
-                            CssClass="text-danger" ErrorMessage="El correo electrónico es obligatorio." />
+                        <asp:TextBox runat="server" ID="EditEmail" TextMode="Email" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="modal-footer">
                         <asp:Button Text="Aceptar" OnClick="EditUser_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditUser()" ID="createEditUserButton" />

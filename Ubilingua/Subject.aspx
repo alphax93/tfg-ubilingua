@@ -295,7 +295,7 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:TextBox runat="server" ID="textResource" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="textResource" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="textResource" ID="textValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" ErrorMessage="El campo de texto es obligatorio." />
                                             </div>
@@ -321,7 +321,7 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:TextBox runat="server" ID="editTextResource" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                                                <asp:TextBox runat="server" ID="editTextResource" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="editTextResource" ID="editTextValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" ErrorMessage="El campo de texto es obligatorio." />
                                             </div>
@@ -427,7 +427,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <asp:Label runat="server" AssociatedControlID="taskText">Descripción</asp:Label>
-                                                <asp:TextBox runat="server" ID="taskText" CssClass="form-control" TextMode="MultiLine" ClientIDMode="Static" />
+                                                <asp:TextBox runat="server" ID="taskText" CssClass="form-control" TextMode="MultiLine" ClientIDMode="Static" Width="100%"/>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="taskText" ClientIDMode="Static" ID="taskTextValidator"
                                                     CssClass="text-danger" ErrorMessage="El campo de descripción es obligatorio." />
                                             </div>
@@ -464,7 +464,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <asp:Label runat="server" AssociatedControlID="EditTaskText">Descripción</asp:Label>
-                                                <asp:TextBox runat="server" ID="EditTaskText" CssClass="form-control" TextMode="MultiLine" ClientIDMode="Static" />
+                                                <asp:TextBox runat="server" ID="EditTaskText" CssClass="form-control" TextMode="MultiLine" ClientIDMode="Static" Width="100%"/>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditTaskText" ClientIDMode="Static" ID="EditTaskTextValidator"
                                                     CssClass="text-danger" ErrorMessage="El campo de descripción es obligatorio." />
                                             </div>
@@ -646,20 +646,20 @@
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="OGText">Texto sin traducir</asp:Label>
                                         <br />
-                                        <asp:TextBox runat="server" ID="OGTExt" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="OGTExt" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
 
                                     </div>
 
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="TransText">Traducción</asp:Label>
                                         <br />
-                                        <asp:TextBox runat="server" ID="TransText" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="TransText" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
 
                                     </div>
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="riddleAnswer">Solución</asp:Label>
                                         <br />
-                                        <asp:TextBox runat="server" ID="riddleAnswer" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="riddleAnswer" TextMode="SingleLine" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleAnswer" ClientIDMode="Static" ID="riddleAnswerValidator"
                                             CssClass="text-danger" ErrorMessage="La solución es obligatoria." />
                                     </div>
@@ -711,20 +711,20 @@
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="EditOGText">Texto sin traducir</asp:Label>
                                         <br />
-                                        <asp:TextBox runat="server" ID="EditOGTExt" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="EditOGTExt" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
 
                                     </div>
 
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="EditTransText">Traducción</asp:Label>
                                         <br />
-                                        <asp:TextBox runat="server" ID="EditTransText" TextMode="MultiLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="EditTransText" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
 
                                     </div>
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="EditRiddleAnswer">Solución</asp:Label>
                                         <br />
-                                        <asp:TextBox runat="server" ID="EditRiddleAnswer" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                                        <asp:TextBox runat="server" ID="EditRiddleAnswer" TextMode="SingleLine" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAnswer" ClientIDMode="Static" ID="EditRiddleAnswerValidator"
                                             CssClass="text-danger" ErrorMessage="La solución es obligatoria." />
                                     </div>
