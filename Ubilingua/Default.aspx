@@ -6,11 +6,11 @@
         <br />
         <div>
 
-            <asp:ListView ID="ListView1" runat="server" DataKeyNames="SubjectID" GroupItemCount="3" ItemType="Ubilingua.Models.Subject" SelectMethod="GetSubjects">
+            <asp:ListView ID="ListView1" runat="server" DataKeyNames="SubjectID" GroupItemCount="3" ItemType="Ubilingua.Models.subjects" SelectMethod="GetSubjects">
                 <EmptyDataTemplate>
                     <table>
                         <tr>
-                            <td>No se ha devuelto ningún dato.</td>
+                            <td><asp:Label runat="server" Text="No hay ningún curso disponible"></asp:Label></td>
                         </tr>
                     </table>
                 </EmptyDataTemplate>

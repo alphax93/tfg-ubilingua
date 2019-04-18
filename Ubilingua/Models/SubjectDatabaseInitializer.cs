@@ -3,36 +3,35 @@ using System.Data.Entity;
 
 namespace Ubilingua.Models
 {
-    public class SubjectDatabaseInitializer : DropCreateDatabaseIfModelChanges<SubjectContext>
+    public class SubjectDatabaseInitializer : DropCreateDatabaseIfModelChanges<Model1>
     {
-        protected override void Seed(SubjectContext context)
+        protected override void Seed(Model1 context)
         {
-            GetSubjects().ForEach(s => context.Subjects.Add(s));
-            GetBlocks().ForEach(b => context.Blocks.Add(b));
-            GetResources().ForEach(r => context.Resources.Add(r));
-            GetTeachers().ForEach(t => context.Teachers.Add(t));
-            context.TeacherPasswords.Add(new TeacherPassword { Password = "profesor"});
+            GetSubjects().ForEach(s => context.subjects.Add(s));
+            GetBlocks().ForEach(b => context.blocks.Add(b));
+            GetResources().ForEach(r => context.resources.Add(r));
+            GetTeachers().ForEach(t => context.teachers.Add(t));
         }
 
-        private static List<Subject> GetSubjects()
+        private static List<subjects> GetSubjects()
         {
-            var subjects = new List<Subject>
+            var subjects = new List<subjects>
             {
-                new Subject
+                new subjects
                 {
                     SubjectID=1,
                     SubjectName="Ingles",
                     ImagePath="uk.jpg",
                     IsPrivate=false
                 },
-                new Subject
+                new subjects
                 {
                     SubjectID=2,
                     SubjectName="Frances",
                     ImagePath="france.jpg",
                     IsPrivate=false
                 },
-                new Subject
+                new subjects
                 {
                     SubjectID=3,
                     SubjectName="Aleman",
@@ -43,29 +42,29 @@ namespace Ubilingua.Models
             return subjects;
         }
 
-        private static List<Block> GetBlocks()
+        private static List<blocks> GetBlocks()
         {
-            var blocks = new List<Block>
+            var blocks = new List<blocks>
             {
-                new Block
+                new blocks
                 {
                     BlockID=1,
                     BlockName="Tema 1",
                     SubjectID=1
                 },
-                new Block
+                new blocks
                 {
                     BlockID=2,
                     BlockName="Tema 2",
                     SubjectID=1
                 },
-                new Block
+                new blocks
                 {
                     BlockID=3,
                     BlockName="Tema 1",
                     SubjectID=2
                 },
-                new Block
+                new blocks
                 {
                     BlockID=4,
                     BlockName="Tema 3",
@@ -75,11 +74,11 @@ namespace Ubilingua.Models
             return blocks;
         }
 
-        private static List<Resource> GetResources()
+        private static List<resources> GetResources()
         {
-            var resources = new List<Resource>
+            var resources = new List<resources>
             {
-                new Resource
+                new resources
                 {
                     ResourceID=1,
                     ResourceName="Recurso1",
@@ -92,11 +91,11 @@ namespace Ubilingua.Models
             return resources;
         }
 
-        private static List<Teacher> GetTeachers()
+        private static List<teachers> GetTeachers()
         {
-            var teachers = new List<Teacher>
+            var teachers = new List<teachers>
             {
-                new Teacher
+                new teachers
                 {
                     TeacherID=0,
                     TeacherName="Agustía Darias Marrero",
@@ -107,7 +106,7 @@ namespace Ubilingua.Models
                     OtherCV="Diplômé d’un Master en interprétation de conférences à l’Université de La Laguna et d’un Doctorat en traduction et en interprétation à l’Université de Las Palmas de Gran Canaria, Agustín Darias Marrero est maître de conférences dans cette université où il donne des cours d’interprétation consécutive et simultanée français – espagnol. À l’heure actuelle, il participe au groupe de recherche Culture et textes en traduction orale et écrite, et il est également membre du projet de recherche du Ministère espagnol des Sciences et de l’innovation, Caractérisation objective de la difficulté générale des textes originaux. Dans le cadre de ces travaux il a réalisé plusieurs publications et a participé à des congrès nationaux et internationaux. Il a mené aussi des recherches sur la diversité culturelle et l’utilisation des TICE.",
                     Image="teacher0.jpg",
                 },
-                new Teacher
+                new teachers
                 {
                     TeacherID=1,
                     TeacherName="Ana Ruth Vidal Luengo",

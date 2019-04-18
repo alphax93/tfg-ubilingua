@@ -18,11 +18,11 @@ namespace Ubilingua
 
         }
 
-        public IQueryable<JoinUserMark> GetElements([QueryString("subjectID")] int? subjectId)
+        public IQueryable<joinusermarks> GetElements([QueryString("subjectID")] int? subjectId)
         {
-            var _db = new SubjectContext();
+            var _db = new Model1();
            
-            IQueryable<JoinUserMark> query = _db.JoinUserMark;
+            IQueryable<joinusermarks> query = _db.joinusermarks;
             string id = User.Identity.GetUserId();
 
                 query = query.Where(b => b.UserID == id && b.SubjectID==subjectId);

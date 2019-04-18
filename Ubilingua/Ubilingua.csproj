@@ -52,12 +52,37 @@
     <Reference Include="AspNet.ScriptManager.bootstrap, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.bootstrap.4.1.1\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.15\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.EntityFramework.8.0.15\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Web, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.18.6.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.EntityFramework.18.3.0\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -167,7 +192,6 @@
     <Content Include="Account\Manage.aspx" />
     <Content Include="Account\ManageLogins.aspx" />
     <Content Include="Account\ManageTeacherProfile.aspx" />
-    <Content Include="Account\ManageTeacherPassword.aspx" />
     <Content Include="Account\ManagePassword.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
@@ -176,6 +200,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="adminPanel.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -263,10 +288,11 @@
     <Content Include="ViewTask.aspx" />
     <Content Include="Teachers.aspx" />
     <Content Include="Validations.js" />
-    <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="ViewTest.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
-    <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
@@ -325,13 +351,6 @@
     <Compile Include="Account\ManageTeacherProfile.aspx.designer.cs">
       <DependentUpon>ManageTeacherProfile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\ManageTeacherPassword.aspx.cs">
-      <DependentUpon>ManageTeacherPassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\ManageTeacherPassword.aspx.designer.cs">
-      <DependentUpon>ManageTeacherPassword.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Account\ManagePassword.aspx.cs">
       <DependentUpon>ManagePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -388,6 +407,13 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="adminPanel.aspx.cs">
+      <DependentUpon>adminPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminPanel.aspx.designer.cs">
+      <DependentUpon>adminPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -438,18 +464,20 @@
       <DependentUpon>201901291219532_CreateNameColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Block.cs" />
+    <Compile Include="Models\blocks.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\JoinSubjectUser.cs" />
-    <Compile Include="Models\JoinUserMark.cs" />
-    <Compile Include="Models\Resource.cs" />
-    <Compile Include="Models\RiddleResource.cs" />
-    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\joinsubjectusers.cs" />
+    <Compile Include="Models\joinusermarks.cs" />
+    <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\MySqlConfiguration.cs" />
+    <Compile Include="Models\MySqlHistoryContext.cs" />
+    <Compile Include="Models\resources.cs" />
+    <Compile Include="Models\riddleresources.cs" />
     <Compile Include="Models\SubjectContext.cs" />
     <Compile Include="Models\SubjectDatabaseInitializer.cs" />
-    <Compile Include="Models\TaskResource.cs" />
-    <Compile Include="Models\Teacher.cs" />
-    <Compile Include="Models\TeacherPassword.cs" />
+    <Compile Include="Models\subjects.cs" />
+    <Compile Include="Models\taskresources.cs" />
+    <Compile Include="Models\teachers.cs" />
     <Compile Include="NewExtensions\ControlExtensions.cs" />
     <Compile Include="NewExtensions\IdentityExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -466,13 +494,6 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Site.Mobile.Master.designer.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Subject.aspx.cs">
@@ -510,19 +531,19 @@
     <Compile Include="Teachers.aspx.designer.cs">
       <DependentUpon>Teachers.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ViewSwitcher.ascx.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ViewSwitcher.ascx.designer.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
     <Compile Include="CreateSubject.aspx.cs">
       <DependentUpon>CreateSubject.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CreateSubject.aspx.designer.cs">
       <DependentUpon>CreateSubject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewTest.aspx.cs">
+      <DependentUpon>ViewTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewTest.aspx.designer.cs">
+      <DependentUpon>ViewTest.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -532,14 +553,17 @@
     <Folder Include="Subjects\1\Downloadables\" />
     <Folder Include="Subjects\1\Images\" />
     <Folder Include="Subjects\1\Tasks\" />
+    <Folder Include="Subjects\1\Tests\" />
     <Folder Include="Subjects\2\Audios\" />
     <Folder Include="Subjects\2\Downloadables\" />
     <Folder Include="Subjects\2\Images\" />
     <Folder Include="Subjects\2\Tasks\" />
+    <Folder Include="Subjects\2\Tests\" />
     <Folder Include="Subjects\3\Audios\" />
     <Folder Include="Subjects\3\Downloadables\" />
     <Folder Include="Subjects\3\Images\" />
     <Folder Include="Subjects\3\Tasks\" />
+    <Folder Include="Subjects\3\Tests\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -568,6 +592,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_LocalResources\Subject.aspx.resx" />
+    <Content Include="App_LocalResources\Subject.aspx.en.resx" />
     <EmbeddedResource Include="Migrations\201811211758056_InitialCreate.resx">
       <DependentUpon>201811211758056_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>

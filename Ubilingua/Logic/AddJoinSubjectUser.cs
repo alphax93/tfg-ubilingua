@@ -10,12 +10,12 @@ namespace Ubilingua.Logic
     {
         public bool AddJoinSubjectUsers(int SubjectID, string UserID)
         {
-            var myJoinSubjectUser = new JoinSubjectUser();
+            var myJoinSubjectUser = new joinsubjectusers();
             myJoinSubjectUser.UserID = UserID;
             myJoinSubjectUser.SubjectID = SubjectID;
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                _db.JoinSubjectUser.Add(myJoinSubjectUser);
+                _db.joinsubjectusers.Add(myJoinSubjectUser);
                 _db.SaveChanges();
             }
             return true;
@@ -23,12 +23,12 @@ namespace Ubilingua.Logic
 
         public bool RemoveJoinSubjectUsers(int subjectID, string userID)
         {
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                var myJoinSubjectUser = (from members in _db.JoinSubjectUser where members.SubjectID == subjectID && members.UserID == userID select members).FirstOrDefault();
+                var myJoinSubjectUser = (from members in _db.joinsubjectusers where members.SubjectID == subjectID && members.UserID == userID select members).FirstOrDefault();
                 if (myJoinSubjectUser != null)
                 {
-                    _db.JoinSubjectUser.Remove(myJoinSubjectUser);
+                    _db.joinsubjectusers.Remove(myJoinSubjectUser);
                 }
                 _db.SaveChanges();
             }

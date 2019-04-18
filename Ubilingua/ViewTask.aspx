@@ -27,7 +27,7 @@
                         </asp:Table>
                         <br />
                         <asp:Label runat="server" CssClass="panel-title" Text="Entregas"></asp:Label>
-                        <asp:GridView ID="fileList" runat="server" GridLines="Horizontal" ItemType="Ubilingua.Models.JoinUserMark" SelectMethod="GetElements" AutoGenerateColumns="false">
+                        <asp:GridView ID="fileList" runat="server" GridLines="Horizontal" ItemType="Ubilingua.Models.joinusermarks" SelectMethod="GetElements" AutoGenerateColumns="false">
                             <Columns>
                                 <asp:TemplateField HeaderText="Nombre">
                                     <ItemTemplate>

@@ -65,14 +65,20 @@ namespace Ubilingua.Account
                     // Seccionar la cadena de consulta desde la acción
                     Form.Action = ResolveUrl("~/Account/Manage");
 
-                    SuccessMessage =
-                        message == "ChangePwdSuccess" ? "Se cambió la contraseña de acceso correctamente."
-                        : message == "ChangeTeachPwdSuccess" ? "Se cambió la contraseña de profesor correctamente."
-                        : message == "ChangeUserSuccess" ? "Se modificaron los datos con éxito. Se aplicarán los cambios la próxima vez que inicie sesión."
-                        : message == "TeacherProfSuccess" ? "Se modificó el perfil de profesor."
-                        : String.Empty;
-                    success.Visible = !String.IsNullOrEmpty(SuccessMessage);
-                    success.Text = SuccessMessage;
+                    
+                    if(message == "ChangePwdSuccess")
+                    {
+                        successChangePass.Visible = true;
+                    } else if (message == "ChangeTeachPwdSuccess")
+                    {
+                        successChangeTeachPass.Visible = true;
+                    } else if (message == "ChangeUserSuccess")
+                    {
+                        successChangeUser.Visible = true;
+                    } else if (message == "TeacherProfSuccess")
+                    {
+                        successTeacherProf.Visible = true;
+                    }
                 }
             }
         }
@@ -129,10 +135,6 @@ namespace Ubilingua.Account
 
  
 
-        public void GoToChangeTeacherPassword(object sender, EventArgs e)
-        {
-            Response.Redirect("/Account/ManageTeacherPassword");
-        }
 
         public void GoToTeacherProfile(object sender, EventArgs e)
         {
@@ -174,18 +176,18 @@ namespace Ubilingua.Account
             Response.Redirect("~");
         }
 
-        public IQueryable<Ubilingua.Models.Subject> GetSubjects()
+        public IQueryable<Ubilingua.Models.subjects> GetSubjects()
         {
-            var _db = new SubjectContext();
-            IQueryable<JoinSubjectUser> tmp = _db.JoinSubjectUser;
-            IQueryable<Models.Subject> query = _db.Subjects;
+            var _db = new Model1();
+            IQueryable<joinsubjectusers> tmp = _db.joinsubjectusers;
+            IQueryable<Models.subjects> query = _db.subjects;
             string userID = User.Identity.GetUserId();
             tmp = tmp.Where(r => r.UserID == userID);
             var tmp2 = tmp.ToList();
-            List<Models.Subject> res = new List<Models.Subject>();
-            foreach(Models.Subject s in query)
+            List<Models.subjects> res = new List<Models.subjects>();
+            foreach(Models.subjects s in query)
             {
-                foreach(JoinSubjectUser j in tmp2)
+                foreach(joinsubjectusers j in tmp2)
                 {
                     if(j.SubjectID == s.SubjectID)
                     {

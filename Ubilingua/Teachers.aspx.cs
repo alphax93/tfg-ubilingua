@@ -32,10 +32,10 @@ namespace Ubilingua
 
         private void PopulateMenu()
         {
-            var _db = new SubjectContext();
-            List<Teacher> teachers = _db.Teachers.ToList();
+            var _db = new Model1();
+            List<teachers> teachers = _db.teachers.ToList();
             bool first = true;
-            foreach(Teacher teacher in teachers)
+            foreach(teachers teacher in teachers)
             {
                 MenuItem menuItem = new MenuItem
                 {
@@ -63,13 +63,13 @@ namespace Ubilingua
 
         private void PopulateMultiview(int id)
         {
-            var _db = new SubjectContext();
+            var _db = new Model1();
             //List<Teacher> teachers = _db.Teachers.ToList();
             //foreach (Teacher teacher in teachers)
             //{
             //    View view = new View { ID = "Tab" + (teacher.TeacherID - 1).ToString(), };
 
-            Teacher teacher = (from Teachers in _db.Teachers where Teachers.TeacherID == id select Teachers).FirstOrDefault();
+            teachers teacher = (from Teachers in _db.teachers where Teachers.TeacherID == id select Teachers).FirstOrDefault();
             
             content.Text = 
                     "<h2>" + teacher.Position + "</h2>" +

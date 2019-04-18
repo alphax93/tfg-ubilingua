@@ -10,18 +10,18 @@ namespace Ubilingua.Logic
     {
         public bool AddJoinUserMarks(int ResourceID, string UserID, string filepath, string user, int subjectID)
         {
-            var myJoinUserMarks = new JoinUserMark();
+            var myJoinUserMarks = new joinusermarks();
             myJoinUserMarks.ResourceID = ResourceID;
             myJoinUserMarks.UserID = UserID;
             myJoinUserMarks.FilePath = filepath;
             myJoinUserMarks.Delivered = DateTime.Now;
             myJoinUserMarks.User = user;
             myJoinUserMarks.SubjectID = subjectID;
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                TaskResource task = (from tasks in _db.TaskResources where tasks.ResourceID == ResourceID select tasks).FirstOrDefault();
+                taskresources task = (from tasks in _db.taskresources where tasks.ResourceID == ResourceID select tasks).FirstOrDefault();
                 myJoinUserMarks.TaskName = task.TaskName;
-                _db.JoinUserMark.Add(myJoinUserMarks);
+                _db.joinusermarks.Add(myJoinUserMarks);
                 _db.SaveChanges();
             }
             return true;
@@ -30,9 +30,9 @@ namespace Ubilingua.Logic
         public bool UpdateJoinUserMarks(int ResourceID, string UserID, string filepath)
         {
 
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                var myJoinUserMarks = (from joins in _db.JoinUserMark where joins.ResourceID == ResourceID && joins.UserID == UserID select joins).FirstOrDefault();
+                var myJoinUserMarks = (from joins in _db.joinusermarks where joins.ResourceID == ResourceID && joins.UserID == UserID select joins).FirstOrDefault();
                 string oldFile = "Resources/UserTasks/" + myJoinUserMarks.FilePath;
                 myJoinUserMarks.FilePath = filepath;
                 myJoinUserMarks.Delivered = DateTime.Now;
@@ -47,9 +47,9 @@ namespace Ubilingua.Logic
 
         public bool UpdateMark(int ResourceID, string UserID, float mark)
         {
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                var myJoinUserMarks = (from joins in _db.JoinUserMark where joins.ResourceID == ResourceID && joins.UserID == UserID select joins).FirstOrDefault();
+                var myJoinUserMarks = (from joins in _db.joinusermarks where joins.ResourceID == ResourceID && joins.UserID == UserID select joins).FirstOrDefault();
                 myJoinUserMarks.Mark = mark;
                 _db.SaveChanges();
             }

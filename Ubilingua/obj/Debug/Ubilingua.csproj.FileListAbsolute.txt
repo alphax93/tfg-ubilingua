@@ -112,4 +112,14 @@ C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csproj.CoreC
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csproj.CopyComplete
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.dll
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.pdb
-C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csprojAssemblyReference.cache
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\System.IO.Compression.dll
+C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\MySql.Data.dll
+C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\MySql.Data.EntityFramework.dll
+C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\MySql.Web.dll
+C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\Google.Protobuf.dll
+C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\MySql.Data.xml
+C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\MySql.Data.EntityFramework.xml
+C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\MySql.Web.xml
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Google.Protobuf.xml
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Oracle.ManagedDataAccess.dll
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Oracle.ManagedDataAccess.EntityFramework.dll

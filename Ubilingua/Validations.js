@@ -70,7 +70,6 @@ function checkDownload() {
 function checkeditDownload() {
 
     var downloadName = document.getElementById("editDownloadResourceName").value;
-    var downloadFile = document.getElementById("editDownloadResourceFile").value;
     var flag = true;
     var validator;
     if (downloadName === "") {
@@ -78,11 +77,7 @@ function checkeditDownload() {
         ValidatorEnable(validator);
         flag = false;
     }
-    if (downloadFile === "") {
-        validator = document.getElementById("editDownloadFileValidator");
-        ValidatorEnable(validator);
-        flag = false;
-    }
+    
     return flag;
 }
 
@@ -118,23 +113,24 @@ function checkEditVideo() {
     var videoPath = document.getElementById("EditVideoPath").value;
     var flag = true;
     var validator;
-
+    
     if (videoName === "") {
         validator = document.getElementById("EditVideoResourceNameValidator");
         ValidatorEnable(validator);
         flag = false;
     }
+    
     if (videoPath === "") {
         validator = document.getElementById("EditVideoResourcePathValidator");
         ValidatorEnable(validator);
         flag = false;
     } else {
-        var pattern = new RegExp("(https:\/\/)?www\.youtube\.com\/watch\?v=.*|https:\/\/www\.youtube\.com\/embed\/.*");
-        if (pattern.test(videoPath)) {
+        var pattern = new RegExp("https:\/\/www\.youtube\.com\/embed\/.*");
+        if (!pattern.test(videoPath)) {
             flag = false;
         }
     }
-
+    
     return flag;
 }
 
@@ -258,9 +254,7 @@ function checkEditRiddle() {
     }
 
     if (riddleAudioFile === "") {
-        validator = document.getElementById("EditRiddleAudioValidator");
-        ValidatorEnable(validator);
-        flag = false;
+        
     } else {
         var pattern = new RegExp("^.+\.(mp3|MP3)$");
         if (!pattern.test(riddleAudioFile)) {

@@ -17,10 +17,10 @@ namespace Ubilingua
 {
     public partial class Subject : System.Web.UI.Page
     {
-        List<Block> blocks;
+        List<blocks> blocks;
         int index = 0;
         public int? subjectID;
-        public Models.Subject subject;
+        public Models.subjects subject;
         UpdatePanel updatePanel;
         ListView blockList;
         ListView resourceList;
@@ -32,15 +32,15 @@ namespace Ubilingua
 
             if (User.Identity.IsAuthenticated)
             {
-                var db = new SubjectContext();
+                var db = new Model1();
                 subjectID = Convert.ToInt32(Request.QueryString["subjectID"]);
-                subject = (from subjects in db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+                subject = (from subjects in db.subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
                 //string pass = (string)(from subjects in db.Subjects where subjects.SubjectID == subjectID select subjects.SubjectPassword).Single<string>();
                 if (subject.IsPrivate)
                 {
                     string userID = User.Identity.GetUserId();
                     //int count = (from joinSubjectUser in db.JoinSubjectUser where joinSubjectUser.SubjectID == subjectID && joinSubjectUser.UserID == userID select joinSubjectUser.SubjectID).Count();
-                    JoinSubjectUser member = (from joinSubjectUser in db.JoinSubjectUser where joinSubjectUser.SubjectID == subjectID && joinSubjectUser.UserID == userID select joinSubjectUser).SingleOrDefault();
+                    joinsubjectusers member = (from joinSubjectUser in db.joinsubjectusers where joinSubjectUser.SubjectID == subjectID && joinSubjectUser.UserID == userID select joinSubjectUser).SingleOrDefault();
                     if (member == null)
                     {
                         Response.Redirect("~/SubjectPassword?SubjectID=" + subjectID);
@@ -86,25 +86,25 @@ namespace Ubilingua
 
         #region Populate Listview Methods
 
-        public IQueryable<Ubilingua.Models.Block> GetBlocks([QueryString("subjectID")] int? subjectId)
+        public IQueryable<Ubilingua.Models.blocks> GetBlocks([QueryString("subjectID")] int? subjectId)
         {
-            var _db = new SubjectContext();
-            IQueryable<Block> query = _db.Blocks;
+            var _db = new Model1();
+            IQueryable<blocks> query = _db.blocks;
             if (subjectId.HasValue && subjectId > 0)
             {
                 query = query.Where(b => b.SubjectID == subjectId);
             }
-            blocks = query.ToList<Block>();
+            blocks = query.ToList<blocks>();
             ViewState["blocks"] = blocks;
             ViewState["index"] = 0;
             return query;
         }
 
-        public IQueryable<Ubilingua.Models.Resource> GetResources()
+        public IQueryable<Ubilingua.Models.resources> GetResources()
         {
-            var _db = new SubjectContext();
-            IQueryable<Resource> query = _db.Resources;
-            blocks = (List<Block>)ViewState["blocks"];
+            var _db = new Model1();
+            IQueryable<resources> query = _db.resources;
+            blocks = (List<blocks>)ViewState["blocks"];
             index = (int)ViewState["index"];
             if (index < blocks.Count)
             {
@@ -120,10 +120,10 @@ namespace Ubilingua
             return query;
         }
 
-        public IQueryable<Ubilingua.Models.Resource> GetVisibleResources()
+        public IQueryable<Ubilingua.Models.resources> GetVisibleResources()
         {
-            var _db = new SubjectContext();
-            IQueryable<Resource> query = _db.Resources;
+            var _db = new Model1();
+            IQueryable<resources> query = _db.resources;
             int? blockID = blocks[index].BlockID;
 
             if (blockID.HasValue && blockID > 0)
@@ -153,6 +153,7 @@ namespace Ubilingua
             if (addSuccess)
             {
                 blockList.DataBind();
+                name.Text = string.Empty;
                 updatePanel.Update();
             }
         }
@@ -163,17 +164,16 @@ namespace Ubilingua
             popup.Show();
 
             TextBox blockName = (TextBox)Page.FindControlRecursive("EditBlockName");
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             ViewState["BlockID"] = e.CommandArgument.ToString();
             int id = int.Parse(ViewState["BlockID"].ToString());
-            Block b = (from blocks in _db.Blocks where blocks.BlockID == id select blocks).FirstOrDefault();
+            blocks b = (from blocks in _db.blocks where blocks.BlockID == id select blocks).FirstOrDefault();
             blockName.Text = b.BlockName;
 
         }
 
         public void EditBlock_Click(object sender, EventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
             int id = int.Parse(ViewState["BlockID"].ToString());
             TextBox blockName = (TextBox)Page.FindControlRecursive("EditBlockName");
             BlockCRUD blocks = new BlockCRUD();
@@ -186,7 +186,6 @@ namespace Ubilingua
 
         public void DeleteBlock(object sender, CommandEventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
             int bID = int.Parse(e.CommandArgument.ToString());
             BlockCRUD blocks = new BlockCRUD();
             bool success = blocks.RemoveBlock(bID);
@@ -226,6 +225,7 @@ namespace Ubilingua
                     bool addSuccess = resources.AddResources(resourceName.Text, fileName, int.Parse(ViewState["blockID"].ToString()), "download");
                     if (addSuccess)
                     {
+                        resourceName.Text = string.Empty;
                         Refresh();
                     }
                 }
@@ -244,9 +244,9 @@ namespace Ubilingua
             ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("editDownloadPopup");
             modalPopupExtender.Show();
 
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            Resource res = (from resources in _db.Resources where resources.ResourceID == id select resources).FirstOrDefault();
+            resources res = (from resources in _db.resources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox text = (TextBox)Page.FindControlRecursive("editDownloadResourceName");
             text.Text = res.ResourceName;
@@ -258,9 +258,9 @@ namespace Ubilingua
 
         public void editDownloadableResource(object sender, EventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            Resource res = (from resources in _db.Resources where resources.ResourceID == id select resources).FirstOrDefault();
+            resources res = (from resources in _db.resources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox text = (TextBox)Page.FindControlRecursive("editDownloadResourceName");
             FileUpload file = (FileUpload)Page.FindControlRecursive("editDownloadResourceFile");
@@ -300,13 +300,14 @@ namespace Ubilingua
         {
             TextBox resourceName = (TextBox)Page.FindControlRecursive("videoResourceName");
             TextBox resourcePath = (TextBox)Page.FindControlRecursive("videoPath");
-            System.Diagnostics.Debug.WriteLine("dsfsdf");
             string link = resourcePath.Text.Replace("watch?v=", "embed/");
 
             ResourceCRUD resources = new ResourceCRUD();
             bool addSuccess = resources.AddResources(resourceName.Text, link, int.Parse(ViewState["blockID"].ToString()), "video");
             if (addSuccess)
             {
+                resourceName.Text = string.Empty;
+                resourcePath.Text = string.Empty;
                 Refresh();
             }
         }
@@ -317,9 +318,9 @@ namespace Ubilingua
             ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("EditVideoPopup");
             modalPopupExtender.Show();
 
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            Resource res = (from resources in _db.Resources where resources.ResourceID == id select resources).FirstOrDefault();
+            resources res = (from resources in _db.resources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox name = (TextBox)Page.FindControlRecursive("EditVideoResourceName");
             TextBox path = (TextBox)Page.FindControlRecursive("EditVideoPath");
@@ -331,15 +332,15 @@ namespace Ubilingua
 
         public void EditVideoResource(object sender, EventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            Resource res = (from resources in _db.Resources where resources.ResourceID == id select resources).FirstOrDefault();
+            resources res = (from resources in _db.resources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox name = (TextBox)Page.FindControlRecursive("EditVideoResourceName");
             TextBox path = (TextBox)Page.FindControlRecursive("EditVideoPath");
 
             string link = path.Text.Replace("watch?v=", "embed/");
-
+            System.Diagnostics.Debug.WriteLine("hasta aqui");
             res.ResourceName = name.Text;
             res.ResourcePath = link;
             _db.SaveChanges();
@@ -406,9 +407,9 @@ namespace Ubilingua
                 string path = "~/Subjects/" + subjectID + "/Images/";
                 fileUpload.SaveAs(Server.MapPath(path) + fileName);
 
-                SubjectContext _db = new SubjectContext();
+                Model1 _db = new Model1();
                 int id = int.Parse(ViewState["ResID"].ToString());
-                Resource res = (from resources in _db.Resources where resources.ResourceID == id select resources).FirstOrDefault();
+                resources res = (from resources in _db.resources where resources.ResourceID == id select resources).FirstOrDefault();
 
                 res.ResourcePath = fileName;
                 _db.SaveChanges();
@@ -436,6 +437,7 @@ namespace Ubilingua
             bool addSuccess = resources.AddResources("text", text, int.Parse(ViewState["blockID"].ToString()), "text");
             if (addSuccess)
             {
+                resource.Text = string.Empty;
                 Refresh();
             }
 
@@ -448,9 +450,9 @@ namespace Ubilingua
             ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("EditTextPopup");
             modalPopupExtender.Show();
 
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            Resource res = (from resources in _db.Resources where resources.ResourceID == id select resources).FirstOrDefault();
+            resources res = (from resources in _db.resources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox text = (TextBox)Page.FindControlRecursive("editTextResource");
             text.Text = res.ResourcePath;
@@ -458,9 +460,9 @@ namespace Ubilingua
 
         public void EditTextResource(object sender, EventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            Resource res = (from resources in _db.Resources where resources.ResourceID == id select resources).FirstOrDefault();
+            resources res = (from resources in _db.resources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox text = (TextBox)Page.FindControlRecursive("editTextResource");
 
@@ -511,6 +513,10 @@ namespace Ubilingua
 
                     if (addSuccess)
                     {
+                        riddleName.Text = string.Empty;
+                        ogText.Text = string.Empty;
+                        transText.Text = string.Empty;
+                        answer.Text = string.Empty;
                         Refresh();
                     }
 
@@ -528,9 +534,9 @@ namespace Ubilingua
             ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("EditRiddlePopup");
             modalPopupExtender.Show();
 
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            RiddleResource riddle = (from resources in _db.RiddleResources where resources.ResourceID == id select resources).FirstOrDefault();
+            riddleresources riddle = (from resources in _db.riddleresources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox name = (TextBox)Page.FindControlRecursive("EditRiddleName");
             TextBox ogText = (TextBox)Page.FindControlRecursive("EditOGTExt");
@@ -550,9 +556,9 @@ namespace Ubilingua
 
         public void EditRiddleResource(object sender, EventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            RiddleResource riddle = (from resources in _db.RiddleResources where resources.ResourceID == id select resources).FirstOrDefault();
+            riddleresources riddle = (from resources in _db.riddleresources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox name = (TextBox)Page.FindControlRecursive("EditRiddleName");
             TextBox ogText = (TextBox)Page.FindControlRecursive("EditOGTExt");
@@ -605,6 +611,8 @@ namespace Ubilingua
             bool addSuccess = resources.AddTaskResource(int.Parse(ViewState["blockID"].ToString()), taskName.Text, taskText.Text, DateTime.Parse(taskDate.Text));
             if (addSuccess)
             {
+                taskName.Text = string.Empty;
+                taskText.Text = string.Empty;
                 Refresh();
             }
         }
@@ -616,9 +624,9 @@ namespace Ubilingua
             ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("EditTaskPopup");
             modalPopupExtender.Show();
 
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            TaskResource res = (from resources in _db.TaskResources where resources.ResourceID == id select resources).FirstOrDefault();
+            taskresources res = (from resources in _db.taskresources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox taskName = (TextBox)Page.FindControlRecursive("EditTaskName");
             TextBox taskText = (TextBox)Page.FindControlRecursive("EditTaskText");
@@ -635,9 +643,9 @@ namespace Ubilingua
 
         public void EditTaskResource(object sender, EventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int id = int.Parse(ViewState["ResID"].ToString());
-            TaskResource res = (from resources in _db.TaskResources where resources.ResourceID == id select resources).FirstOrDefault();
+            taskresources res = (from resources in _db.taskresources where resources.ResourceID == id select resources).FirstOrDefault();
 
             TextBox taskName = (TextBox)Page.FindControlRecursive("EditTaskName");
             TextBox taskText = (TextBox)Page.FindControlRecursive("EditTaskText");
@@ -661,7 +669,64 @@ namespace Ubilingua
 
         #endregion
 
-        public void DeleteResource(object sender, CommandEventArgs e)
+        #region Test Resource
+
+        public void ShowTestPopup(object sender, CommandEventArgs e)
+        {
+            ViewState["blockID"] = e.CommandArgument.ToString();
+            ModalPopupExtender modalPopupExtender = (ModalPopupExtender)Page.FindControlRecursive("addTestPopup");
+            modalPopupExtender.Show();
+        }
+
+        public void NewTestResource(object sender, EventArgs e)
+        {
+            TextBox testName = (TextBox)Page.FindControlRecursive("testName");
+            FileUpload fileUpload = (FileUpload)Page.FindControlRecursive("testResourceFile");
+
+
+            if (fileUpload.HasFile)
+            {
+
+                try
+                {
+
+                    string fileName = Path.GetFileName(fileUpload.FileName);
+                    
+                    
+                    ResourceCRUD resources = new ResourceCRUD();
+
+
+                    int resourceID = resources.AddTestResource(int.Parse(ViewState["blockID"].ToString()), testName.Text, fileName);
+                    string path = "~/Subjects/" + subjectID + "/Tests/";
+                    path = Server.MapPath(path) + resourceID;
+                    
+                    Directory.CreateDirectory(path);
+
+                    fileUpload.SaveAs(path + "/" + fileName);
+
+                    bool addSuccess = resources.AddZip(resourceID, (int)subjectID, fileName, path);
+
+                    if (addSuccess)
+                    {
+                        testName.Text = string.Empty;
+                        Refresh();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+        }
+
+        public void ShowEditTest(object sender, CommandEventArgs e)
+        { }
+
+            #endregion
+
+            public void DeleteResource(object sender, CommandEventArgs e)
         {
             int resID = int.Parse(e.CommandArgument.ToString());
             ResourceCRUD resources = new ResourceCRUD();
@@ -676,9 +741,9 @@ namespace Ubilingua
 
         public void ChangeVisibility(object sender, CommandEventArgs e)
         {
-            SubjectContext _db = new SubjectContext();
+            Model1 _db = new Model1();
             int resID = int.Parse(e.CommandArgument.ToString());
-            Resource res = (from resources in _db.Resources where resources.ResourceID == resID select resources).FirstOrDefault();
+            resources res = (from resources in _db.resources where resources.ResourceID == resID select resources).FirstOrDefault();
             if (res != null)
             {
                 res.IsVisible = !res.IsVisible;
@@ -708,9 +773,9 @@ namespace Ubilingua
             modalPopupExtender.Show();
 
             TextBox name = (TextBox)Page.FindControlRecursive("EditSubjectName");
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                Models.Subject sub = (from subjects in _db.Subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
+                Models.subjects sub = (from subjects in _db.subjects where subjects.SubjectID == subjectID select subjects).FirstOrDefault();
 
                 name.Text = sub.SubjectName;
                 updatePanel.Update();

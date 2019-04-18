@@ -12,15 +12,15 @@ namespace Ubilingua
 {
     public partial class Riddle : System.Web.UI.Page
     {
-        public RiddleResource riddleRes;
+        public riddleresources riddleRes;
         int id;
         protected void Page_Load(object sender, EventArgs e)
         {
-            var _db = new SubjectContext();
+            var _db = new Model1();
             id = Convert.ToInt32(Request.QueryString["ResourceID"]);
-            riddleRes = (from riddles in _db.RiddleResources where riddles.ResourceID == id select riddles).FirstOrDefault();
-            int blockID = (from resources in _db.Resources where resources.ResourceID == id select resources.BlockID).First();
-            int subjectID = (from blocks in _db.Blocks where blocks.BlockID == blockID select blocks.SubjectID).First();
+            riddleRes = (from riddles in _db.riddleresources where riddles.ResourceID == id select riddles).FirstOrDefault();
+            int blockID = (from resources in _db.resources where resources.ResourceID == id select resources.BlockID).First();
+            int subjectID = (from blocks in _db.blocks where blocks.BlockID == blockID select blocks.SubjectID).First();
             Label label = (Label)Page.FindControlRecursive("name");
             label.Text = riddleRes.RiddleName;
 

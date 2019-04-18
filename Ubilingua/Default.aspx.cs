@@ -16,10 +16,10 @@ namespace Ubilingua
 
         }
 
-        public IQueryable<Ubilingua.Models.Subject> GetSubjects([QueryString("subjectID")] int? subjectId)
+        public IQueryable<Ubilingua.Models.subjects> GetSubjects([QueryString("subjectID")] int? subjectId)
         {
-            var _db = new SubjectContext();
-            IQueryable<Ubilingua.Models.Subject> query = (IQueryable<Ubilingua.Models.Subject>)_db.Subjects;
+            var _db = new Model1();
+            IQueryable<Ubilingua.Models.subjects> query = (IQueryable<Ubilingua.Models.subjects>)_db.subjects;
             if(subjectId.HasValue && subjectId > 0)
             {
                 query = query.Where(s => s.SubjectID == subjectId);

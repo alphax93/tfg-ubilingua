@@ -32,7 +32,7 @@
                         Transcripción del audio
                     </asp:Panel>
                     <asp:Panel runat="server" ID="OGTextPanel">
-                        <pre id="ogtext" runat="server"></pre>
+                        <p style="white-space: pre" id="ogtext" runat="server"></p>
                     </asp:Panel>
                     <asp:CollapsiblePanelExtender ID="cpe2" runat="server" TargetControlID="OGTextPanel" CollapsedSize="0" Collapsed="true" ExpandControlID="OGTextPanelExtender" CollapseControlID="OGTextPanelExtender"
                         AutoCollapse="false" AutoExpand="false" ScrollContents="false" ImageControlID="OGTextPanelImage" ExpandDirection="Vertical"
@@ -45,7 +45,7 @@
                         Traducción del audio
                     </asp:Panel>
                     <asp:Panel runat="server" ID="TransTextPanel">
-                        <pre id="transtext" runat="server">baaaaa</pre>
+                        <p style="white-space: pre" id="transtext" runat="server">baaaaa</p>
                     </asp:Panel>
                     <asp:CollapsiblePanelExtender ID="cpe3" runat="server" TargetControlID="TransTextPanel" CollapsedSize="0" Collapsed="true" ExpandControlID="TransTextPanelExtender" CollapseControlID="TransTextPanelExtender"
                         AutoCollapse="false" AutoExpand="false" ScrollContents="false" ImageControlID="TransTextPanelImage" ExpandDirection="Vertical"
@@ -58,7 +58,7 @@
                         Respuesta
                     </asp:Panel>
                     <asp:Panel runat="server" ID="AnswerPanel">
-                        <pre id="answer" runat="server"></pre>
+                        <p style="white-space: pre" id="answer" runat="server"></p>
                     </asp:Panel>
                     <asp:CollapsiblePanelExtender ID="cpe4" runat="server" TargetControlID="AnswerPanel" CollapsedSize="0" Collapsed="true" ExpandControlID="AnswerPanelExtender" CollapseControlID="AnswerPanelExtender"
                         AutoCollapse="false" AutoExpand="false" ScrollContents="false" ImageControlID="AnswerPanelImage" ExpandDirection="Vertical"

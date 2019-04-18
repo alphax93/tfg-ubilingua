@@ -60,13 +60,6 @@
             </div>
         </div>
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="TeacherPassword" CssClass="col-md-2 control-label">Contraseña de profesor</asp:Label>
-            <div class="col-md-10">
-                <asp:TextBox runat="server" ID="TeacherPassword" TextMode="Password" CssClass="form-control" />
-                <asp:Literal runat="server" ID="TeacherPasswordWarning" Visible="false" Text="La contraseña de profesor no es correcta"></asp:Literal>
-            </div>
-        </div>
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <asp:Button runat="server" OnClick="CreateUser_Click" Text="Registrarse" CssClass="btn panel-button" />
             </div>

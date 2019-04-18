@@ -31,10 +31,10 @@ namespace Ubilingua.Account
                     Form.Action = ResolveUrl("~/Account/Manage");
                 }
 
-                using (SubjectContext _db = new SubjectContext())
+                using (Model1 _db = new Model1())
                 {
                     string id = User.Identity.GetUserId();
-                    Teacher teacher = (from Teachers in _db.Teachers where Teachers.UserID == id select Teachers).FirstOrDefault();
+                    teachers teacher = (from Teachers in _db.teachers where Teachers.UserID == id select Teachers).FirstOrDefault();
                     if (teacher != null)
                     {
                         update.Visible = true;
@@ -57,7 +57,7 @@ namespace Ubilingua.Account
         {
             if (IsValid)
             {
-                Teacher teacher = new Teacher
+                teachers teacher = new teachers
                 {
                     Position = Position.Text,
                     Contact = Contact.Text,
@@ -82,9 +82,9 @@ namespace Ubilingua.Account
 
                     }
                 }
-                using (SubjectContext _db = new SubjectContext())
+                using (Model1 _db = new Model1())
                 {
-                    _db.Teachers.Add(teacher);
+                    _db.teachers.Add(teacher);
                     _db.SaveChanges();
                     Response.Redirect("~/Account/Manage?m=TeacherProfSuccess");
                 }
@@ -96,10 +96,10 @@ namespace Ubilingua.Account
         {
             if (IsValid)
             {
-                using (SubjectContext _db = new SubjectContext())
+                using (Model1 _db = new Model1())
                 {
                     string id = User.Identity.GetUserId();
-                    Teacher teacher = (from Teachers in _db.Teachers where Teachers.UserID == id select Teachers).FirstOrDefault();
+                    teachers teacher = (from Teachers in _db.teachers where Teachers.UserID == id select Teachers).FirstOrDefault();
 
                     teacher.Position = Position.Text;
                     teacher.Contact = Contact.Text;
@@ -134,11 +134,11 @@ namespace Ubilingua.Account
 
         public void DeleteTeacherProfile_Click(object sender, EventArgs e)
         {
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
                 string id = User.Identity.GetUserId();
-                Teacher teacher = (from Teachers in _db.Teachers where Teachers.UserID == id select Teachers).FirstOrDefault();
-                _db.Teachers.Remove(teacher);
+                teachers teacher = (from Teachers in _db.teachers where Teachers.UserID == id select Teachers).FirstOrDefault();
+                _db.teachers.Remove(teacher);
                 _db.SaveChanges();
             }
         }

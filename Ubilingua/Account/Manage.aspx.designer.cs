@@ -40,13 +40,40 @@ namespace Ubilingua.Account {
         protected global::System.Web.UI.WebControls.ListView SubjectList;
         
         /// <summary>
-        /// Control success.
+        /// Control successChangePass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label success;
+        protected global::System.Web.UI.WebControls.Label successChangePass;
+        
+        /// <summary>
+        /// Control successChangeTeachPass.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label successChangeTeachPass;
+        
+        /// <summary>
+        /// Control successChangeUser.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label successChangeUser;
+        
+        /// <summary>
+        /// Control successTeacherProf.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label successTeacherProf;
         
         /// <summary>
         /// Control EditUserDummy.

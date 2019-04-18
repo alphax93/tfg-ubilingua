@@ -10,14 +10,14 @@ namespace Ubilingua.Logic
     {
         public bool AddBlocks(int SubjectID, string name)
         {
-            var MyBlock = new Block
+            var MyBlock = new blocks
             {
                 BlockName = name,
                 SubjectID = SubjectID
             };
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                _db.Blocks.Add(MyBlock);
+                _db.blocks.Add(MyBlock);
                 _db.SaveChanges();
             }
             return true;
@@ -25,12 +25,12 @@ namespace Ubilingua.Logic
 
         public bool RemoveBlock(int id)
         {
-            using (SubjectContext _db = new SubjectContext())
+            using (Model1 _db = new Model1())
             {
-                Block res = (from blocks in _db.Blocks where blocks.BlockID == id select blocks).FirstOrDefault();
+                blocks res = (from blocks in _db.blocks where blocks.BlockID == id select blocks).FirstOrDefault();
                 if (res != null)
                 {
-                    _db.Blocks.Remove(res);
+                    _db.blocks.Remove(res);
                     _db.SaveChanges();
                 }
             }
@@ -39,9 +39,9 @@ namespace Ubilingua.Logic
 
         public bool EditBlock(int id, string newName)
         {
-            using(SubjectContext _db = new SubjectContext())
+            using(Model1 _db = new Model1())
             {
-                Block b = (from blocks in _db.Blocks where blocks.BlockID == id select blocks).FirstOrDefault();
+                blocks b = (from blocks in _db.blocks where blocks.BlockID == id select blocks).FirstOrDefault();
                 b.BlockName = newName;
                 _db.SaveChanges();
             }

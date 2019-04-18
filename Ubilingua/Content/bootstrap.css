@@ -8280,6 +8280,7 @@ button.close {
     height: 100%;
     overflow: auto;
     right: 0;
+    
 }
 
 @media screen and (max-width: 1000px) {
@@ -8291,8 +8292,15 @@ button.close {
         display: block;
         margin: 2% auto;
         text-align: center;
+        z-index: 100000;
+    }
+
+    .btn-group-vertical btn {
+        width:100%;
     }
 }
+
+
 
 
 /*# sourceMappingURL=bootstrap.css.map */

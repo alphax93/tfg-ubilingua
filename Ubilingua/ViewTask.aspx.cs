@@ -21,11 +21,11 @@ namespace Ubilingua
         public int subjectID;
         protected void Page_Load(object sender, EventArgs e)
         {
-            var _db = new SubjectContext();
+            var _db = new Model1();
             id = Convert.ToInt32(Request.QueryString["ResourceID"]);
-            int blockID = (from resources in _db.Resources where resources.ResourceID == id select resources.BlockID).First();
-            subjectID = (from blocks in _db.Blocks where blocks.BlockID == blockID select blocks.SubjectID).First();
-            TaskResource task = (from tasks in _db.TaskResources where tasks.ResourceID == id select tasks).FirstOrDefault();
+            int blockID = (from resources in _db.resources where resources.ResourceID == id select resources.BlockID).First();
+            subjectID = (from blocks in _db.blocks where blocks.BlockID == blockID select blocks.SubjectID).First();
+            taskresources task = (from tasks in _db.taskresources where tasks.ResourceID == id select tasks).FirstOrDefault();
 
             Label name = (Label)Page.FindControlRecursive("name");
             name.Text = task.TaskName;
@@ -80,7 +80,7 @@ namespace Ubilingua
                     leftCell.Text = "Quedan " + days + " días " + hours + " horas " + minutes + " minutos";
                 }
                 string currentID = User.Identity.GetUserId();
-                JoinUserMark joinUserMark = (from joinUserMarks in _db.JoinUserMark where joinUserMarks.ResourceID == id && joinUserMarks.UserID == currentID select joinUserMarks).FirstOrDefault();
+                joinusermarks joinUserMark = (from joinUserMarks in _db.joinusermarks where joinUserMarks.ResourceID == id && joinUserMarks.UserID == currentID select joinUserMarks).FirstOrDefault();
                 if (joinUserMark != null)
                 {
                     alredySent = true;
@@ -140,10 +140,10 @@ namespace Ubilingua
             }
         }
 
-        public IQueryable<JoinUserMark> GetElements([QueryString("ResourceID")] int? resourceId)
+        public IQueryable<joinusermarks> GetElements([QueryString("ResourceID")] int? resourceId)
         {
-            var _db = new SubjectContext();
-            IQueryable<JoinUserMark> query = _db.JoinUserMark;
+            var _db = new Model1();
+            IQueryable<joinusermarks> query = _db.joinusermarks;
             if (resourceId.HasValue && resourceId > 0)
             {
                 query = query.Where(b => b.ResourceID == resourceId);
