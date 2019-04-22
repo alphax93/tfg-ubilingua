@@ -2,11 +2,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <asp:Panel runat="server" CssClass="panel">
-        <h2>Panel de administración</h2>
-            <asp:Button runat="server" Text="Crear copia de seguridad" CssClass="btn" OnClick="Backup" />
+        <asp:Label runat="server" CssClass="h2" meta:resourcekey="title"></asp:Label>
+            <asp:Button runat="server" meta:resourcekey="desc" CssClass="btn" OnClick="Backup" />
         <br /><br />
         
-        <asp:Label ID="tittle" runat="server" Text="Profesores" CssClass="h3"></asp:Label>
+        <asp:Label ID="tittle" runat="server" meta:resourcekey="prof" CssClass="h3"></asp:Label>
             <asp:GridView runat="server" id="teacherGrid" ItemType="Ubilingua.Models.ApplicationUser" SelectMethod="ViewTeachers" GridLines="Horizontal" AutoGenerateColumns="false" DeleteMethod="DeleteUser">
                 <Columns>
                     <asp:TemplateField HeaderText="ID">
@@ -27,15 +27,15 @@
                     </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button runat="server" OnCommand="DeleteUser" Text="Eliminar usuario" CommandArgument="<%# Item.Id %>" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;" CssClass="btn"/>
-                            <asp:Button runat="server" OnCommand="ChangeToStudent" Text="Convertir en alumno" CommandArgument="<%# Item.Id %>" OnClientClick="if (!confirm('¿Está seguro de que desea convertir al usuario en alumno?')) return false;" CssClass="btn"/>
+                            <asp:Button runat="server" OnCommand="DeleteUser" meta:resourcekey="elim" CommandArgument="<%# Item.Id %>" CssClass="btn"/>
+                            <asp:Button runat="server" OnCommand="ChangeToStudent" meta:resourcekey="convAAlum" CommandArgument="<%# Item.Id %>" CssClass="btn"/>
                         </ItemTemplate>
                     </asp:TemplateField>
                     
                 </Columns>
             </asp:GridView>
         <br /><br />
-        <asp:Label ID="tittleStudent" runat="server" Text="Alumnos" CssClass="h3"></asp:Label>
+        <asp:Label ID="tittleStudent" runat="server" meta:resourcekey="alum" CssClass="h3"></asp:Label>
             <asp:GridView runat="server" id="studentGrid" ItemType="Ubilingua.Models.ApplicationUser" SelectMethod="ViewStudents" GridLines="Horizontal" AutoGenerateColumns="false" DeleteMethod="DeleteUser">
                 <Columns>
                     <asp:TemplateField HeaderText="ID">
@@ -56,8 +56,8 @@
                     </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <asp:Button runat="server" OnCommand="DeleteUser" Text="Eliminar usuario" CommandArgument="<%# Item.Id %>" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;" CssClass="btn"/>
-                            <asp:Button runat="server" OnCommand="ChangeToTeacher" Text="Convertir en profesor" CommandArgument="<%# Item.Id %>" OnClientClick="if (!confirm('¿Está seguro de que desea convertir al usuario en profesor?')) return false;" CssClass="btn"/>
+                            <asp:Button runat="server" OnCommand="DeleteUser" meta:resourcekey="elim" CommandArgument="<%# Item.Id %>" CssClass="btn"/>
+                            <asp:Button runat="server" OnCommand="ChangeToTeacher" meta:resourcekey="convAProf" CommandArgument="<%# Item.Id %>" CssClass="btn"/>
                         </ItemTemplate>
                     </asp:TemplateField>
                     

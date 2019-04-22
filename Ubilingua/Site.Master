@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Mi aplicación ASP.NET</title>
+    <title><%: Page.Title %> </title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -19,7 +19,7 @@
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" EnablePageMethods="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -53,18 +53,18 @@
                 <div class="navbar-collapse collapse">
 
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cursos <b class="caret"></b></a>
+                        <li class="dropdown"> 
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <asp:Label runat="server" meta:resourcekey="cursos"></asp:Label> <b class="caret"></b></a>
                             <ul class="dropdown-menu" id="subjectMenu" runat="server" clientidmode="Static">
                             </ul>
                         </li>
-                        <li><a runat="server" href="~/Teachers">Profesores</a></li>
+                        <li><a runat="server" href="~/Teachers"><asp:Label runat="server" meta:resourcekey="profesores"></asp:Label></a></li>
 
                         <asp:LoginView runat="server">
                             <RoleGroups>
                                 <asp:RoleGroup Roles="admin">
                                     <ContentTemplate>
-                                        <li><a runat="server" href="~/adminPanel">Panel de administración</a></li>
+                                        <li><a runat="server" href="~/adminPanel"><asp:Label runat="server" meta:resourcekey="panel"></asp:Label></a></li>
                                     </ContentTemplate>
                                 </asp:RoleGroup>
                             </RoleGroups>
@@ -75,15 +75,15 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Registrarse</a></li>
-                                <li><a runat="server" href="~/Account/Login">Iniciar sesión</a></li>
+                                <li><a runat="server" href="~/Account/Register"><asp:Label runat="server" meta:resourcekey="reg"></asp:Label></a></li>
+                                <li><a runat="server" href="~/Account/Login"><asp:Label runat="server" meta:resourcekey="inic"></asp:Label></a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Manage" title="Manage your account"><%: Context.User.Identity.GetName() + " " +  Context.User.Identity.GetSurname1() %></a></li>
                                 <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Cerrar sesión" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" meta:resourcekey="cerr" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>
                         </LoggedInTemplate>

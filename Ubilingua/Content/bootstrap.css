@@ -8292,7 +8292,6 @@ button.close {
         display: block;
         margin: 2% auto;
         text-align: center;
-        z-index: 100000;
     }
 
     .btn-group-vertical btn {

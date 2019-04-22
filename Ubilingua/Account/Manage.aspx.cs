@@ -69,9 +69,6 @@ namespace Ubilingua.Account
                     if(message == "ChangePwdSuccess")
                     {
                         successChangePass.Visible = true;
-                    } else if (message == "ChangeTeachPwdSuccess")
-                    {
-                        successChangeTeachPass.Visible = true;
                     } else if (message == "ChangeUserSuccess")
                     {
                         successChangeUser.Visible = true;

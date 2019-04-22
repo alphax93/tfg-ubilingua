@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="abandCurso.OnClientClick" xml:space="preserve">
+    <value>if (!confirm('¿Está seguro de que desea abandonar el curso?')) return false;</value>
+  </data>
   <data name="abandCurso.Text" xml:space="preserve">
     <value>Abandonar curso</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="añadirVideo.Text" xml:space="preserve">
     <value>Añadir vídeo</value>
+  </data>
+  <data name="borrarRecurso.OnClientClick" xml:space="preserve">
+    <value>if (!confirm('¿Está seguro de que desea borrar?')) return false;</value>
   </data>
   <data name="cambiarContraseña.Text" xml:space="preserve">
     <value>Cambiar contraseña</value>
@@ -195,6 +201,9 @@
   <data name="editarVideo.Text" xml:space="preserve">
     <value>Editar vídeo</value>
   </data>
+  <data name="eliminarCurso.OnClientClick" xml:space="preserve">
+    <value>if (!confirm('¿Está seguro de que desea borrar?')) return false;</value>
+  </data>
   <data name="eliminarCurso.Text" xml:space="preserve">
     <value>Eliminar curso</value>
   </data>
@@ -206,6 +215,9 @@
   </data>
   <data name="hacerPrivado.Text" xml:space="preserve">
     <value>Hacer curso privado</value>
+  </data>
+  <data name="hacerPublico.OnClientClick" xml:space="preserve">
+    <value>if (!confirm('¿Está seguro de que desea hacer público el curso?')) return false;</value>
   </data>
   <data name="hacerPublico.Text" xml:space="preserve">
     <value>Hacer curso público</value>

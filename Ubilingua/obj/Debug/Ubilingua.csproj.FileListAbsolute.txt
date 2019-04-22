@@ -123,3 +123,4 @@ C:\Users\Aitor\source\repos\ubilingua\Ubilingua\bin\MySql.Web.xml
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Google.Protobuf.xml
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Oracle.ManagedDataAccess.dll
 C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\bin\Oracle.ManagedDataAccess.EntityFramework.dll
+C:\Users\Aitor\source\repos\Ubilingua\Ubilingua\obj\Debug\Ubilingua.csprojAssemblyReference.cache

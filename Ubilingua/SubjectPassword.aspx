@@ -7,17 +7,18 @@
 
             <h3>
                 <asp:Label runat="server" ID="SubjectName"></asp:Label></h3>
-            <asp:Label runat="server" CssClass="control-label">Necesita la contraseña para acceder a este curso</asp:Label>
+            <asp:Label runat="server" CssClass="control-label" meta:resourcekey="necesitasCont"></asp:Label>
             <div class="form-group">
-                <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Contraseña</asp:Label>
+                <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label" meta:resourcekey="cont"></asp:Label>
                 <div class="col-md-10">
                     <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="El campo de contraseña es obligatorio." />
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" meta:resourcekey="validCont" />
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <asp:Button runat="server" OnClick="AccessSubject_Click" Text="Acceder a curso" CssClass="btn btn-default" />
+                    <asp:Button runat="server" OnClick="AccessSubject_Click" Text="<%$ Resources:General, aceptar%>"  CssClass="btn btn-default" />
                 </div>
             </div>
 

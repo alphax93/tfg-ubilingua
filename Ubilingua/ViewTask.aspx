@@ -16,38 +16,38 @@
                         <asp:Table runat="server" CssClass="table-bordered" BorderStyle="Solid" BorderWidth="0.5">
 
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Fecha de entrega</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="fecha"></asp:TableHeaderCell>
                                 <asp:TableCell ID="date" CssClass="td"></asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Tiempo restante</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="tiempo"></asp:TableHeaderCell>
                                 <asp:TableCell ID="leftTime" CssClass="td"></asp:TableCell>
                             </asp:TableRow>
 
                         </asp:Table>
                         <br />
-                        <asp:Label runat="server" CssClass="panel-title" Text="Entregas"></asp:Label>
+                        <asp:Label runat="server" CssClass="panel-title" meta:resourcekey="entregas"></asp:Label>
                         <asp:GridView ID="fileList" runat="server" GridLines="Horizontal" ItemType="Ubilingua.Models.joinusermarks" SelectMethod="GetElements" AutoGenerateColumns="false">
                             <Columns>
-                                <asp:TemplateField HeaderText="Nombre">
+                                <asp:TemplateField meta:resourcekey="nombre">
                                     <ItemTemplate>
                                         <%#:Item.User %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Fecha de entrega">
+                                <asp:TemplateField meta:resourcekey="fecha2">
                                     <ItemTemplate>
                                         <%#:Item.Delivered %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Archivo">
+                                <asp:TemplateField meta:resourcekey="archivo">
                                     <ItemTemplate>
                                         <a href="Subject/<%#:subjectID %>/Tasks/<%#:id %>/<%#:Item.FilePath %>" download><%#:Item.FilePath %></a>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Calificación">
+                                <asp:TemplateField meta:resourcekey="calif">
                                     <ItemTemplate>
                                         <asp:TextBox runat="server" id="mark" Text="<%#:Item.Mark %>" ></asp:TextBox>
-                                        <asp:RangeValidator runat="server" ControlToValidate="mark" MinimumValue="0" MaximumValue="10" Type="Double" Text="Debe introducir un número entre 0 y 10"></asp:RangeValidator>
+                                        <asp:RangeValidator runat="server" ControlToValidate="mark" MinimumValue="0" MaximumValue="10" Type="Double" meta:resourcekey="validCalif"></asp:RangeValidator>
                                         <asp:HiddenField runat="server" ID="userid" Value="<%#:Item.UserID %>" />
                                         <asp:HiddenField runat="server" ID="resourceid" Value="<%#:Item.ResourceID %>" />
                                     </ItemTemplate>
@@ -55,7 +55,7 @@
                                 
                             </Columns>
                         </asp:GridView>
-                        <asp:Button runat="server" ID="SaveMarksButton" CssClass="panel-button" Text="Guardar" OnClick="SaveMarks"/>
+                        <asp:Button runat="server" ID="SaveMarksButton" CssClass="panel-button" meta:resourcekey="guardar" OnClick="SaveMarks"/>
                     </ContentTemplate>
                 </asp:RoleGroup>
                 <asp:RoleGroup Roles="Alumno">
@@ -63,35 +63,35 @@
                         <asp:Table runat="server" CssClass="table-bordered" BorderStyle="Solid" BorderWidth="0.5">
 
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Fecha de entrega</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="fecha"></asp:TableHeaderCell>
                                 <asp:TableCell ID="date" CssClass="td"></asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Tiempo restante</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="tiempo"></asp:TableHeaderCell>
                                 <asp:TableCell ID="leftTime" CssClass="td"></asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Estado</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="estado"></asp:TableHeaderCell>
                                 <asp:TableCell CssClass="td" ID="status">Sin entregar</asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Archivo</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="archivo2"></asp:TableHeaderCell>
                                 <asp:TableCell CssClass="td" ID="file"> - </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Subir archivo</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="subir"></asp:TableHeaderCell>
                                 <asp:TableCell CssClass="td" ID="uploadCell">
                                     <asp:FileUpload runat="server" ID="fileUpload" />
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow runat="server">
-                                <asp:TableHeaderCell CssClass="th">Calificación</asp:TableHeaderCell>
+                                <asp:TableHeaderCell CssClass="th" meta:resourcekey="calif2"></asp:TableHeaderCell>
                                 <asp:TableCell ID="mark" CssClass="td">-</asp:TableCell>
                             </asp:TableRow>
                         </asp:Table>
                         <br />
-                        <asp:Button runat="server" Text="Subir Archivo" OnClick="Upload_Click" ID="uploadButton" CssClass="panel-button" />
-                        <asp:Label runat="server" ID="warning">Se sobreescribirá el archivo anterior</asp:Label>
+                        <asp:Button runat="server" meta:resourcekey="subir" OnClick="Upload_Click" ID="uploadButton" CssClass="panel-button" />
+                        <asp:Label runat="server" ID="warning" meta:resourcekey="warning"></asp:Label>
                     </ContentTemplate>
                 </asp:RoleGroup>
             </RoleGroups>

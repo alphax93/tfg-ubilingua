@@ -10,7 +10,7 @@
                 <EmptyDataTemplate>
                     <table>
                         <tr>
-                            <td><asp:Label runat="server" Text="No hay ningún curso disponible"></asp:Label></td>
+                            <td><asp:Label runat="server" meta:resourcekey="sincursos"></asp:Label></td>
                         </tr>
                     </table>
                 </EmptyDataTemplate>
@@ -76,7 +76,7 @@
                                     <a href="CreateSubject.aspx" class="panel-title" >
                                         <asp:Panel CssClass="panel-subject" runat="server" HorizontalAlign="Center" >
                                         <h1>+</h1>
-                                            <p  style="font-variant-caps: all-small-caps">CREAR NUEVO CURSO</p>
+                                            <asp:Label runat="server" style="font-variant-caps: all-small-caps" meta:resourcekey="crear"></asp:Label>
 
                                     </asp:Panel>
                                         </a>

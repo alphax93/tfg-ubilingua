@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="nombre.Text" xml:space="preserve">
-    <value>Name</value>
+  <data name="aceptar" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="campoObligatorio" xml:space="preserve">
+    <value>* Campo obligatorio</value>
+  </data>
+  <data name="cancelar" xml:space="preserve">
+    <value>Cancelar</value>
   </data>
 </root>

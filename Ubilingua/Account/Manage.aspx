@@ -10,14 +10,15 @@
         <ContentTemplate>
             <asp:Panel runat="server" CssClass="panel">
                 <h2><%: User.Identity.GetName() + " " + User.Identity.GetSurname1() + " " + User.Identity.GetSurname2() %></h2>
-                <b>Correo electrónico: </b>
+                <asp:Label runat="server" CssClass="h4" meta:resourcekey="correo"></asp:Label>
                 <br />
                 <p id="email" runat="server">&emsp;</p>
                 <div>
-                    <h3>Mis cursos privados</h3>
+                    <asp:Label runat="server" CssClass="h3" meta:resourcekey="miscursos"></asp:Label>
+                    <br />
                     <asp:ListView runat="server" ID="SubjectList" SelectMethod="GetSubjects" ItemType="Ubilingua.Models.subjects">
                         <EmptyItemTemplate>
-                            <p>No es miembro de ningún curso privado</p>
+                            <asp:Label runat="server" meta:resourcekey="ninguncurso"></asp:Label>
                         </EmptyItemTemplate>
                         <ItemTemplate>
                             &emsp; <a href="../Subject.aspx?subjectID=<%#: Item.SubjectID %>"><%#: Item.SubjectName %></a>
@@ -27,24 +28,23 @@
                 </div>
                 <br />
                 <div class="btn-group">
-                    <asp:Button Text="Editar Datos" runat="server" CssClass="btn" OnClick="ShowProfilePopu" OnClientClick="return true" CausesValidation="false" />
-                    <asp:Button Text="Cambiar Contraseña Acceso" runat="server" CssClass="btn" OnClick="GoToChangePassword" OnClientClick="return true" CausesValidation="false" />
+                    <asp:Button meta:resourcekey="editar" runat="server" CssClass="btn" OnClick="ShowProfilePopu" OnClientClick="return true" CausesValidation="false" />
+                    <asp:Button meta:resourcekey="cambiarcont" runat="server" CssClass="btn" OnClick="GoToChangePassword" OnClientClick="return true" CausesValidation="false" />
                     <asp:LoginView runat="server">
                         <RoleGroups>
                             <asp:RoleGroup Roles="Profesor">
                                 <ContentTemplate>
-                                    <asp:Button Text="Datos de Profesor" runat="server" CssClass="btn" OnClick="GoToTeacherProfile" OnClientClick="return true" CausesValidation="false" />
+                                    <asp:Button meta:resourcekey="datosProf" runat="server" CssClass="btn" OnClick="GoToTeacherProfile" OnClientClick="return true" CausesValidation="false" />
                                 </ContentTemplate>
                             </asp:RoleGroup>
                         </RoleGroups>
                     </asp:LoginView>
-                    <asp:Button Text="Eliminar Cuenta" runat="server" CssClass="btn" OnClick="DeleteAccount" OnClientClick="if (!confirm('¿Está seguro de que desea eliminar su cuenta?')) return false;" CausesValidation="false" />
+                    <asp:Button meta:resourcekey="elim" runat="server" CssClass="btn" OnClick="DeleteAccount" CausesValidation="false" />
                 </div>
                 <br />
-                <asp:Label runat="server" Visible="false" CssClass="text-danger" ID="successChangePass"></asp:Label>
-                <asp:Label runat="server" Visible="false" CssClass="text-danger" ID="successChangeTeachPass"></asp:Label>
-                <asp:Label runat="server" Visible="false" CssClass="text-danger" ID="successChangeUser"></asp:Label>
-                <asp:Label runat="server" Visible="false" CssClass="text-danger" ID="successTeacherProf"></asp:Label>
+                <asp:Label meta:resourcekey="okCont" runat="server" Visible="false" CssClass="text-danger" ID="successChangePass"></asp:Label>
+                <asp:Label meta:resourcekey="okDatos" runat="server" Visible="false" CssClass="text-danger" ID="successChangeUser"></asp:Label>
+                <asp:Label meta:resourcekey="okPerfil" runat="server" Visible="false" CssClass="text-danger" ID="successTeacherProf"></asp:Label>
             </asp:Panel>
 
             <asp:HiddenField ID="EditUserDummy" runat="server" />
@@ -60,29 +60,30 @@
                     </div>
                     <br />
                     <div class="form-group">
-                        <asp:Label runat="server">Nombre</asp:Label>
+                        <asp:Label runat="server" meta:resourcekey="nombre"></asp:Label> *
                         <asp:TextBox runat="server" ID="EditUserName" TextMode="SingleLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditUserName" ID="EditUserValidator" ClientIDMode="Static"
-                            CssClass="text-danger" ErrorMessage="El campo de nombre es obligatorio." />
+                            CssClass="text-danger" meta:resourcekey="validNombre" />
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server">Primer Apellido</asp:Label>
+                        <asp:Label runat="server" meta:resourcekey="pApellido"></asp:Label> *
                         <asp:TextBox runat="server" ID="EditSurname1" TextMode="SingleLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditSurname1" ID="EditSurname1Validator" ClientIDMode="Static"
-                            CssClass="text-danger" ErrorMessage="El primer apellido es obligatorio." />
+                            CssClass="text-danger" meta:resourcekey="validApellido" />
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server">Segundo Apellido</asp:Label>
+                        <asp:Label runat="server" meta:resourcekey="sApellido"></asp:Label>
                         <asp:TextBox runat="server" ID="EditSurname2" TextMode="SingleLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <asp:Label runat="server">Correo Electrónico</asp:Label>
+                        <asp:Label runat="server" meta:resourcekey="correo"></asp:Label> *
                         <asp:TextBox runat="server" ID="EditEmail" TextMode="Email" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                     </div>
+                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                     <div class="modal-footer">
-                        <asp:Button Text="Aceptar" OnClick="EditUser_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditUser()" ID="createEditUserButton" />
+                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditUser_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditUser()" ID="createEditUserButton" />
 
-                        <input id="EditUserBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="EditUserBtnCancel" CssClass="panel-button" />
                     </div>
                 </div>
             </asp:Panel>

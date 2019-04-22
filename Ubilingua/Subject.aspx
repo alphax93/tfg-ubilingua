@@ -26,9 +26,9 @@
                                         <asp:Button runat="server" meta:resourcekey="editarCurso" CssClass="btn" OnClick="ShowSubjectPanel" CausesValidation="false" />
                                         <asp:Button runat="server" ID="MakePrivate" meta:resourcekey="hacerPrivado" OnClick="ShowMakePrivate" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" />
                                         <asp:Button runat="server" ID="ChangePassword" meta:resourcekey="cambiarContraseña" OnClick="ShowChangePassword" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" />
-                                        <asp:Button runat="server" ID="MakePublic" meta:resourcekey="hacerPublico" OnClick="MakePublicClick" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" OnClientClick="if (!confirm('¿Está seguro de que desea hacer público el curso?')) return false;" />
-                                        <asp:Button runat="server" meta:resourcekey="abandCurso" CssClass="btn" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea abandonar el curso?')) return false;" OnClick="LeaveSubject" ID="LeaveButton" Visible="false" />
-                                        <asp:Button runat="server" meta:resourcekey="eliminarCurso" CssClass="btn" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;" OnClick="DeleteSubject" />
+                                        <asp:Button runat="server" ID="MakePublic" meta:resourcekey="hacerPublico" OnClick="MakePublicClick" CssClass="btn" CausesValidation="false" Visible="false" ClientIDMode="Static" />
+                                        <asp:Button runat="server" meta:resourcekey="abandCurso" CssClass="btn" CausesValidation="false" OnClick="LeaveSubject" ID="LeaveButton" Visible="false" />
+                                        <asp:Button runat="server" meta:resourcekey="eliminarCurso" CssClass="btn" CausesValidation="false" OnClick="DeleteSubject" />
                                     </asp:Panel>
 
                                     <div class="col-md-11">
@@ -54,7 +54,7 @@
                                                             <asp:Image ID="imgCollapsible" CssClass="first" ImageUrl="~/Subjects/Images/uparrow.jpg" runat="server" Width="20px" Height="20px" />
                                                         </asp:Panel>
                                                         <span class="panel-title panel-heading" style="display: inline-block"><%#:Item.BlockName %></span>
-                                                        <asp:LinkButton runat="server" OnCommand="DeleteBlock" ID="deleteBlockButton" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
+                                                        <asp:LinkButton runat="server" OnCommand="DeleteBlock" ID="deleteBlockButton" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false" meta:resourcekey="borrarRecurso"><span class="glyphicon glyphicon-remove"></span></asp:LinkButton>
 
                                                         <asp:LinkButton runat="server" OnCommand="ShowEditBlock" ID="editBlockButton" CommandArgument="<%#:Item.BlockID %>" CausesValidation="false"><span class="glyphicon glyphicon-pencil"></span></asp:LinkButton>
 
@@ -73,7 +73,7 @@
                                                                 <ItemTemplate>
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <asp:LinkButton runat="server" OnCommand="DeleteResource" ID="deleteButton" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="if (!confirm('¿Está seguro de que desea borrar?')) return false;"><span class="glyphicon glyphicon-remove <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
+                                                                            <asp:LinkButton runat="server" OnCommand="DeleteResource" ID="deleteButton" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" meta:resourcekey="borrarRecurso"><span class="glyphicon glyphicon-remove <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
                                                                             <asp:LinkButton runat="server" OnCommand="ChangeVisibility" ID="visibleButton" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false"><span class="<%#:(Item.IsVisible == true ? "glyphicon glyphicon-eye-open visible" : "glyphicon glyphicon-eye-close notvisible")%>" id="eye"></span></asp:LinkButton>
 
                                                                             <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="text"? true : false%>'>
@@ -170,16 +170,16 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" meta:resourcekey="nombre"></asp:Label>
-                                                <asp:TextBox runat="server" ID="EditSubjectName" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
+                                                <asp:Label runat="server" meta:resourcekey="nombre"></asp:Label> *
+                                                <asp:TextBox runat="server" ID="EditSubjectName" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox> 
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditSubjectName" ID="EditSubjectValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false" />
                                             </div>
-
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditSubject_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditSubject()" ID="EditSubjectButton" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditSubject_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditSubject()" ID="EditSubjectButton" />
 
-                                                <input id="EditSubjectBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>" ID="EditSubjectBtnCancel" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -197,16 +197,16 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" meta:resourcekey="contraseña"></asp:Label>
+                                                <asp:Label runat="server" meta:resourcekey="contraseña"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditSubjectPassword" TextMode="Password" ClientIDMode="Static"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditSubjectPassword" ID="EditSubjectPasswordValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" meta:resourcekey="validContr" Enabled="false"/>
                                             </div>
-
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditSubjectPassword_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditSubjectPassword()" ID="EditSubjectPasswordButton" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditSubjectPassword_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditSubjectPassword()" ID="EditSubjectPasswordButton" />
 
-                                                <input id="EditSubjectPasswordBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" ID="EditSubjectPasswordBtnCancel" Text="<%$ Resources:General, cancelar%>" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -224,16 +224,16 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" meta:resourcekey="nuevaContraseña"></asp:Label>
+                                                <asp:Label runat="server" meta:resourcekey="nuevaContraseña"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="ChangeSubjectPassword" TextMode="Password" ClientIDMode="Static"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="ChangeSubjectPassword" ID="ChangeSubjectPasswordValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" meta:resourcekey="validContr" Enabled="false"/>
                                             </div>
-
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="ChangeSubjectPassword_Click" CssClass="panel-button" runat="server" OnClientClick="return checkChangeSubjectPassword()" ID="ChangeSubjectPasswordButton" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="ChangeSubjectPassword_Click" CssClass="panel-button" runat="server" OnClientClick="return checkChangeSubjectPassword()" ID="ChangeSubjectPasswordButton" />
 
-                                                <input id="ChangeSubjectPasswordBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" ID="ChangeSubjectPasswordBtnCancel" Text="<%$ Resources:General, cancelar%>" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -251,16 +251,16 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" meta:resourcekey="nombre"></asp:Label>
+                                                <asp:Label runat="server" meta:resourcekey="nombre"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="BlockName" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="BlockName" ID="BlockValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false" />
                                             </div>
-
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="CreateBlock_Click" CssClass="panel-button" runat="server" OnClientClick="return checkBlock()" ID="createBlockButton" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="CreateBlock_Click" CssClass="panel-button" runat="server" OnClientClick="return checkBlock()" ID="createBlockButton" />
 
-                                                <input id="BlockBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" ID="BlockBtnCancel" Text="<%$ Resources:General, cancelar%>" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -278,16 +278,16 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" meta:resourcekey="nombre"></asp:Label>
+                                                <asp:Label runat="server" meta:resourcekey="nombre"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditBlockName" TextMode="SingleLine" ClientIDMode="Static"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditBlockName" ID="EditBlockValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
                                             </div>
-
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditBlock_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditBlock()" ID="createEditBlockButton" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditBlock_Click" CssClass="panel-button" runat="server" OnClientClick="return checkEditBlock()" ID="createEditBlockButton" />
 
-                                                <input id="EditBlockBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" ID="EditBlockBtnCancel" Text="<%$ Resources:General, cancelar%>" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -305,15 +305,16 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
+                                                *
                                                 <asp:TextBox runat="server" ID="textResource" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="textResource" ID="textValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" meta:resourcekey="validTexto" Enabled="false"/>
                                             </div>
-
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="NewTextResource" CssClass="panel-button" runat="server" OnClientClick="return checkText()" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewTextResource" CssClass="panel-button" runat="server" OnClientClick="return checkText()" />
 
-                                                <input id="textBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="textBtnCancel" Csslass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -331,15 +332,16 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
+                                                *
                                                 <asp:TextBox runat="server" ID="editTextResource" TextMode="MultiLine" ClientIDMode="Static" Width="100%" CssClass="form-control"></asp:TextBox>
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="editTextResource" ID="editTextValidator" ClientIDMode="Static"
                                                     CssClass="text-danger" meta:resourcekey="validTexto" Enabled="false"/>
                                             </div>
-
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditTextResource" CssClass="panel-button" runat="server" OnClientClick="return checkTextEdit()" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditTextResource" CssClass="panel-button" runat="server" OnClientClick="return checkTextEdit()" />
 
-                                                <input id="editTextBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="editTextBtnCancel" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -357,23 +359,24 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="videoResourceName" meta:resourcekey="nombre"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="videoResourceName" meta:resourcekey="nombre"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="videoResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="videoResourceName" ClientIDMode="Static" ID="videoResourceNameValidator"
                                                     CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
                                             </div>
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="videoPath" meta:resourcekey="enlace"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="videoPath" meta:resourcekey="enlace"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="videoPath" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="videoPath" ClientIDMode="Static" ID="videoResourcePathValidator"
                                                     CssClass="text-danger" meta:resourcekey="validEnlace" Enabled="false"/>
                                                 <asp:RegularExpressionValidator runat="server" ControlToValidate="videoPath" ClientIDMode="Static" ID="youtubeValidator" ValidationExpression="(https:\/\/)?www\.youtube\.com\/watch\?v=.*|https:\/\/www\.youtube\.com\/embed\/.*"
                                                     CssClass="text-danger" meta:resourcekey="validYoutube" />
                                             </div>
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="NewVideoResource" CssClass="panel-button" runat="server" OnClientClick="return checkVideo()" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewVideoResource" CssClass="panel-button" runat="server" OnClientClick="return checkVideo()" />
 
-                                                <input id="videoBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="videoBtnCancel"  CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -391,23 +394,24 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditVideoResourceName" meta:resourcekey="nombre"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="EditVideoResourceName" meta:resourcekey="nombre"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditVideoResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditVideoResourceName" ClientIDMode="Static" ID="EditVideoResourceNameValidator"
                                                     CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
                                             </div>
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditVideoPath" meta:resourcekey="enlace"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="EditVideoPath" meta:resourcekey="enlace"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditVideoPath" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditVideoPath" ClientIDMode="Static" ID="EditVideoResourcePathValidator"
                                                     CssClass="text-danger" meta:resourcekey="validEnlace" Enabled="false"/>
                                                 <asp:RegularExpressionValidator runat="server" ControlToValidate="EditVideoPath" ClientIDMode="Static" ID="RegularExpressionValidator1" ValidationExpression="https:\/\/www\.youtube\.com\/watch\?v=\w*|https:\/\/www\.youtube\.com\/embed\/\w*"
                                                     CssClass="text-danger" meta:resourcekey="validYoutube" />
                                             </div>
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditVideoResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditVideo()" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditVideoResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditVideo()" />
 
-                                                <input id="EditVideoBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="EditVideoBtnCancel" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -430,26 +434,27 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="taskName" meta:resourcekey="nombre"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="taskName" meta:resourcekey="nombre"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="taskName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="taskName" ClientIDMode="Static" ID="taskNameValidator"
                                                     CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
                                             </div>
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="taskText" meta:resourcekey="descripcion"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="taskText" meta:resourcekey="descripcion"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="taskText" CssClass="form-control" TextMode="MultiLine" ClientIDMode="Static" Width="100%" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="taskText" ClientIDMode="Static" ID="taskTextValidator"
                                                     CssClass="text-danger" meta:resourcekey="validDesc" Enabled="false" />
                                             </div>
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="taskDate" meta:resourcekey="fechaEntrega"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="taskDate" meta:resourcekey="fechaEntrega"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="taskDate" CssClass="form-control" TextMode="DateTimeLocal" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="taskDate" ClientIDMode="Static" ID="taskDateValidator"
                                                     CssClass="text-danger" meta:resourcekey="validFecha" Enabled="false"/>
                                             </div>
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="NewTaskResource" CssClass="panel-button" runat="server" OnClientClick="return checkTask()" />
-                                                <input id="taskBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewTaskResource" CssClass="panel-button" runat="server" OnClientClick="return checkTask()" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="taskBtnCancel" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -467,27 +472,28 @@
                                             </div>
                                             <br />
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditTaskName" meta:resourcekey="nombre"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="EditTaskName" meta:resourcekey="nombre"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditTaskName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditTaskName" ClientIDMode="Static" ID="EditTaskNameValidator"
                                                     CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
                                             </div>
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditTaskText" meta:resourcekey="descripcion"></asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="EditTaskText" meta:resourcekey="descripcion"></asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditTaskText" CssClass="form-control" TextMode="MultiLine" ClientIDMode="Static" Width="100%" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditTaskText" ClientIDMode="Static" ID="EditTaskTextValidator"
                                                     CssClass="text-danger" meta:resourcekey="validDesc" Enabled="false"/>
                                             </div>
                                             <div class="form-group">
-                                                <asp:Label runat="server" AssociatedControlID="EditTaskDate" meta:resourcekey="fechaEntrega">Fecha de entrega</asp:Label>
+                                                <asp:Label runat="server" AssociatedControlID="EditTaskDate" meta:resourcekey="fechaEntrega">Fecha de entrega</asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditTaskDate" CssClass="form-control" TextMode="DateTimeLocal" ClientIDMode="Static" />
                                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="EditTaskDate" ClientIDMode="Static" ID="EditTaskDateValidator"
                                                     CssClass="text-danger" meta:resourcekey="validFecha" Enabled="false"/>
                                             </div>
                                             <asp:HiddenField runat="server" ID="deadlineHidden" ClientIDMode="Static" />
+                                            <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                             <div class="modal-footer">
-                                                <asp:Button Text="Aceptar" OnClick="EditTaskResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditTask()" />
-                                                <input id="EditTaskBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                                <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditTaskResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditTask()" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="EditTaskBtnCancel" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -512,20 +518,21 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="downloadResourceName" meta:resourcekey="nombre"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="downloadResourceName" meta:resourcekey="nombre"></asp:Label>*
                                         <asp:TextBox runat="server" ID="downloadResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="downloadResourceName" ClientIDMode="Static" ID="downloadNameValidator"
                                             CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
                                     </div>
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="downloadResourceFile" meta:resourcekey="archivo"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="downloadResourceFile" meta:resourcekey="archivo"></asp:Label>*
                                         <asp:FileUpload ID="downloadResourceFile" runat="server" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="downloadResourceFile" ClientIDMode="Static" ID="downloadFileValidator"
                                             CssClass="text-danger" meta:resourcekey="validArchivo" Enabled="false"></asp:RequiredFieldValidator>
                                     </div>
+                                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                     <div class="modal-footer">
-                                        <asp:Button Text="Aceptar" OnClick="NewDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkDownload()" />
-                                        <input id="downloadBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkDownload()" />
+                                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="downloadBtnCancel" CssClass="panel-button" />
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -544,7 +551,7 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="editDownloadResourceName" meta:resourcekey="nombre"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="editDownloadResourceName" meta:resourcekey="nombre"></asp:Label>*
                                         <asp:TextBox runat="server" ID="editDownloadResourceName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="editDownloadResourceName" ClientIDMode="Static" ID="editDownloadNameValidator"
                                             CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
@@ -555,9 +562,10 @@
                                         <asp:Label runat="server" AssociatedControlID="editDownloadResourceFile" meta:resourcekey="nuevoArchivo"></asp:Label>
                                         <asp:FileUpload ID="editDownloadResourceFile" runat="server" ClientIDMode="Static" />
                                     </div>
+                                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                     <div class="modal-footer">
-                                        <asp:Button Text="Aceptar" OnClick="editDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkeditDownload()" />
-                                        <input id="editDownloadBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="editDownloadableResource" CssClass="panel-button" runat="server" OnClientClick="return checkeditDownload()" />
+                                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="editDownloadBtnCancel" CssClass="panel-button" />
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -574,18 +582,18 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="imageResourceFile" meta:resourcekey="archivo"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="imageResourceFile" meta:resourcekey="archivo"></asp:Label> (.jpg, .png, .gif) *
                                         <asp:FileUpload ID="imageResourceFile" runat="server" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="imageResourceFile" ClientIDMode="Static" ID="imageValidator"
                                             CssClass="text-danger" meta:resourcekey="validArchivo" Enabled="false" />
                                         <asp:RegularExpressionValidator runat="server" ControlToValidate="imageResourceFile" ClientIDMode="Static" ID="imageExtensionValidator"
                                             CssClass="text-danger" meta:resourcekey="validImg" ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$"/>
                                     </div>
-
+                                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                     <div class="modal-footer">
-                                        <asp:Button Text="Aceptar" OnClick="NewImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkImage()" />
+                                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkImage()" />
 
-                                        <input id="imageBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="imageBtnCancel" CssClass="panel-button" />
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -603,18 +611,18 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="EditImageResourceFile">Archivo</asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="EditImageResourceFile">Archivo</asp:Label>(.jpg, .png, .gif) *
                                         <asp:FileUpload ID="EditImageResourceFile" runat="server" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditImageResourceFile" ClientIDMode="Static" ID="EditImageValidator"
                                             CssClass="text-danger" ErrorMessage="El campo de archivo es obligatorio." Enabled="false"/>
                                         <asp:RegularExpressionValidator runat="server" ControlToValidate="EditImageResourceFile" ClientIDMode="Static" ID="EditImageExtensionValidator"
                                             CssClass="text-danger" ErrorMessage="Formato de imagen incorrecto." ValidationExpression="^.+\.(jpg|JPG|png|PNG|gif|GIF)$" />
                                     </div>
-
+                                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                     <div class="modal-footer">
-                                        <asp:Button Text="Aceptar" OnClick="EditImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditImage()" />
+                                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditImageResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditImage()" />
 
-                                        <input id="EditImageBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="EditImageBtnCancel" CssClass="panel-button" />
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -631,13 +639,13 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="riddleName" meta:resourcekey="nombre"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="riddleName" meta:resourcekey="nombre"></asp:Label>*
                                         <asp:TextBox runat="server" ID="riddleName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleName" ClientIDMode="Static" ID="riddleNameValidator"
                                             CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
                                     </div>
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="riddleAudioFile" meta:resourcekey="audio"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="riddleAudioFile" meta:resourcekey="audio"></asp:Label>(.mp3) *
                                         <asp:FileUpload ID="riddleAudioFile" runat="server" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleAudioFile" ClientIDMode="Static" ID="AudioFileValidator"
                                             CssClass="text-danger" meta:resourcekey="validAudio" Enabled="false"/>
@@ -645,7 +653,7 @@
                                             CssClass="text-danger" meta:resourcekey="validAudioForm" ValidationExpression="^.+\.(mp3|MP3)$" />
                                     </div>
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="riddleImageFile" meta:resourcekey="imagen"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="riddleImageFile" meta:resourcekey="imagen"></asp:Label> (.jpg, .png, .gif) 
                                         <asp:FileUpload ID="riddleImageFile" runat="server" ClientIDMode="Static" />
 
                                         <asp:RegularExpressionValidator runat="server" ControlToValidate="riddleImageFile" ClientIDMode="Static" ID="riddleImageFileExtValidator"
@@ -665,16 +673,17 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="riddleAnswer" meta:resourcekey="solucion"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="riddleAnswer" meta:resourcekey="solucion"></asp:Label>*
                                         <br />
                                         <asp:TextBox runat="server" ID="riddleAnswer" TextMode="SingleLine" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="riddleAnswer" ClientIDMode="Static" ID="riddleAnswerValidator"
                                             CssClass="text-danger" meta:resourcekey="validSolucion" Enabled="false"/>
                                     </div>
+                                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                     <div class="modal-footer">
-                                        <asp:Button Text="Aceptar" OnClick="NewRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkRiddle()" />
+                                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkRiddle()" />
 
-                                        <input id="riddleBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>" ID="riddleBtnCancel" CssClass="panel-button" />
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -692,7 +701,7 @@
                                     </div>
                                     <br />
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="EditRiddleName" meta:resourcekey="nombre"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleName" meta:resourcekey="nombre"></asp:Label>*
                                         <asp:TextBox runat="server" ID="EditRiddleName" CssClass="form-control" TextMode="SingleLine" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleName" ClientIDMode="Static" ID="EditRiddleNameValidator"
                                             CssClass="text-danger" meta:resourcekey="validNombre" Enabled="false"/>
@@ -700,7 +709,7 @@
                                     <div class="form-group">
                                         <asp:Label runat="server" meta:resourcekey="audioServidor"> </asp:Label>
                                         <asp:Label ID="oldRiddleAudio" runat="server"></asp:Label><br />
-                                        <asp:Label runat="server" AssociatedControlID="EditRiddleAudioFile" meta:resourcekey="audio"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleAudioFile" meta:resourcekey="audio"></asp:Label>(.mp3) *
                                         <asp:FileUpload ID="EditRiddleAudioFile" runat="server" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAudioFile" ClientIDMode="Static" ID="EditRiddleAudioValidator"
                                             CssClass="text-danger" meta:resourcekey="validAudio" Enabled="false"/>
@@ -710,7 +719,7 @@
                                     <div class="form-group">
                                         <asp:Label runat="server" meta:resourcekey="archivoServidor"> </asp:Label>
                                         <asp:Label ID="oldRiddleImage" runat="server"></asp:Label><br />
-                                        <asp:Label runat="server" AssociatedControlID="EditRiddleImageFile" meta:resourcekey="imagen"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleImageFile" meta:resourcekey="imagen"></asp:Label> (.jpg, .png, .gif) 
                                         <asp:FileUpload ID="EditRiddleImageFile" runat="server" ClientIDMode="Static" />
 
                                         <asp:RegularExpressionValidator runat="server" ControlToValidate="EditRiddleImageFile" ClientIDMode="Static" ID="EditRiddleImageFileExtValidator"
@@ -730,16 +739,17 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="EditRiddleAnswer" meta:resourcekey="solucion"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="EditRiddleAnswer" meta:resourcekey="solucion"></asp:Label>*
                                         <br />
                                         <asp:TextBox runat="server" ID="EditRiddleAnswer" TextMode="SingleLine" ClientIDMode="Static" CssClass="form-control"></asp:TextBox>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="EditRiddleAnswer" ClientIDMode="Static" ID="EditRiddleAnswerValidator"
                                             CssClass="text-danger" meta:resourcekey="validSolucion" Enabled="false" />
                                     </div>
+                                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                     <div class="modal-footer">
-                                        <asp:Button Text="Aceptar" OnClick="EditRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditRiddle()" />
+                                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="EditRiddleResource" CssClass="panel-button" runat="server" OnClientClick="return checkEditRiddle()" />
 
-                                        <input id="EditRiddleBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="EditRiddleBtnCancel" CssClass="panel-button" />
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -757,22 +767,22 @@
                                     </div> 
                                     <br />
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="testName" meta:resourcekey="nombre"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="testName" meta:resourcekey="nombre"></asp:Label> *
                                         <asp:TextBox runat="server" ID="testName" ClientIDMode="Static" TextMode="SingleLine"></asp:TextBox>
                                     </div>
                                     <div class="form-group">
-                                        <asp:Label runat="server" AssociatedControlID="testResourceFile" meta:resourcekey="archivo"></asp:Label>
+                                        <asp:Label runat="server" AssociatedControlID="testResourceFile" meta:resourcekey="archivo"></asp:Label> (.zip) *
                                         <asp:FileUpload ID="testResourceFile" runat="server" ClientIDMode="Static" />
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="testResourceFile" ClientIDMode="Static" ID="testValidator"
                                             CssClass="text-danger" meta:resourcekey="validArchivo" Enabled="false" />
                                         <asp:RegularExpressionValidator runat="server" ControlToValidate="testResourceFile" ClientIDMode="Static" ID="testExtensionValidator"
                                             CssClass="text-danger" meta:resourcekey="validArchivo" ValidationExpression="^.+\.(zip)$" />
                                     </div>
-
+                                    <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
                                     <div class="modal-footer">
-                                        <asp:Button Text="Aceptar" OnClick="NewTestResource" CssClass="panel-button" runat="server" OnClientClick="return checkTest()" />
+                                        <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewTestResource" CssClass="panel-button" runat="server" OnClientClick="return checkTest()" />
 
-                                        <input id="testBtnCancel" type="button" value="Cancelar" class="panel-button" />
+                                        <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="testBtnCancel" CssClass="panel-button" />
                                     </div>
                                 </div>
                             </asp:Panel>

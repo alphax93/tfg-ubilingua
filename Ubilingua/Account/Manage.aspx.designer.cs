@@ -49,15 +49,6 @@ namespace Ubilingua.Account {
         protected global::System.Web.UI.WebControls.Label successChangePass;
         
         /// <summary>
-        /// Control successChangeTeachPass.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label successChangeTeachPass;
-        
-        /// <summary>
         /// Control successChangeUser.
         /// </summary>
         /// <remarks>
@@ -164,5 +155,14 @@ namespace Ubilingua.Account {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button createEditUserButton;
+        
+        /// <summary>
+        /// Control EditUserBtnCancel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button EditUserBtnCancel;
     }
 }

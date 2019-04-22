@@ -55,5 +55,24 @@ namespace Ubilingua.Logic
             }
             return true;
         }
+
+        public bool AddJoinUserMarkTest(int ResourceID, string UserID,string user, int subjectID, float mark)
+        {
+            var myJoinUserMarks = new joinusermarks();
+            myJoinUserMarks.ResourceID = ResourceID;
+            myJoinUserMarks.UserID = UserID;
+            myJoinUserMarks.FilePath = "test";
+            myJoinUserMarks.Delivered = DateTime.Now;
+            myJoinUserMarks.User = user;
+            myJoinUserMarks.SubjectID = subjectID;
+            myJoinUserMarks.Mark = mark;
+            using (Model1 _db = new Model1())
+            {
+                _db.joinusermarks.Add(myJoinUserMarks);
+                _db.SaveChanges();
+            }
+
+            return true;
+        }
     }
 }
