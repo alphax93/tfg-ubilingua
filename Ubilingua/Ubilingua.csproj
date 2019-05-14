@@ -280,12 +280,6 @@
     <Content Include="SubjectPassword.aspx" />
     <Content Include="Subjects\Images\arrows.jpg" />
     <Content Include="Subjects\Images\downarrow.png" />
-    <Content Include="Subjects\Images\france.jpg" />
-    <Content Include="Subjects\Images\france.png" />
-    <Content Include="Subjects\Images\germany.jpg" />
-    <Content Include="Subjects\Images\teacher0.jpg" />
-    <Content Include="Subjects\Images\uk.jpg" />
-    <Content Include="Subjects\Images\uk.png" />
     <Content Include="Subjects\Images\uparrow.png" />
     <Content Include="ViewTask.aspx" />
     <Content Include="Teachers.aspx" />
@@ -555,22 +549,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\UserTasks\" />
-    <Folder Include="Subjects\1\Audios\" />
-    <Folder Include="Subjects\1\Downloadables\" />
-    <Folder Include="Subjects\1\Images\" />
-    <Folder Include="Subjects\1\Tasks\" />
-    <Folder Include="Subjects\1\Tests\" />
-    <Folder Include="Subjects\2\Audios\" />
-    <Folder Include="Subjects\2\Downloadables\" />
-    <Folder Include="Subjects\2\Images\" />
-    <Folder Include="Subjects\2\Tasks\" />
-    <Folder Include="Subjects\2\Tests\" />
-    <Folder Include="Subjects\3\Audios\" />
-    <Folder Include="Subjects\3\Downloadables\" />
-    <Folder Include="Subjects\3\Images\" />
-    <Folder Include="Subjects\3\Tasks\" />
-    <Folder Include="Subjects\3\Tests\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

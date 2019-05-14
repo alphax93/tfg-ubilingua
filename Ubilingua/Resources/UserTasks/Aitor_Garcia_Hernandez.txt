@@ -1,5 +1,0 @@
-Titulación: Grado en Ingeniería Informática
-Título del trabajo: Plataforma de autoaprendizaje para idiomas basada en descargas de
-material
-Tutores: Francisco Javier Carreras Riudavets y Ana Ruth Vidal Luengo
-Fecha aproximada de aprobación: Marzo de 2018

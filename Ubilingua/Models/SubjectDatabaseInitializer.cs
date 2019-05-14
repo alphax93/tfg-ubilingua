@@ -7,10 +7,10 @@ namespace Ubilingua.Models
     {
         protected override void Seed(Model1 context)
         {
-            GetSubjects().ForEach(s => context.subjects.Add(s));
-            GetBlocks().ForEach(b => context.blocks.Add(b));
-            GetResources().ForEach(r => context.resources.Add(r));
-            GetTeachers().ForEach(t => context.teachers.Add(t));
+            //GetSubjects().ForEach(s => context.subjects.Add(s));
+            //GetBlocks().ForEach(b => context.blocks.Add(b));
+            //GetResources().ForEach(r => context.resources.Add(r));
+            //GetTeachers().ForEach(t => context.teachers.Add(t));
         }
 
         private static List<subjects> GetSubjects()
