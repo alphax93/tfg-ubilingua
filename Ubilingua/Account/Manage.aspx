@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Administrar cuenta" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="Ubilingua.Account.Manage" %>
+﻿<%@ Page Title="Administrar cuenta" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Manage.aspx.cs" Inherits="Ubilingua.Account.Manage" Culture="auto:es-ES" UICulture="auto" %>
 
 <%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
@@ -32,7 +32,7 @@
                     <asp:Button meta:resourcekey="cambiarcont" runat="server" CssClass="btn" OnClick="GoToChangePassword" OnClientClick="return true" CausesValidation="false" />
                     <asp:LoginView runat="server">
                         <RoleGroups>
-                            <asp:RoleGroup Roles="Profesor">
+                            <asp:RoleGroup Roles="Profesor,admin">
                                 <ContentTemplate>
                                     <asp:Button meta:resourcekey="datosProf" runat="server" CssClass="btn" OnClick="GoToTeacherProfile" OnClientClick="return true" CausesValidation="false" />
                                 </ContentTemplate>
@@ -56,7 +56,7 @@
             <asp:Panel ID="EditUserPanel" Style="display: none" runat="server" CssClass="panel-popup">
                 <div>
                     <div id="EditUserPopupHeader" class="modal-header">
-                        <h4>Editar Tema</h4>
+                        <h4>Editar Datos</h4>
                     </div>
                     <br />
                     <div class="form-group">

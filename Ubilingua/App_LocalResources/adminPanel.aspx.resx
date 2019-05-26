@@ -141,6 +141,12 @@
   <data name="elim.Text" xml:space="preserve">
     <value>Eliminar usuario</value>
   </data>
+  <data name="email.HeaderText" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="nombre.HeaderText" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
   <data name="prof.Text" xml:space="preserve">
     <value>Profesores</value>
   </data>

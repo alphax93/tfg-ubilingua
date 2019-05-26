@@ -11,10 +11,10 @@
 
             <asp:LoginView runat="server">
                 <AnonymousTemplate>
-                    <%Response.Redirect("./Account/Login"); %>
+                    <%Response.Redirect("./Account/Login.aspx"); %>
                 </AnonymousTemplate>
                 <RoleGroups>
-                    <asp:RoleGroup Roles="Profesor">
+                    <asp:RoleGroup Roles="Profesor,admin">
                         <ContentTemplate>
                             <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UpdatePanel" ChildrenAsTriggers="false">
                                 <ContentTemplate>
@@ -126,7 +126,7 @@
                                                                                 <asp:LinkButton runat="server" OnCommand="ShowEditTest" CommandArgument="<%#:Item.ResourceID %>" CausesValidation="false" OnClientClick="return true"><span class="glyphicon glyphicon-pencil <%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"></span></asp:LinkButton>
                                                                         </div>
                                                                         <div class="col-md-4">
-                                                                            <span class="glyphicon glyphicon-open"></span>
+                                                                            <span class="glyphicon glyphicon-list-alt"></span>
                                                                             <a href="ViewTest.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
 
                                                                             </asp:PlaceHolder>
@@ -314,7 +314,7 @@
                                             <div class="modal-footer">
                                                 <asp:Button Text="<%$ Resources:General, aceptar%>" OnClick="NewTextResource" CssClass="panel-button" runat="server" OnClientClick="return checkText()" />
 
-                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="textBtnCancel" Csslass="panel-button" />
+                                                <asp:Button runat="server" Text="<%$ Resources:General, cancelar%>"  ID="textBtnCancel" CssClass="panel-button" />
                                             </div>
                                         </div>
                                     </asp:Panel>
@@ -486,8 +486,7 @@
                                             <div class="form-group">
                                                 <asp:Label runat="server" AssociatedControlID="EditTaskDate" meta:resourcekey="fechaEntrega">Fecha de entrega</asp:Label>*
                                                 <asp:TextBox runat="server" ID="EditTaskDate" CssClass="form-control" TextMode="DateTimeLocal" ClientIDMode="Static" />
-                                                <asp:RequiredFieldValidator runat="server" ControlToValidate="EditTaskDate" ClientIDMode="Static" ID="EditTaskDateValidator"
-                                                    CssClass="text-danger" meta:resourcekey="validFecha" Enabled="false"/>
+                                               
                                             </div>
                                             <asp:HiddenField runat="server" ID="deadlineHidden" ClientIDMode="Static" />
                                             <asp:Label runat="server" Text="<%$ Resources:General, campoObligatorio %>" ></asp:Label>
@@ -869,7 +868,7 @@
                                                                 <asp:PlaceHolder runat="server" Visible='<%# Item.ResourceType=="task"? true : false %>'>
 
                                                                     <div class="col-md-4">
-                                                                        <span class="glyphicon glyphicon-open"></span>
+                                                                        <span class="glyphicon glyphicon-list-alt"></span>
                                                                         <a href="ViewTask.aspx?ResourceID=<%#Item.ResourceID %>" class="<%#:(Item.IsVisible == true ? "visible" : "notvisible")%>"><%#Item.ResourceName %></a>
                                                                 </asp:PlaceHolder>
                                                             </div>

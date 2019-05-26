@@ -280,6 +280,9 @@
     <Content Include="SubjectPassword.aspx" />
     <Content Include="Subjects\Images\arrows.jpg" />
     <Content Include="Subjects\Images\downarrow.png" />
+    <Content Include="Subjects\Images\france.png" />
+    <Content Include="Subjects\Images\germany.png" />
+    <Content Include="Subjects\Images\uk.png" />
     <Content Include="Subjects\Images\uparrow.png" />
     <Content Include="ViewTask.aspx" />
     <Content Include="Teachers.aspx" />
@@ -409,6 +412,21 @@
     </Compile>
     <Compile Include="adminPanel.aspx.designer.cs">
       <DependentUpon>adminPanel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\General.ar.designer.cs">
+      <DependentUpon>General.ar.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\General.fr.designer.cs">
+      <DependentUpon>General.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\General.en.designer.cs">
+      <DependentUpon>General.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="App_GlobalResources\General.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -596,6 +614,62 @@
     <Content Include="Account\App_LocalResources\ManagePassword.aspx.resx" />
     <Content Include="Account\App_LocalResources\ManageTeacherProfile.aspx.resx" />
     <Content Include="Account\App_LocalResources\Register.aspx.resx" />
+    <Content Include="App_GlobalResources\General.en.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>General.en.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\General.fr.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>General.fr.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\General.ar.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>General.ar.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_LocalResources\adminPanel.aspx.en.resx" />
+    <Content Include="adminPanel.aspx.resx" />
+    <Content Include="App_LocalResources\adminPanel.aspx.ar.resx" />
+    <Content Include="App_LocalResources\adminPanel.aspx.fr.resx" />
+    <Content Include="App_LocalResources\CreateSubject.aspx.ar.resx" />
+    <Content Include="App_LocalResources\CreateSubject.aspx.en.resx" />
+    <Content Include="App_LocalResources\CreateSubject.aspx.fr.resx" />
+    <Content Include="App_LocalResources\Default.aspx.en.resx" />
+    <Content Include="App_LocalResources\Default.aspx.ar.resx" />
+    <Content Include="App_LocalResources\Default.aspx.fr.resx" />
+    <Content Include="App_LocalResources\Riddle.aspx.fr.resx" />
+    <Content Include="App_LocalResources\Riddle.aspx.ar.resx" />
+    <Content Include="App_LocalResources\Riddle.aspx.en.resx" />
+    <Content Include="App_LocalResources\Site.Master.ar.resx" />
+    <Content Include="App_LocalResources\Site.Master.fr.resx" />
+    <Content Include="App_LocalResources\Site.Master.en.resx" />
+    <Content Include="App_LocalResources\SubjectMarks.aspx.fr.resx" />
+    <Content Include="App_LocalResources\SubjectMarks.aspx.ar.resx" />
+    <Content Include="App_LocalResources\SubjectMarks.aspx.en.resx" />
+    <Content Include="App_LocalResources\SubjectPassword.aspx.fr.resx" />
+    <Content Include="App_LocalResources\SubjectPassword.aspx.ar.resx" />
+    <Content Include="App_LocalResources\SubjectPassword.aspx.en.resx" />
+    <Content Include="App_LocalResources\ViewTask.aspx.fr.resx" />
+    <Content Include="App_LocalResources\ViewTask.aspx.ar.resx" />
+    <Content Include="App_LocalResources\ViewTask.aspx.en.resx" />
+    <Content Include="App_LocalResources\Subject.aspx.en.resx" />
+    <Content Include="App_LocalResources\Subject.aspx.ar.resx" />
+    <Content Include="App_LocalResources\Subject.aspx.fr.resx" />
+    <Content Include="Account\App_LocalResources\Login.aspx.en.resx" />
+    <Content Include="Login.aspx.resx" />
+    <Content Include="Account\App_LocalResources\Login.aspx.ar.resx" />
+    <Content Include="Account\App_LocalResources\Login.aspx.fr.resx" />
+    <Content Include="Account\App_LocalResources\Manage.aspx.fr.resx" />
+    <Content Include="Account\App_LocalResources\Manage.aspx.ar.resx" />
+    <Content Include="Account\App_LocalResources\Manage.aspx.en.resx" />
+    <Content Include="Account\App_LocalResources\ManagePassword.aspx.fr.resx" />
+    <Content Include="Account\App_LocalResources\ManagePassword.aspx.ar.resx" />
+    <Content Include="Account\App_LocalResources\ManagePassword.aspx.en.resx" />
+    <Content Include="Account\App_LocalResources\ManageTeacherProfile.aspx.fr.resx" />
+    <Content Include="Account\App_LocalResources\ManageTeacherProfile.aspx.ar.resx" />
+    <Content Include="Account\App_LocalResources\ManageTeacherProfile.aspx.en.resx" />
+    <Content Include="Account\App_LocalResources\Register.aspx.fr.resx" />
+    <Content Include="Account\App_LocalResources\Register.aspx.ar.resx" />
+    <Content Include="Account\App_LocalResources\Register.aspx.en.resx" />
     <EmbeddedResource Include="Migrations\201811211758056_InitialCreate.resx">
       <DependentUpon>201811211758056_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>

@@ -33,7 +33,7 @@ namespace Ubilingua.Account
                 var result = manager.ResetPassword(user.Id, code, Password.Text);
                 if (result.Succeeded)
                 {
-                    Response.Redirect("~/Account/ResetPasswordConfirmation");
+                    Response.Redirect("~/Account/ResetPasswordConfirmation.aspx");
                     return;
                 }
                 ErrorMessage.Text = result.Errors.FirstOrDefault();

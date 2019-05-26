@@ -39,7 +39,7 @@ namespace Ubilingua.Account
                 if (user != null)
                 {
                     signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
-                    Response.Redirect("/Account/Manage?m=AddPhoneNumberSuccess");
+                    Response.Redirect("/Account/Manage.aspx?m=AddPhoneNumberSuccess");
                 }
             }
 

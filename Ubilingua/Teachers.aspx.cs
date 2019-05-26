@@ -70,10 +70,13 @@ namespace Ubilingua
             //    View view = new View { ID = "Tab" + (teacher.TeacherID - 1).ToString(), };
 
             teachers teacher = (from Teachers in _db.teachers where Teachers.TeacherID == id select Teachers).FirstOrDefault();
-            
-            content.Text = 
-                    "<h2>" + teacher.Position + "</h2>" +
-                    "<br><div style='float: left;'><img src='Subjects/Images/"+  teacher.Image + "' style=' margin-right: 10px'><img></div>" +
+
+            content.Text =
+                    "<h2>" + teacher.Position + "</h2>";
+            if (teacher.Image != null) {
+                content.Text += "<br><div style='float: left;'><img src='Subjects/Images/" + teacher.Image + "' style=' margin-right: 10px'><img></div>";
+            }
+            content.Text +=
                     "<div><h3>Función en el grupo</h3>" +
                     "<br><p style='text-align:justify; white - space: pre'>" + teacher.SpanishRole + "</p>" +
                     "<p style='text-align:justify; white - space: pre'><i>" + teacher.OtherRole + "</i></p></div>" +

@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateSubject.aspx.cs" Inherits="Ubilingua.CreateSubject" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateSubject.aspx.cs" Inherits="Ubilingua.CreateSubject" Culture="auto:es-ES" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <asp:Panel runat="server" CssClass="panel">
         <div class="form-horizontal">
-            <h2>Crear nuevo curso</h2>
+            <asp:Label runat="server" CssClass="h2" meta:resourcekey="nuevoCurso"></asp:Label>
             <div class="form-group">
                 <asp:Label runat="server" AssociatedControlID="SubjectName" CssClass="col-md-2 control-label" meta:resourcekey="nombre"></asp:Label>
                 <div class="col-md-10">

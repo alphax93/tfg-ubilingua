@@ -129,6 +129,9 @@
   <data name="nombre.Text" xml:space="preserve">
     <value>Nombre del curso *</value>
   </data>
+  <data name="nuevoCurso.Text" xml:space="preserve">
+    <value>Crear nuevo curso</value>
+  </data>
   <data name="valid.ErrorMessage" xml:space="preserve">
     <value>El campo de nombre es obligatorio</value>
   </data>

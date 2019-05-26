@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Ubilingua._Default" %>
+﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Ubilingua._Default" Culture="auto:es-ES" UICulture="auto" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -70,7 +70,7 @@
     <section>
         <asp:LoginView runat="server">
             <RoleGroups>
-                <asp:RoleGroup Roles="Profesor">
+                <asp:RoleGroup Roles="Profesor,admin">
                     <ContentTemplate>
                         
                                     <a href="CreateSubject.aspx" class="panel-title" >

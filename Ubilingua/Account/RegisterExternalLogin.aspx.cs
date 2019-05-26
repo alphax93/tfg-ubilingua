@@ -24,7 +24,7 @@ namespace Ubilingua.Account
 
         private void RedirectOnFail()
         {
-            Response.Redirect((User.Identity.IsAuthenticated) ? "~/Account/Manage" : "~/Account/Login");
+            Response.Redirect((User.Identity.IsAuthenticated) ? "~/Account/Manage.aspx" : "~/Account/Login.aspx");
         }
 
         protected void Page_Load()

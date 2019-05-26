@@ -44,10 +44,10 @@ namespace Ubilingua.Account
                             IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                             break;
                         case SignInStatus.LockedOut:
-                            Response.Redirect("/Account/Lockout");
+                            Response.Redirect("/Account/Lockout.aspx");
                             break;
                         case SignInStatus.RequiresVerification:
-                            Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}",
+                            Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn.aspx?ReturnUrl={0}&RememberMe={1}",
                                                             Request.QueryString["ReturnUrl"],
                                                             RememberMe.Checked),
                                               true);

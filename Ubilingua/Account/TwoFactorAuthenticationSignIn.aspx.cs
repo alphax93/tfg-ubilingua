@@ -27,7 +27,7 @@ namespace Ubilingua.Account
             var userId = signinManager.GetVerifiedUserId<ApplicationUser, string>();
             if (userId == null)
             {
-                Response.Redirect("/Account/Error", true);
+                Response.Redirect("/Account/Error.aspx", true);
             }
             var userFactors = manager.GetValidTwoFactorProviders(userId);
             Providers.DataSource = userFactors.Select(x => x).ToList();
@@ -46,7 +46,7 @@ namespace Ubilingua.Account
                     IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                     break;
                 case SignInStatus.LockedOut:
-                    Response.Redirect("/Account/Lockout");
+                    Response.Redirect("/Account/Lockout.aspx");
                     break;
                 case SignInStatus.Failure:
                 default:
@@ -60,7 +60,7 @@ namespace Ubilingua.Account
         {
             if (!signinManager.SendTwoFactorCode(Providers.SelectedValue))
             {
-                Response.Redirect("/Account/Error");
+                Response.Redirect("/Account/Error.aspx");
             }
 
             var user = manager.FindById(signinManager.GetVerifiedUserId<ApplicationUser, string>());

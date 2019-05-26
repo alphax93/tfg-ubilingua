@@ -28,7 +28,7 @@ namespace Ubilingua.Account
                 manager.SmsService.Send(message);
             }
 
-            Response.Redirect("/Account/VerifyPhoneNumber?PhoneNumber=" + HttpUtility.UrlEncode(PhoneNumber.Text));
+            Response.Redirect("/Account/VerifyPhoneNumber.aspx?PhoneNumber=" + HttpUtility.UrlEncode(PhoneNumber.Text));
         }
     }
 }

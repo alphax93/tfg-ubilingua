@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewTask.aspx.cs" Inherits="Ubilingua.ViewTask" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewTask.aspx.cs" Inherits="Ubilingua.ViewTask" Culture="auto:es-ES" UICulture="auto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
@@ -6,11 +6,13 @@
         <asp:Label runat="server" ID="name" CssClass="panel-title"></asp:Label>
         <br />
         <br />
-        <p style="white-space: pre" runat="server" id="description"></p>
+        <div style="width:100%; display:block; overflow-y:scroll">
+        <p style="white-space: pre; word-wrap:hyphenate" runat="server" id="description"></p>
+            </div>
         <br />
         <asp:LoginView runat="server">
             <RoleGroups>
-                <asp:RoleGroup Roles="Profesor">
+                <asp:RoleGroup Roles="Profesor,admin">
                     <ContentTemplate>
 
                         <asp:Table runat="server" CssClass="table-bordered" BorderStyle="Solid" BorderWidth="0.5">
@@ -27,7 +29,7 @@
                         </asp:Table>
                         <br />
                         <asp:Label runat="server" CssClass="panel-title" meta:resourcekey="entregas"></asp:Label>
-                        <asp:GridView ID="fileList" runat="server" GridLines="Horizontal" ItemType="Ubilingua.Models.joinusermarks" SelectMethod="GetElements" AutoGenerateColumns="false">
+                        <asp:GridView ID="fileList" runat="server" GridLines="Horizontal" ItemType="Ubilingua.Models.joinusermarks" SelectMethod="GetElements" AutoGenerateColumns="false" CssClass="table table-responsive">
                             <Columns>
                                 <asp:TemplateField meta:resourcekey="nombre">
                                     <ItemTemplate>

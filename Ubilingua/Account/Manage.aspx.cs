@@ -63,7 +63,7 @@ namespace Ubilingua.Account
                 if (message != null)
                 {
                     // Seccionar la cadena de consulta desde la acción
-                    Form.Action = ResolveUrl("~/Account/Manage");
+                    Form.Action = ResolveUrl("~/Account/Manage.aspx");
 
                     
                     if(message == "ChangePwdSuccess")
@@ -103,7 +103,7 @@ namespace Ubilingua.Account
             if (user != null)
             {
                 signInManager.SignIn(user, isPersistent: false, rememberBrowser: false);
-                Response.Redirect("/Account/Manage?m=RemovePhoneNumberSuccess");
+                Response.Redirect("/Account/Manage.aspx?m=RemovePhoneNumberSuccess");
             }
         }
 
@@ -113,7 +113,7 @@ namespace Ubilingua.Account
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             manager.SetTwoFactorEnabled(User.Identity.GetUserId(), false);
 
-            Response.Redirect("/Account/Manage");
+            Response.Redirect("/Account/Manage.aspx");
         }
 
         //EnableTwoFactorAuthentication 
@@ -122,12 +122,12 @@ namespace Ubilingua.Account
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             manager.SetTwoFactorEnabled(User.Identity.GetUserId(), true);
 
-            Response.Redirect("/Account/Manage");
+            Response.Redirect("/Account/Manage.aspx");
         }
 
         public void GoToChangePassword(object sender, EventArgs e)
         {
-            Response.Redirect("/Account/ManagePassword");
+            Response.Redirect("/Account/ManagePassword.aspx");
         }
 
  
@@ -135,7 +135,7 @@ namespace Ubilingua.Account
 
         public void GoToTeacherProfile(object sender, EventArgs e)
         {
-            Response.Redirect("/Account/ManageTeacherProfile");
+            Response.Redirect("/Account/ManageTeacherProfile.aspx");
         }
 
         public void ShowProfilePopu(object sender, EventArgs e)
@@ -158,7 +158,7 @@ namespace Ubilingua.Account
             user.Surname2 = EditSurname2.Text;
             manager.Update(user);
 
-            Response.Redirect("~/Account/Manage?m=ChangeUserSuccess");
+            Response.Redirect("~/Account/Manage.aspx?m=ChangeUserSuccess");
 
         }
 

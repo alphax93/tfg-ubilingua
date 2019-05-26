@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Perfil de profesor" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageTeacherProfile.aspx.cs" Inherits="Ubilingua.Account.ManageTeacherProfile" %>
+﻿<%@ Page Title="Perfil de profesor" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageTeacherProfile.aspx.cs" Inherits="Ubilingua.Account.ManageTeacherProfile" Culture="auto:es-ES" UICulture="auto" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <br />

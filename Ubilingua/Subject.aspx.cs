@@ -43,7 +43,7 @@ namespace Ubilingua
                     joinsubjectusers member = (from joinSubjectUser in db.joinsubjectusers where joinSubjectUser.SubjectID == subjectID && joinSubjectUser.UserID == userID select joinSubjectUser).SingleOrDefault();
                     if (member == null)
                     {
-                        Response.Redirect("~/SubjectPassword?SubjectID=" + subjectID);
+                        Response.Redirect("~/SubjectPassword.aspx?SubjectID=" + subjectID);
                     }
 
                 }
@@ -51,7 +51,7 @@ namespace Ubilingua
 
                 blockList = (ListView)Page.FindControlRecursive("blockList");
                 resourceList = (ListView)Page.FindControlRecursive("resourceList");
-                if (User.IsInRole("Profesor"))
+                if (User.IsInRole("Profesor")|| User.IsInRole("admin"))
                 {
                     if (subject.IsPrivate)
                     {
@@ -802,7 +802,7 @@ namespace Ubilingua
             bool success = subjects.MakePublic((int)subjectID);
             if (success)
             {
-                Response.Redirect("~/Subject?subjectID=" + subjectID);
+                Response.Redirect("~/Subject.aspx?subjectID=" + subjectID);
             }
         }
 
@@ -819,7 +819,7 @@ namespace Ubilingua
             bool success = subjects.MakePrivate((int)subjectID, password.Text, User.Identity.GetUserId());
             if (success)
             {
-                Response.Redirect("~/Subject?subjectID=" + subjectID);
+                Response.Redirect("~/Subject.aspx?subjectID=" + subjectID);
             }
         }
 
@@ -849,7 +849,7 @@ namespace Ubilingua
 
         public void ViewMarks(object sender, EventArgs e)
         {
-            Response.Redirect("~/SubjectMarks?subjectID="+subjectID);
+            Response.Redirect("~/SubjectMarks.aspx?subjectID=" + subjectID);
         }
 
     }

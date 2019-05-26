@@ -51,7 +51,7 @@ namespace Ubilingua.Account
                 {
                     var user = manager.FindById(User.Identity.GetUserId());
                     signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
-                    Response.Redirect("~/Account/Manage?m=ChangePwdSuccess");
+                    Response.Redirect("~/Account/Manage.aspx?m=ChangePwdSuccess");
                 }
                 else
                 {

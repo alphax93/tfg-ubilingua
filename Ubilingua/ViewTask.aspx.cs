@@ -33,7 +33,7 @@ namespace Ubilingua
             HtmlGenericControl desc = (HtmlGenericControl)Page.FindControlRecursive("description");
             desc.InnerText = task.Text;
 
-            if (User.IsInRole("Profesor"))
+            if (User.IsInRole("Profesor")||User.IsInRole("admin"))
             {
                 TableCell dateCell = (TableCell)Page.FindControlRecursive("date");
                 dateCell.Text = task.Deadline.ToString();

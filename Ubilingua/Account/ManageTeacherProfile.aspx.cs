@@ -86,7 +86,7 @@ namespace Ubilingua.Account
                 {
                     _db.teachers.Add(teacher);
                     _db.SaveChanges();
-                    Response.Redirect("~/Account/Manage?m=TeacherProfSuccess");
+                    Response.Redirect("~/Account/Manage.aspx?m=TeacherProfSuccess");
                 }
 
             }
@@ -126,7 +126,7 @@ namespace Ubilingua.Account
                     }
 
                     _db.SaveChanges();
-                    Response.Redirect("~/Account/Manage?m=TeacherProfSuccess");
+                    Response.Redirect("~/Account/Manage.aspx?m=TeacherProfSuccess");
                 }
 
             }

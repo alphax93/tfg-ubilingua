@@ -58,13 +58,13 @@
                             <ul class="dropdown-menu" id="subjectMenu" runat="server" clientidmode="Static">
                             </ul>
                         </li>
-                        <li><a runat="server" href="~/Teachers"><asp:Label runat="server" meta:resourcekey="profesores"></asp:Label></a></li>
+                        <li><a runat="server" href="~/Teachers.aspx"><asp:Label runat="server" meta:resourcekey="profesores"></asp:Label></a></li>
 
                         <asp:LoginView runat="server">
                             <RoleGroups>
                                 <asp:RoleGroup Roles="admin">
                                     <ContentTemplate>
-                                        <li><a runat="server" href="~/adminPanel"><asp:Label runat="server" meta:resourcekey="panel"></asp:Label></a></li>
+                                        <li><a runat="server" href="~/adminPanel.aspx"><asp:Label runat="server" meta:resourcekey="panel"></asp:Label></a></li>
                                     </ContentTemplate>
                                 </asp:RoleGroup>
                             </RoleGroups>
@@ -75,13 +75,13 @@
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register"><asp:Label runat="server" meta:resourcekey="reg"></asp:Label></a></li>
-                                <li><a runat="server" href="~/Account/Login"><asp:Label runat="server" meta:resourcekey="inic"></asp:Label></a></li>
+                                <li><a runat="server" href="~/Account/Register.aspx"><asp:Label runat="server" meta:resourcekey="reg"></asp:Label></a></li>
+                                <li><a runat="server" href="~/Account/Login.aspx"><asp:Label runat="server" meta:resourcekey="inic"></asp:Label></a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account"><%: Context.User.Identity.GetName() + " " +  Context.User.Identity.GetSurname1() %></a></li>
+                                <li><a runat="server" href="~/Account/Manage.aspx" title="Manage your account"><%: Context.User.Identity.GetName() + " " +  Context.User.Identity.GetSurname1() %></a></li>
                                 <li>
                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" meta:resourcekey="cerr" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
